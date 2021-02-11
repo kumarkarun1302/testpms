@@ -1,0 +1,17 @@
+{
+  "name": "Push Notification App",
+  "short_name": "PushApp",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "browser",
+  "Scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "img/icon.png",
+      "type": "image/png"
+    }
+  ],
+  "splash_pages": null,
+  "gcm_sender_id": "581617258037"
+}

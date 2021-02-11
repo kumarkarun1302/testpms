@@ -1,0 +1,466 @@
+video::-internal-media-controls-download-button {
+    display:none;
+   }
+   video::-webkit-media-controls-enclosure {
+        overflow:hidden;
+   }
+   video::-webkit-media-controls-panel {
+        width: calc(100% + 30px); 
+   }
+   body.modal-open .bg-container{
+    -webkit-filter: blur(4px);
+    -moz-filter: blur(4px);
+    -o-filter: blur(4px);
+    -ms-filter: blur(4px);
+    filter: blur(4px);
+    filter: url("https://gist.githubusercontent.com/amitabhaghosh197/b7865b409e835b5a43b5/raw/1a255b551091924971e7dee8935fd38a7fdf7311/blur".svg#blur);
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
+  }
+
+.container{
+ border-radius:3px;
+ padding:5px;
+ margin: 0 auto;
+}
+.thumbnail{
+ font-weight: normal;
+ font-size: 25px;
+}
+.thumbnail:hover{
+ cursor: pointer;
+}
+.thumbnail_loopfile{
+ font-weight: normal;
+ font-size: 25px;
+}
+.thumbnail_loopfile:hover{
+ cursor: pointer;
+}
+.context-menu{
+ display: none;
+ position: absolute;
+ border: 1px solid black;
+ border-radius: 3px;
+ width: 200px;
+ background: white;
+ box-shadow: 10px 10px 5px #888888;
+}
+.context-menu ul{
+ list-style: none;
+ padding: 2px;
+}
+.context-menu ul li{
+ padding: 5px 2px;
+ margin-bottom: 3px;
+ color: white;
+ font-weight: bold;
+}
+.context-menu ul li:hover{
+ cursor: pointer;
+ background-color: #7fffd4;
+}
+
+
+.blue-boxy {
+    border-width: 1px;
+    border-color: #4da7ec;
+    border-style: solid;
+    background-color: #dff1ff;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 100px;
+    vertical-align: middle;
+}
+.blue-boxy .img-blue-box.bin {
+    margin: 17px 0 17px 18px;
+}
+.blue-boxy .img-blue-box {
+    float: left;
+    overflow: hidden;
+    text-align: left !important;
+    margin: 25px 0 25px 25px;
+    padding: 0 !important;
+}
+.blue-boxy .blue-boxy-text.bin {
+    width: 90%;
+    margin: 20px 35px 20px 0;
+}
+.blue-boxy .blue-boxy-text {
+    width: 78%;
+    color: #1d262d;
+    line-height: 1.6;
+    text-align: left;
+    margin: 29px 15px 29px 0;
+    float: right;
+    font-size: 14.5px !important;
+}
+
+
+.download.info-block {
+    position: relative;
+    margin-left: 198px;
+}
+.download .file-type-wrapper {
+    width: 172px;
+    height: 172px;
+    float: left;
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    position: relative;
+    margin: 2px 2px 2px -196px;
+}
+.download .block-view-file-type {
+    position: static;
+    float: left;
+    top: auto;
+    margin: 44px 0 -2px 45px;
+}
+.download.thumb-block {
+    display: none;
+    float: left;
+    width: 172px;
+    height: 172px;
+    background-color: #fff;
+    border-radius: 2px;
+    position: relative;
+    margin: 2px 2px 2px -196px;
+}
+.download.file-info {
+    padding: 23px 16px 0 0;
+}
+.download.info-txt.big-txt {
+    font-size: 0;
+    line-height: 0;
+    padding: 0 8px 12px 0;
+}
+.download.info-txt.big-txt span {
+    display: inline-block;
+    font-family: LatoWebBold,source_sans_probold,Arial;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    max-width: -webkit-calc(100% - 70px);
+    max-width: -moz-calc(100% - 70px);
+    max-width: calc(100% - 70px);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 20px;
+    color: #333;
+    white-space: nowrap;
+}
+.small-icon.icons-sprite.lens {
+    background-position: -205px -1731px;
+}
+.download.file-info .txt-view-button {
+    margin-left: 15px;
+}
+.download.file-info .txt-view-button .icons-sprite.edit-file {
+    background-position: -143px -2138px;
+}
+.icons-sprite, i.icons-sprite, i.small-icon.icons-sprite {
+    background-image: url(https://sg.static.mega.co.nz/3/images/mega/icons-sprite_v40.png);
+}
+.small-icon.icons-sprite.share {
+    background-position: -235px -1633px;
+}
+.icons-sprite, i.icons-sprite, i.small-icon.icons-sprite {
+    background-image: url(https://sg.static.mega.co.nz/3/images/mega/icons-sprite_v40.png);
+}
+.download.info-txt.small-txt {
+    font-size: 13px;
+    line-height: 18px;
+    color: #999;
+    font-family: LatoWeb,source_sans_proregular,Arial;
+}
+.block-view-file-type {
+    width: 82px;
+    height: 84px;
+    display: block;
+    background-position: 0 -3234px;
+    background-image: url(https://anjwebtech.com/anjwebtech_pms/drive_assets/files-icons_v3.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    margin: -42px 0 0 -41px;
+    left: 50%;
+    top: 50%;
+}
+.block-view-file-type.video {
+    background-position: 0 -354px;
+}
+
+.download.buttons-block, .download.transfer-buttons {
+    font-size: 0;
+    white-space: nowrap;
+    text-align: right;
+    -webkit-box-shadow: innset 0 1px 0 0 rgba(0, 0, 0, .1);
+    -moz-box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, .1);
+    box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, .1);
+    padding: 0 16px;
+    overflow: hidden;
+}
+.download.buttons-block .button {
+    margin-top: 14px;
+    margin-bottom: 16px;
+}
+.download.big-button:first-child {
+    margin: 0;
+}
+.download.big-button {
+    height: 48px;
+    line-height: 48px;
+    letter-spacing: .5px;
+    font-size: 18px;
+    margin: 0 0 0 16px;
+    padding: 0 7px 0 12px;
+    min-width: -moz-calc(50% - 10px);
+    min-width: 200px;
+    background: #fff;
+}
+.download.big-button, .download.mid-button {
+    min-width: 125px;
+}
+.download.big-button, .download.mid-button, .share.big-button {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 32px;
+    color: #333;
+    letter-spacing: .39px;
+    height: 32px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 0 12px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    position: relative;
+    -webkit-transition: box-shadow .2s ease-in-out,background-color .2s ease-in-out;
+    transition: box-shadow .2s ease-in-out,background-color .2s ease-in-out;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    white-space: nowrap;
+    font-family: LatoWeb,source_sans_proregular,Arial;
+    margin: 2px 6px 0;
+    overflow: visible;
+    text-transform: none;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15);
+}
+.download.buttons-block .button {
+    margin-top: 14px;
+    margin-bottom: 16px;
+}
+.download.big-button.green, .download.mid-button.green {
+    background: #00bfa5;
+    padding: 0 21px;
+    color: #fff;
+    -webkit-box-shadow: 0 0.5px 1px 0 rgba(0, 0, 0, .05);
+    -moz-box-shadow: 0 .5px 1px 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 0.5px 1px 0 rgba(0, 0, 0, .05);
+}
+.download.big-button {
+    height: 48px;
+    line-height: 48px;
+    letter-spacing: .5px;
+    font-size: 18px;
+    margin: 0 0 0 16px;
+    padding: 0 7px 0 12px;
+    min-width: -moz-calc(50% - 10px);
+    min-width: 200px;
+    background: #fff;
+}
+.download.big-button, .download.mid-button {
+    min-width: 125px;
+}
+.download.big-button, .download.mid-button, .share.big-button {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 32px;
+    color: #333;
+    letter-spacing: .39px;
+    height: 32px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 0 12px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    position: relative;
+    -webkit-transition: box-shadow .2s ease-in-out,background-color .2s ease-in-out;
+    transition: box-shadow .2s ease-in-out,background-color .2s ease-in-out;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    white-space: nowrap;
+    font-family: LatoWeb,source_sans_proregular,Arial;
+    margin: 2px 6px 0;
+    overflow: visible;
+    text-transform: none;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15);
+}
+.download.big-button.green:before, .download.mid-button.green:before {
+    -webkit-box-shadow: 0 0.5px 1px 0 rgba(0, 0, 0, .05);
+    -moz-box-shadow: 0 .5px 1px 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 0.5px 1px 0 rgba(0, 0, 0, .05);
+}
+.download.big-button.green:after, .download.big-button:before, .download.mid-button.green:after, .download.mid-button:before, .share.big-button:after, .share.big-button:before {
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .05);
+    -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05);
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.medium-icon.icons-sprite.download.big {
+    background-position: 0 -953px;
+}
+.button:not(.disabled)>i, .button:not(.disabled)>span {
+    cursor: pointer;
+}
+.big-button .medium-icon.icons-sprite.mega, .download.big-button i {
+    margin: 10px 0 0 5px;
+    vertical-align: top;
+}
+.button:not(.disabled)>i, .button:not(.disabled)>span {
+    cursor: pointer;
+}
+.download.big-button span {
+    position: relative;
+    z-index: 10;
+    vertical-align: top;
+}
+
+.dashboardBanner {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-end;
+    width: calc(100% - 8rem);
+    margin: 4.5rem 4rem 0;
+    border-radius: 4px;
+    background-image: url(https://anjwebtech.com/anjwebtech_pms/drive_assets/banner.svg),linear-gradient(315deg,#2b6bf3,#53a5f1);
+    background-size: 100%;
+    flex: none;
+    min-width: 275px;
+}
+.dashboardBanner__closeButton {
+    position: absolute;
+    top: .8rem;
+    right: .8rem;
+}
+button {
+    background: none;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    font-family: Source Sans Pro,sans-serif;
+    box-sizing: border-box;
+}
+
+.appsBanner {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+    font-size: 2rem;
+    padding: 2rem 2rem 2rem 0;
+}
+.visually-hidden {
+    position: absolute!important;
+    clip: rect(1px,1px,1px,1px);
+    padding: 0!important;
+    border: 0!important;
+    height: 1px!important;
+    width: 1px!important;
+    overflow: hidden;
+}
+
+.appsBanner .width--90 {
+    width: 90%!important;
+}
+.appsBanner .appsBanner__text {
+    width: 30%;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.appsBanner .para-banner {
+    width: 80%;
+    font-size: 2rem;
+}
+.appsBanner .appsBanner__text {
+    width: 30%;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.appsBanner {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+    font-size: 2rem;
+    padding: 2rem 2rem 2rem 0;
+}
+.appsBanner .bold--banner {
+    font-weight: 700;
+}
+.appsBanner .font--larger {
+    font-size: larger;
+}
+.appsBanner .bold--banner {
+    font-weight: 700;
+}
+.appsBanner .appsBanner__buttons {
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.drui-button--withText, .drui-button--withIcon {
+    padding: 0 16px;
+}
+
+.drui-button {
+    box-sizing: border-box;
+    width: auto;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 4px;
+    background: linear-gradient(0deg, #6B3CC1 0%, #7A50C7 100%);
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Source Sans Pro", sans-serif;
+    cursor: pointer;
+}
+
+.file_detail_block {
+    border: 4px dotted #ccc;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
