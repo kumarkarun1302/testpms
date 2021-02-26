@@ -76,6 +76,11 @@ class Projects extends \Restserver\Libraries\REST_Controller
 	                    'deadline' => $this->input->post('deadline'),
                       'category'=>$this->input->post('category'),
 	                    'updated_date' => date_from_today(),
+                      'project_priority' =>  $this->input->post('project_priority'),
+                      'billing_type_id' =>  $this->input->post('billing_type_id'),
+                      'estimated_hours' =>  $this->input->post('estimated_hours'),
+                      'project_phase' =>  $this->input->post('project_phase'),
+                      'project_demo_url' =>  $this->input->post('project_demo_url'),
 	                ];
                 	$output = $this->project_model->update_project($insert_data,$project_id);
                 	$m_msg = 'edit';
@@ -103,6 +108,11 @@ class Projects extends \Restserver\Libraries\REST_Controller
                       'category'=>$this->input->post('category'),
 	                    'created_date' => date_from_today(),
 	                    'combo_id' => $combo_id,
+                      'project_priority' =>  $this->input->post('project_priority'),
+                      'billing_type_id' =>  $this->input->post('billing_type_id'),
+                      'estimated_hours' =>  $this->input->post('estimated_hours'),
+                      'project_phase' =>  $this->input->post('project_phase'),
+                      'project_demo_url' =>  $this->input->post('project_demo_url'),
 	                ];
 	        		$output = $this->project_model->add_Project($insert_data);
 	        		$m_msg = 'edit';
@@ -177,9 +187,15 @@ class Projects extends \Restserver\Libraries\REST_Controller
               $row_array['Start_Date'] = $row["start_date"];
               $row_array['End_Date'] = $row["deadline"]; 
               $row_array['client_name'] = $row["client_id"];
+              $row_array['technology']=$row['category'];
               $row_array['total_labels'] = $status_total["status_id"];
               $row_array['total_tasks'] = $task_total["task_id"]; 
               $row_array['total_comments'] = $task_total_comments["comments"];
+              $row_array['project_priority'] = $row["project_priority"]; 
+              $row_array['billing_type_id'] = $row["billing_type_id"];
+              $row_array['estimated_hours'] = $row["estimated_hours"]; 
+              $row_array['project_phase'] = $row["project_phase"];
+              $row_array['project_demo_url'] = $row["project_demo_url"]; 
               array_push($json_response,$row_array);
           }
 

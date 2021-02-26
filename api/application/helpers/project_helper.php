@@ -102,12 +102,13 @@ function show_tasklist($user_id,$project_id,$main_user_id) {
           $priority = 'low';
       } else if($taskRow["priority"]=='2'){
         $priority = 'medium';
-      } else if($taskRow["priority"]=='1'){
+      } else if($taskRow["priority"]=='3'){
         $priority = 'high';
+      } else if($taskRow["priority"]=='4'){
+        $priority = 'Urgent';
       }
       $statusid= $taskRow["status_id"];
       $task_status = get_one_value('tbl_status','status_name','id',$statusid);
-      //$assigned_to = $taskRow["assigned_to"];
       $assigned_to = get_by_role_assion('tbl_roles', $main_user_id, $project_id, 'user_id');
       $query = $ci->db->query("SELECT GROUP_CONCAT(username, ' (', email, ')') as task_assigned_name FROM `tbl_users` WHERE user_id IN ($assigned_to)");
       $username = $query->row_array();
@@ -285,7 +286,12 @@ function newloginBydefultProject1($user_id,$username){
         'created_date'=>date_from_today(),
         'user_id'=>$user_id,
         'combo_id'=>$combo_id,
-        'status'=>0
+        'status'=>0,
+        'project_priority'=>'Urgent',
+        'billing_type_id'=>'Project Hours',
+        'estimated_hours'=>'200',
+        'project_phase'=>'3',
+        'project_demo_url'=>'http://google.com'
         );
     $project_id = add_insert('tbl_project',$data1);
     $projectID = anj_encode($project_id);

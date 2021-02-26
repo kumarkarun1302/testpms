@@ -18,13 +18,20 @@ class Projects extends MY_Controller
       }*/
       $project_documentation = 0;
       $edit_data = array('project_name'=>$project_name,
-                         'client_id'=>$data['client_id'],
-                         'start_date'=>$data['start_date'],
-                         'deadline'=>$data['deadline'],
-                         'category' => ucfirst($this->input->post('category')),
-                         'project_description'=>$data['project_description']);
+                          'client_id'=>$data['client_id'],
+                          'start_date'=>$data['start_date'],
+                          'deadline'=>$data['deadline'],
+                          'category' => ucfirst($this->input->post('category')),
+                          'project_priority' =>  $this->input->post('project_priority'),
+                          'billing_type_id' =>  $this->input->post('billing_type_id'),
+                          'estimated_hours' =>  $this->input->post('estimated_hours'),
+                          'project_phase' =>  $this->input->post('project_phase'),
+                          'project_demo_url' =>  $this->input->post('project_demo_url'),
+                          'updated_date'=>date_from_today(),
+                          'project_description'=>$data['project_description']);
       edit_update('tbl_project',$edit_data,'project_id',$project_id);
 
+//echo $this->db->last_query();exit;
       $project_id_new = anj_encode($project_id);
       $projectID = anj_encode($project_id);
       $projectNAME = slugify($project_name);
@@ -35,7 +42,7 @@ class Projects extends MY_Controller
       $url = '/'.$projectID.'/'.$projectNAME.'/'.$projectASSIGN.'/'.$projectMain_user_id.'/'.$projectCombo_id;
 $project_link = base_url().'Invite/anj'.$url;
 
-$tbl_notifications_data = array('main_user_id'=>getProfileName('user_id'),'user_id'=>getProfileName('user_id'),'title'=>$project_name,'url'=>$project_link,'notifications_name'=>$project_name);
+$tbl_notifications_data = array('main_user_id'=>getProfileName('user_id'),'user_id'=>getProfileName('user_id'),'title'=>$project_name,'url'=>$project_link,'notifications_name'=>$project_name,'updated_date'=>date_from_today());
 
 $this->db->query("UPDATE tbl_project SET project_link='".$project_link."' WHERE project_id='".$project_id."'");
 
@@ -77,7 +84,12 @@ $this->db->query("UPDATE tbl_project SET project_link='".$project_link."' WHERE 
                 'created_date' => date_from_today(),
                 'user_id' => $this->input->post('pms_user_id'),
                 'combo_id'=> $combo_id,
-                'project_documentation' =>$project_documentation
+                'project_documentation' =>$project_documentation,
+                'project_priority' =>  $this->input->post('project_priority'),
+                'billing_type_id' =>  $this->input->post('billing_type_id'),
+                'estimated_hours' =>  $this->input->post('estimated_hours'),
+                'project_phase' =>  $this->input->post('project_phase'),
+                'project_demo_url' =>  $this->input->post('project_demo_url')
             );
             $project_id = $this->input->post('edit_project_id');
             if($project_id){

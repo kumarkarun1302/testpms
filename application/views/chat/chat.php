@@ -390,11 +390,11 @@
         function setText(element){
             var value = $(element).text();
             var user_id = $(element).val();
-            $("#chat_txt_search").val(value);
+            $("#chattxtsearch").val(value);
             $("#searchResult").empty();
         }
 
-        $("#chat_txt_search2").keyup(function(){
+        $("#chattxtsearch").keyup(function(){
             var search = $(this).val();
             //if(search != ""){
                 $.ajax({

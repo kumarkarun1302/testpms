@@ -18,6 +18,7 @@ class Feedback extends CI_Controller
     				  'email'=>$this->input->post('email'),
     				  'quality'=>$quality,
     				  'message'=>$message,
+                      'ip_address'=>$this->input->ip_address(),
     				  'created_date'=>date_from_today());
     	insert_data_last_id('tbl_feedback',$arg1);
     	$this->load->helper('email_helper');

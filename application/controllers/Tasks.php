@@ -147,8 +147,9 @@ class Tasks extends MY_Controller {
         $this->load->helper('download');
         $query = $this->db->query("SELECT file_name FROM `tbl_multiple_image` WHERE task_id='$task_id' and user_id='$user_id' and multiple_image_id=$multiple_image_id");
     	$result_array = $query->row_array();
-        $url = 'https://www.anjpms.com/uploads/task/'.$result_array['file_name'];
-        $url = file_get_contents($url);
+        $url = 'https://anjpms.com/uploads/task/'.$result_array['file_name'];
+        //$url = file_get_contents($url);
+        $url = read_file($url);
         $file_name = $result_array['file_name'];
         force_download($file_name, $url);
     }

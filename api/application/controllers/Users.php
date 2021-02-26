@@ -69,10 +69,10 @@ class Users extends \Restserver\Libraries\REST_Controller
                 'picture_url'=>$picture_url
             ];
             
-            /*$email_verification_link = 'https://anjpms.com/login/verify/'.$tot;
+            $email_verification_link = 'https://anjpms.com/login/verify/'.$tot;
             $body = $this->mailer->Tpl_Registration($this->input->post('username', TRUE), $email_verification_link);
             $this->load->helper('email_helper');
-            sendEmail($this->input->post('email', TRUE), 'Activate your APP PMS account', $body, $file = '' , $cc = 'pms.test@anjwebtech.com');*/
+            sendEmail($this->input->post('email', TRUE), 'Activate your APP PMS account', $body, $file = '' , $cc = 'pms.test@anjwebtech.com');
             $last_user_id = $this->UserModel->insert_user($insert_data);
             $output = $this->UserModel->getResponse($last_user_id);
             $return_data = $this->getTokenRespone($output);

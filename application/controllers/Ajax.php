@@ -10,7 +10,7 @@ class Ajax extends MY_Controller
     {
         if(isset($_SESSION['last_active_time']))
         {
-            if((time() - $this->session->userdata('last_active_time'))>900)
+            if((time() - $this->session->userdata('last_active_time'))>1500)
             {
                     echo "logout";
             }
@@ -158,7 +158,12 @@ if($mandone=='done' || $mandone=='DONE'){
     $query_label_done = $this->db->query("UPDATE `tbl_task` SET task_status='2' WHERE project_id=$project_id_new and user_id=$maniuser_id and status_id=$status_idstatusid");
    // echo $this->db->last_query();exit;
     $manishdisable = 'pointer-events: none;opacity: 0.4;';
+} else {
+    $query_label_done = $this->db->query("UPDATE `tbl_task` SET task_status='0' WHERE project_id=$project_id_new and user_id=$maniuser_id and status_id=$status_idstatusid");
+   // echo $this->db->last_query();exit;
+    $manishdisable = 'pointer-events: none;opacity: 0.4;';   
 }
+
 
 
             if(accessOnlyMembers($project_id_new)==1){
@@ -305,7 +310,7 @@ foreach ($taskResult as $taskRow) {
         }
     }
       
-        $html .='<div class="item item-body" id="sort'.$statusRow["id"].'" data-status-id="'.$taskRow["status_id"].'" data-task-id="'.$taskRow["id"].'" datastatusid="'.$statusRow["id"].'" data-taskNameid="'.$taskRow["id"].'">
+        $html .='<div class="item item-body" id="sort'.$statusRow["id"].'" data-status-id="'.$taskRow["status_id"].'" data-task-id="'.$taskRow["id"].'" datastatusid="'.$statusRow["id"].'" data-taskNameid="'.$taskRow["id"].'" data-toggle="modal" data-target="#editTaskModal">
             <div class="itemHeading">
                 <h6 class="m-0 d-flex align-items-center"><span class="title">'.$taskRow["title"].'</span> <span class="'.$badgeclass.'">'.$priority.'</span></h6>
                 <div class="card-options">';

@@ -58,11 +58,13 @@
                         <i class="ri-group-line"></i>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="" data-original-title="Contacts" onclick="side_menu_nav()">
+
+                <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="" data-original-title="Contacts" onclick="side_menu_nav()" style="display: none;">
                     <a class="nav-link" id="pills-contacts-tab" data-toggle="pill" href="#pills-contacts" role="tab" aria-selected="false">
                         <i class="ri-contacts-line"></i>
                     </a>
                 </li>
+
                 <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="" data-original-title="Settings" onclick="side_menu_nav()">
                     <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#pills-setting" role="tab" aria-selected="false">
                         <i class="ri-settings-2-line"></i>

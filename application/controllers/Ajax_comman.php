@@ -165,7 +165,7 @@ class Ajax_comman extends MY_Controller
 
 	public function edit_task_assigned_to_drop()
     {
-        $html = '<option value="0" selected>Select assigned to taks</option>';
+        $html = '<option value="0" selected>Select assigned to task</option>';
         $project_id = anj_decode($this->input->post('projectID'));
         $main_user_id = anj_decode($this->input->post('projectMain_user_id'));
         $projectCombo_id = $this->input->post('projectCombo_id');

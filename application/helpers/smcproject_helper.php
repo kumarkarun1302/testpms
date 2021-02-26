@@ -19,7 +19,12 @@ function newloginBydefultProject1(){
         'created_date'=>date_from_today(),
         'user_id'=>getProfileName('user_id'),
         'combo_id'=>$combo_id,
-        'status'=>0
+        'status'=>0,
+        'project_priority'=>'Urgent',
+        'billing_type_id'=>'Project Hours',
+        'estimated_hours'=>'200',
+        'project_phase'=>'3',
+        'project_demo_url'=>'http://google.com'
         );
     $project_id = insert_data_last_id('tbl_project',$data1);
     $projectID = anj_encode($project_id);
@@ -52,7 +57,12 @@ function newloginBydefultProject2(){
     'created_date' => date_from_today(),
     'user_id' => getProfileName('user_id'),
     'combo_id'=> $combo_id,
-    'status'=>2
+    'status'=>2,
+    'project_priority'=>'Urgent',
+    'billing_type_id'=>'Project Hours',
+    'estimated_hours'=>'200',
+    'project_phase'=>'3',
+    'project_demo_url'=>'http://google.com'
     );
     $project_id = insert_data_last_id('tbl_project',$data);
     $projectID = anj_encode($project_id);
@@ -85,7 +95,12 @@ function newloginBydefultProject3(){
         'created_date' => date_from_today(),
         'user_id' => getProfileName('user_id'),
         'combo_id'=> $combo_id,
-        'status'=>3
+        'status'=>3,
+        'project_priority'=>'Urgent',
+        'billing_type_id'=>'Project Hours',
+        'estimated_hours'=>'200',
+        'project_phase'=>'3',
+        'project_demo_url'=>'http://google.com'
         );
     $project_id = insert_data_last_id('tbl_project',$data1);
     $projectID = anj_encode($project_id);
@@ -118,7 +133,12 @@ function newloginBydefultProject4(){
         'created_date' => date_from_today(),
         'user_id' => getProfileName('user_id'),
         'combo_id'=> $combo_id,
-        'status'=>4
+        'status'=>4,
+        'project_priority'=>'Urgent',
+        'billing_type_id'=>'Project Hours',
+        'estimated_hours'=>'200',
+        'project_phase'=>'3',
+        'project_demo_url'=>'http://google.com'
         );
     $project_id = insert_data_last_id('tbl_project',$data1);
     $projectID = anj_encode($project_id);

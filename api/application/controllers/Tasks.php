@@ -436,7 +436,7 @@ class Tasks extends \Restserver\Libraries\REST_Controller
                     $parts = explode('@',$txt_search1);
                     $username = $parts[0];
                     $picture_url='https://anjpms.com/uploads/notDelete.png';
-                    $user_id = add_insert($this->tbl_users,array('username'=>$username,'user_type'=>$user_type,'first_name'=>slugify($username),'last_name'=>slugify($username),'slug_username'=>slugify($username),'email'=>$txt_search1,'is_verify'=>1,'web_app'=>1,'created_at'=>date_from_today(),'picture_url'=>$picture_url));
+                    $user_id = add_insert($this->tbl_users,array('username'=>$username,'user_type'=>1,'first_name'=>slugify($username),'last_name'=>slugify($username),'slug_username'=>slugify($username),'email'=>$txt_search1,'is_verify'=>1,'web_app'=>1,'created_at'=>date_from_today(),'picture_url'=>$picture_url));
                 }
                 $subject = $sender_name.' invited you to join the board '.$username.' on ANJ PMS';
                 $body = $this->mailer->Anj_inviteTeam($sender_name, $username, $task_link);

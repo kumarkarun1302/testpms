@@ -8,7 +8,7 @@ function sendEmail($to = '', $subject  = '', $body = '', $attachment = '', $cc =
 	$config['useragent']            = "CodeIgniter";
 	$config['mailpath']             = "/usr/bin/sendmail";
 	$config['protocol']             = "smtp";
-	$config['smtp_host']            = "smtp.anjwebtech.com";
+	$config['smtp_host']            = "ssl://mail.anjwebtech.com";
 	$config['smtp_port']            = "465";
 	$config['smtp_timeout'] 		= '20';
 	$config['smtp_user']    		= "pms.test@anjwebtech.com";

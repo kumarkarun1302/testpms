@@ -329,7 +329,10 @@ var BASE_URL = "<?php echo base_url(); ?>";
         }
     });
 
- /*document.addEventListener("keydown",function(){return 123==event.keyCode?(alert("This function has been disabled to prevent you from stealing my code!"),!1):event.ctrlKey&&event.shiftKey&&73==event.keyCode?(alert("This function has been disabled to prevent you from stealing my code!"),!1):event.ctrlKey&&85==event.keyCode?(alert("This function has been disabled to prevent you from stealing my code!"),!1):void 0},!1),document.addEventListener?document.addEventListener("contextmenu",function(e){alert("This function has been disabled to prevent you from stealing my code!"),e.preventDefault()},!1):document.attachEvent("oncontextmenu",function(){alert("This function has been disabled to prevent you from stealing my code!"),window.event.returnValue=!1});*/
+ 
+
+/*document.addEventListener("keydown",function(){return 123==event.keyCode?(alert("Nice trick! but not permitted!"),!1):event.ctrlKey&&event.shiftKey&&73==event.keyCode?(alert("Nice trick! but not permitted!"),!1):event.ctrlKey&&85==event.keyCode?(alert("Nice trick! but not permitted!"),!1):void 0},!1),document.addEventListener?document.addEventListener("contextmenu",function(e){alert("Nice trick! but not permitted!"),e.preventDefault()},!1):document.attachEvent("oncontextmenu",function(){alert("Nice trick! but not permitted!"),window.event.returnValue=!1});
+*/
 
 /*document.onkeydown = function(e) {
 if(event.keyCode == 123) {
@@ -359,8 +362,8 @@ return false;
 if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
 return false;
 }
-}*/
-
+}
+*/
         function myFunction_old_password() {
           var x = document.getElementById("old_password");
           if (x.type === "password") {

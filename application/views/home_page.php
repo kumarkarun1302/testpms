@@ -37,13 +37,15 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/wow.css">
 <link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/slick-theme.css">
 <link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/flaticon.css">
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=601ba3a85692e4001147c438&product=undefined' async='async'></script>
+
+<!-- <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=601ba3a85692e4001147c438&product=undefined' async='async'></script> -->
+
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 <script>
   window.OneSignal = window.OneSignal || [];
   OneSignal.push(function() {
     OneSignal.init({
-      appId: "295a45d3-aff0-4e46-b87f-31f276611acd",
+      appId: "37b918fe-7261-492d-847b-90c5d7d972fa",
     });
   });
 </script>
@@ -125,7 +127,9 @@ if (isPushSupported)
             <ul class="login">
               <?php if(isset($_SESSION['user_details'])){ ?>
                 
-                <li class="d-inline "><a href="<?php echo base_url('dashboard'); ?>" class="login-btn">Dashboard</a></li>
+                <li class="d-inline"><a href="<?php echo base_url('dashboard'); ?>" class="login-btn">Dashboard</a></li>
+
+                <li class="d-inline"><a href="<?php echo base_url('login/logout'); ?>" class="btn">Logout</a></li>
 
               <?php } else { ?>
 
@@ -367,9 +371,7 @@ if (isPushSupported)
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-1">
-              </div>
-              <div class="col-lg-11 col-md-12">
+              <div class="col-lg-12 col-md-12">
                 <div class="slider variable-width">
                   <?php 
                   $query_blog = $this->db->query("SELECT title,blog_image,created_date,like_blog,comment,blog_id FROM `tbl_blog` ORDER BY `tbl_blog`.`blog_id` DESC");
@@ -452,9 +454,7 @@ $result3 = $query3->row_array();
                     <li class="available"><?php echo $result1['file_sharing_storage'] / 1000; ?> MB of space</li>
                     <li class="available"><?php echo $result1['max_file_size_upload']; ?> MB file upload limit</li>
                     <li class="available">7x24 Fully Support</li>
-                    <li class="available">Password protection</li>
                     <li class="available">File share</li>
-                    <li class="available">Unlimited success-based support</li>
                     <li class="available" style="text-decoration: line-through;">API access</li>
                     <li class="available" style="text-decoration: line-through;">Masteradmin Panel No access</li>
                   </ul>
@@ -501,9 +501,7 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
                     <li class="available">Upto <?php echo $file_sharing_storage_limit; ?> Space</li>
                     <li class="available"><?php echo $max_file_size_upload_limit; ?> Max file size</li>
                     <li class="available">7x24 Fully Support</li>
-                    <li class="available">Password protection</li>
                     <li class="available">File share</li>
-                    <li class="available">Unlimited success-based support</li>
                     <li class="available">API access</li>
                     <li class="available">Masteradmin Panel access</li>
                   </ul>
@@ -550,9 +548,7 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
                     <li class="available">To be discussed</li>
                     <li class="available">No Max file size</li>
                     <li class="available">7x24 Fully Support</li>
-                    <li class="available">Password protection</li>
                     <li class="available">File share</li>
-                    <li class="available">Unlimited success-based support</li>
                     <li class="available">API access</li>
                     <li class="available">Masteradmin Panel access</li>
                   </ul>
@@ -684,19 +680,32 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
             </div>
 
             <ul class="footer-bottom-social" style="text-align: center;">
-              <li><u><a href="<?php echo base_url('blog'); ?>" target="_blank">Blog</a></u></li>
               <li><u><a href="<?php echo base_url('feedback'); ?>" target="_blank">FeedBack</a></u></li>
               <li><u><a href="<?php echo base_url('#iq-feature'); ?>">Product</a></u></li>
               <li><u><a href="<?php echo base_url('developer_api'); ?>" target="_blank">Developers & API</a></u></li>
               <li><u><a href="<?php echo base_url('#pricing-table'); ?>">Pricing</a></u></li>
-              <li><u><a href="<?php echo base_url('terms_privacy'); ?>" target="_blank">Terms & Privacy</a></u></li>
+              <li><u><a href="<?php echo base_url('contact'); ?>" target="_blank">Contact</a></u></li>
             </ul>
 
           </div>
         </div>
       </footer>
       <!-- Footer End -->
-
+      <div class="feedback"><a href="<?php echo base_url('feedback'); ?>" target="_blank">FeedBack</a></u></div>
+      <style type="text/css">
+        .feedback {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        position: fixed;
+        top: 40%;
+        left: 95%;
+        background: #ccc;
+        padding: 10px;
+        }
+      </style>
       <!-- Start Go To Top Section -->
       <div class="go-top-area">
         <div class="go-top-wrap">
@@ -725,7 +734,7 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
 
       <!--Start of Tawk.to Script-->
       <script type="text/javascript">
-      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      /*var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
       (function(){
       var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
       s1.async=true;
@@ -733,7 +742,7 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
       s1.charset='UTF-8';
       s1.setAttribute('crossorigin','*');
       s0.parentNode.insertBefore(s1,s0);
-      })();
+      })();*/
       </script>
       <!--End of Tawk.to Script-->
 
@@ -752,7 +761,7 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
           $.ajax({
             url: '<?php echo base_url('home/platinum_packege'); ?>',
             dataType: 'html',type: 'post',
-            data: {price_hide:price_hide},
+            data: {price_hide:price_hide,upgrademdr:'no'},
             success: function(response){
               window.location.href = 'https://anjpms.com/register/';
             }
@@ -763,9 +772,9 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
           $.ajax({
             url: '<?php echo base_url('home/platinum_packege'); ?>',
             dataType: 'html',type: 'post',
-            data: {price_hide:price_hide},
+            data: {price_hide:price_hide,upgrademdr:'yes'},
             success: function(response){
-              window.location.href = 'https://anjpms.com/upgradePlanM/';
+              window.location.href = 'https://anjpms.com/test/radio/';
             }
           });
         }
@@ -775,6 +784,59 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
           }, 2000);
         });
 
+/*document.addEventListener("keydown",function(){return 123==event.keyCode?(alert("Nice trick! but not permitted!"),!1):event.ctrlKey&&event.shiftKey&&73==event.keyCode?(alert("Nice trick! but not permitted!"),!1):event.ctrlKey&&85==event.keyCode?(alert("Nice trick! but not permitted!"),!1):void 0},!1),document.addEventListener?document.addEventListener("contextmenu",function(e){alert("Nice trick! but not permitted!"),e.preventDefault()},!1):document.attachEvent("oncontextmenu",function(){alert("Nice trick! but not permitted!"),window.event.returnValue=!1});
+*/
+/*document.onkeydown = function(e) {
+if(event.keyCode == 123) {
+return false;
+}
+if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+return false;
+}
+if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+return false;
+}
+if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+return false;
+}
+if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)){
+return false;
+}
+if(e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)){
+return false;
+}
+if(e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)){
+return false;
+}
+if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+return false;
+}
+}
+*/
       </script>
+
+<script>
+setInterval(function(){
+  check_user();
+},3000);
+function check_user(){
+  jQuery.ajax({
+    url:'<?php echo base_url('ajax/user_auth'); ?>',
+    type:'post',
+    data:'type=ajax',
+    success:function(result){
+      console.log(result);
+      if(result=='logout'){
+        alert('Your session will expire')
+        window.location.href='<?php echo base_url('logout'); ?>';
+      }
+    }
+  });
+}
+</script>
+
   </body>
 </html>

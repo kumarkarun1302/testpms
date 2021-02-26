@@ -52,8 +52,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js">
 </script>
 
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=601ba3a85692e4001147c438&product=undefined' async='async'></script>
-
 </head>
 <!-- <body class="common_dashboard_trello" oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;">
      -->

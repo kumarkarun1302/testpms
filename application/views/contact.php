@@ -4,7 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title><?php echo $heading; ?></title>
-<link rel="canonical" href="<?php echo base_url(); ?>" />
+
+<meta name="description" content="contact anjpms project management system pms tools"/>
+<meta name="keywords" content="contact anjpms project management system pms tools pms, task, team, projects, images, role permission, Account Merge" />
+<meta name="robots" content="noindex, nofollow, index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="language" content="en"/>
+<meta name="audience" content="ALL"/>
+<meta name="copyright" content="anjpmswebtech Pvt Ltd"/>
+<meta name="googlebot" content="index,follow" />
+<meta name="SLURP" content="INDEX,FOLLOW" />
+<meta name="author" content="contact anjpms">
+<meta name="p:domain_verify" content="074142b0b1f71cd9c90164be2a88e4a3"/>
+<link rel="dns-prefetch" href="<?php echo base_url('contact'); ?>"/>
+<meta property="og:title" content="contact anjpms"/>
+<meta property="twitter:title" content="contact anjpms" />
+<meta property="og:image" content="<?php echo base_url('assets/images/ogBanner.png'); ?>"/>
+<meta property="twitter:image" content="<?php echo base_url('assets/images/ogBanner.png'); ?>" />
+<meta property="og:description" content="contact anjpms project management system pms tools"/>
+<meta property="twitter:description" content="contact anjpms project management system pms tools"/>
+<meta property="og:type" content="website" />
+<meta property="og:url" content="<?php echo base_url('contact'); ?>"/>
+<meta property="og:site_name" content="contact anjpms"/>
+
+<link rel="canonical" href="<?php echo base_url('contact'); ?>" />
 <link rel="canonical" href="<?php echo base_url('assets/images/ogBanner.png'); ?>" />
 <link rel="alternate" href="<?php echo base_url('assets/images/ogBanner.png'); ?>" hreflang="en" />
 <link rel="shortcut icon" href="<?php echo base_url('assets/home/'); ?>images/favicon.ico" />
@@ -39,6 +61,8 @@
                 
                 <li class="d-inline "><a href="<?php echo base_url('dashboard'); ?>" class="login-btn">Dashboard</a></li>
 
+                <li class="d-inline"><a href="<?php echo base_url('login/logout'); ?>" class="btn">Logout</a></li>
+
               <?php } else { ?>
 
                 <li class="d-inline text-dark"><a href="<?php echo base_url('login'); ?>" class="login-btn">Login</a></li>
@@ -68,14 +92,30 @@
             </div>
             <div class="row">
               
-              <div class="col-lg-12 col-md-12">
+              <div class="col-lg-6 col-md-12">
                 <div class="iq-feature-box">
                    <i class="flaticon-manager flaticon mb-3"></i>
                    <h4 class="mb-3">India Office</h4>
                    <div class="gyan-infobox-content gyan-ease-transition">
-            F-504, Titanium City Center, Near Sachin Tower, Prahaladnagar, Ahmedabad – 380015
-<div class="office-phone"><a href="tel:+919824168721"><span><i class="fas fa-phone"></i><span>+91-982-416-8721</span></span></a></div>
-<div class="office-email"><a href="mailto:info@anjwebtech.com"><span><i class="fas fa-envelope"></i><span>info@anjwebtech.com</span></span></a></div>         </div>
+                      F-504, Titanium City Center, Near Sachin Tower, Prahaladnagar, Ahmedabad – 380015
+                      <div class="office-phone"><a href="tel:+919824168721"><span>
+                        <i class="fas fa-phone"></i><span>+91-982-416-8721</span></span></a></div>
+                      <div class="office-email"><a href="mailto:info@anjwebtech.com"><span>
+                        <i class="fas fa-envelope"></i><span>info@anjwebtech.com</span></span></a></div></div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                  <div class="iq-feature-box">
+                   <h4 class="mb-3">Follow Us!</h4>
+                    <p>
+                      Facebook: <a href="https://www.facebook.com/anjpms/" target="_blank">facebook.com/anjpms</a><br>
+                      Twitter: <a href="https://twitter.com/anjpms" target="_blank">twitter.com/anjpms</a><br>
+                      LinkedIn: <a href="https://www.linkedin.com/in/anjpms/" target="_blank">linkedin.com/in/anjpms</a><br>
+                      Youtube: <a href="https://www.youtube.com/user/anjpms" target="_blank">youtube.com/user/anjpms</a><br>
+
+                      Facebook: <a href="https://www.instagram.com/anjpms/" target="_blank">instagram.com/anjpms</a><br>
+                      Facebook: <a href="https://www.pinterest.com/ajobanputra/" target="_blank">pinterest.com/ajobanputra</a>
+                    </p>
                 </div>
               </div>
               
@@ -106,7 +146,6 @@
               <div class="col-sm-6">
                 <label for="type_of_enquiry">Type of Enquiry:</label>
                 <select name="type_of_enquiry" id="type_of_enquiry" class="form-control" required="">
-                  <option value=""></option>
                   <option value="General Question">General Question</option>
                   <option value="Issue With Login / Registration">Issue With Login / Registration</option>
                   <option value="Issue With anjpms Drive">Issue With Anjpms Drive</option>
@@ -137,7 +176,7 @@
               </div>
 
               <div class="col-sm-12">
-                <input type="submit" name="submit" class="btn login-btn" value="Send Message">
+                <input type="submit" name="submit" class="btn login-btn btn-primary" value="Send Message">
               </div>
 
             </div>
@@ -218,12 +257,11 @@
             </div>
 
             <ul class="footer-bottom-social" style="text-align: center;">
-              <li><u><a href="<?php echo base_url('blog'); ?>" target="_blank">Blog</a></u></li>
               <li><u><a href="<?php echo base_url('feedback'); ?>" target="_blank">FeedBack</a></u></li>
               <li><u><a href="<?php echo base_url('#iq-feature'); ?>">Product</a></u></li>
               <li><u><a href="<?php echo base_url('developer_api'); ?>" target="_blank">Developers & API</a></u></li>
               <li><u><a href="<?php echo base_url('#pricing-table'); ?>">Pricing</a></u></li>
-              <li><u><a href="<?php echo base_url('terms_privacy'); ?>" target="_blank">Terms & Privacy</a></u></li>
+              <li><u><a href="<?php echo base_url('contact'); ?>" target="_blank">Contact</a></u></li>
             </ul>
 
           </div>

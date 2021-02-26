@@ -73,17 +73,37 @@ class OtherPages extends CI_Controller
 
 	public function insertContact()
 	{
+		$details=$this->input->post('details');
+		$type_of_enquiry=$this->input->post('type_of_enquiry');
 		$data_tbl_contact_support = array(
-			'type_of_enquiry' => $this->input->post('type_of_enquiry'),
+			'type_of_enquiry' => $type_of_enquiry,
 			'phone' => $this->input->post('phone'),
-			'details' => $this->input->post('details'),
+			'details' => $details,
 			'name' =>  $this->input->post('name'),
 			'email' =>  $this->input->post('email'),
-			'created_date' => date_from_today()
+			'created_date' => date_from_today(),
+			'ip_address'=>$this->input->ip_address()
 		);
 		$result = insert_data_last_id('tbl_contact_support',$data_tbl_contact_support);
+		$this->load->helper('email_helper');
+    	$body = "type_of_enquiry : ".$type_of_enquiry."<br/>
+    	message : ".$details."";
+    	sendEmail('manish@anjwebtech.com','Your Contact ANJPMS Support Submit',$body,$file='',$cc='pms.test@anjwebtech.com');
+
 		$this->session->set_flashdata('success', 'Your contact submit successful!!');
 		redirect('contact');
 	}
+
+	public function insert_marketing_channel()
+	{
+		$data_tbl = array(
+			'marketing_channel' => $this->input->post('marketing_channel'),
+			'user_id' => getProfileName('user_id'),
+			'created_date' => date_from_today(),
+			'ip_address'=>$this->input->ip_address()
+		);
+		insert_data_last_id('tbl_marketing_channel',$data_tbl);
+	}
+
 
 }

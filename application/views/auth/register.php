@@ -33,19 +33,8 @@
             <div class="lrf-header">
                 <ul class="lrf-switcher-wrap">
 
-<?php  if($projectID) {  ?> 
-
-<li><a href="<?php echo base_url('returnUrllogin/'); ?><?php  echo $projectID.'/'.$projectNAME.'/'.$projectASSIGN.'/'.$projectMain_user_id.'/'.$projectCombo_id; ?>" class="switcher-text">Login</a></li>
-
-<li><a href="<?php echo base_url('register'); ?><?php echo '/'.$projectID.'/'.$projectNAME.'/'.$projectASSIGN.'/'.$projectMain_user_id.'/'.$projectCombo_id; ?>" class="switcher-text active">Register</a></li>
-
-<?php } else { ?>
-
 <li><a href="<?php echo base_url('login'); ?>" class="switcher-text">Login</a></li>
-
 <li><a href="<?php echo base_url('register'); ?>" class="switcher-text active">Register</a></li>
-
-<?php } ?>
 
                 </ul>
             </div>                            

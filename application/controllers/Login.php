@@ -200,7 +200,7 @@ echo $this->uri->segment(3);exit;
 			} else {
 				$token=0;
 			}
-			$userdata = array('oauth_provider'=>1,'token'=>$token,'username' => $name,'first_name' => $name,'last_name'=>$name, 'slug_username' => slugify($name),'email' => $email, 'last_ip' => $this->input->ip_address(),
+			$userdata = array('oauth_provider'=>1,'is_verify'=>1,'token'=>$token,'username' => $name,'first_name' => $name,'last_name'=>$name, 'slug_username' => slugify($name),'email' => $email, 'last_ip' => $this->input->ip_address(),
 					'created_at' => date_from_today(),'first_login' => date_from_today(),'picture_url'=>$picture);
 			$last_id = insert_data_last_id('tbl_users',$userdata);
 			$user_data = array('user_id'=>$last_id,'oauth_provider'=>1,'token'=>$user['data']['id'],'username' => $name,'first_name' => $name,'last_name'=>$name, 'email' => $email);
@@ -229,8 +229,8 @@ echo $this->uri->segment(3);exit;
 	}
 
 	public function login(){
-        $recaptchaResponse = trim($this->input->post('g-recaptcha-response'));
-		
+        
+        /*$recaptchaResponse = trim($this->input->post('g-recaptcha-response'));
 		$secret = $this->config->item('google_secret');
 		$url="https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$recaptchaResponse."&remoteip=".$userIp;
 		$ch = curl_init(); 
@@ -238,7 +238,7 @@ echo $this->uri->segment(3);exit;
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
 		$output = curl_exec($ch); 
 		curl_close($ch);      
-		$status= json_decode($output, true);
+		$status= json_decode($output, true);*/
 
 		//echo print_r($status);exit;
 		/*if($status['success']==''){     
@@ -279,7 +279,16 @@ echo $this->uri->segment(3);exit;
 
 			$data = array('username'=>$musername,'password'=>$this->input->post('password'));
 			$result = $this->auth_model->login($data);
+
+			//echo print_r($result);exit;
 			if($result){
+				//echo $result['paymentyesnot'];exit();
+				if($result['paymentyesnot']=='1'){
+					$this->session->set_flashdata('error', 'Your Payment is Padding');
+					redirect('login');
+					exit;
+				}
+
 				if($result['is_verify'] == 0){
 					$this->session->set_flashdata('error', 'Please verify your email address!');
 					if($this->input->post('projectID')){
@@ -290,6 +299,7 @@ echo $this->uri->segment(3);exit;
 					exit;
 				}
 				$slug_username = $result['slug_username'];
+				$user_id = $result['user_id'];
 				$admin_details = array('user_id' => $result['user_id'],'admin_login' => 'admin_login');
 
 $cookie_userid = array('name'=>'userid_set','value'=>$result['user_id'],'expire'=>time()+86500,'path'=>'/','prefix'=>'manish_');
@@ -324,18 +334,27 @@ set_cookie($cookie_mergeaccount);
 					      $this->session->set_flashdata('error', 'Your ANJ PMS month expires. Please Upgrade');
 					      redirect('#pricing-table');
 					    } 
-					    
 
-						if($status['success']){     
-						   if($this->session->userdata('projectID')){
-								redirect('dashboard/'.$this->last_url_show($result['username']));
-							} else {
+					$qrypedding=$this->db->query("SELECT due_date FROM `tbl_task` WHERE `due_date` < CURDATE() and task_status=0 and user_id='$user_id'");
+					$result_qrypedding = $qrypedding->row_array(); 	    
+					if($result_qrypedding['due_date']){
+						$body = $this->mailer->Anj_pending_tasks();
+						$this->load->helper('email_helper');
+						$email = sendEmail($result['email'], 'pending tasks', $body, $file = '' , $cc = 'manish@anjwebtech.com');
+					}
+			
+					    redirect('dashboard');
+					    
+						 /*if($status['success']){     
+						    if($this->session->userdata('projectID')){
+						 		redirect('dashboard/'.$this->last_url_show($result['username']));
+						 	} else {
 								redirect('dashboard');
 							}
 					    }else{
 					   	   $this->session->set_flashdata('flashSuccess', 'Sorry Google Recaptcha Unsuccessful!!');
 					   	   redirect('login');
-					    }
+					    }*/
 	                }
 				} else {
 					$this->session->set_flashdata('error', 'Invalid Username or Password!');
@@ -426,17 +445,18 @@ set_cookie($cookie_mergeaccount);
 					$price_hide=$this->session->userdata('price_hide');
 					$query_tbl_pricemonth = $this->db->query("SELECT file_sharing_storage,max_file_size_upload FROM `tbl_price` where price_hide='$price_hide'");
 					$result_tbl_pricemonth = $query_tbl_pricemonth->row_array();
-					$file_sharing_storage = $result_tbl_pricemonth['file_sharing_storage'];
-					$max_file_size_upload = $result_tbl_pricemonth['max_file_size_upload'];
+					$file_sharing_storage = '100';
+					$max_file_size_upload = '1';
 					$month_year=$this->session->userdata('month_year');
 					$package_date=$this->session->userdata('package_date');
 					$month_count=$this->session->userdata('month_count');
 					$plan_packages=$this->session->userdata('plan_packages');
-					$total_user_support = $this->session->userdata('total_user_support');
+					$paymentyesnot = '1';
+					$total_user_support = '2';
 				} else {
-					$file_sharing_storage = '250000';
-					$max_file_size_upload = '50';
-					$month_year=$package_date=$month_count=$total_user_support='0';
+					$file_sharing_storage = '100000';
+					$max_file_size_upload = '5';
+					$month_year=$package_date=$month_count=$total_user_support=$paymentyesnot='0';
 				}
 
 				$data = array(
@@ -448,8 +468,10 @@ set_cookie($cookie_mergeaccount);
 				'slug_username' => slugify($username),
 				'code' => $this->input->post('code'),
 				'email' => $email,
+				'paymentyesnot'=>$paymentyesnot,
 				'password' =>  password_hash($this->input->post('password'), PASSWORD_BCRYPT),
 				'token' => md5(rand(0,1000)),    
+				'payment_expire_time'=>time(),
 				'last_ip' => $this->input->ip_address(),
 				'picture_url'=>base_url().'uploads/notDelete.png',
 				'created_at' => date_from_today(),
@@ -467,6 +489,12 @@ set_cookie($cookie_mergeaccount);
 					$body = $this->mailer->Tpl_Registration($username, $email_verification_link);
 					$this->load->helper('email_helper');
 					$email = sendEmail($email, 'Activate your PMS account', $body, $file = '' , $cc = 'pms.test@anjwebtech.com');
+
+					if($this->session->userdata('price'))
+					{
+						$this->session->set_userdata('user_id_payment',$result);
+						redirect('test/radio');
+					}
 					$this->session->set_flashdata('success', 'Your Account has been made, please verify it by clicking the activation link that has been send to your email.');	
 					if($this->input->post('projectID')){
 						//$main_user_id = anj_decode($this->input->post('projectMain_user_id'));

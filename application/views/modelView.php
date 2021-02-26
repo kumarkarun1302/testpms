@@ -302,7 +302,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="small mb-1" for="inputFirstName">Project Name</label>
-                            <input class="form-control py-4" name="project_name" id="project_name" type="text" required/>
+                            <input class="form-control" name="project_name" id="project_name" type="text" required/>
                             <input name="website_addProject" id="website_addProject" type="hidden" value="dashboard" />
                              <input name="pms_user_id" id="pms_user_id" type="hidden" value="<?php echo getProfileName('user_id'); ?>" />
                              <input name="edit_project_id" id="edit_project_id" type="hidden"/>
@@ -312,7 +312,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="small mb-1" for="client_id">Client Name</label>
-                            <input class="form-control py-4" id="client_id" type="text" name="client_id" required/>
+                            <input class="form-control" id="client_id" type="text" name="client_id" required/>
                         </div>
                     </div>
                 </div>
@@ -321,19 +321,19 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="small mb-1" for="category">Technology</label>
-                            <input class="form-control py-4" id="category" type="text" name="category" required autocomplete="off" />
+                            <input class="form-control" id="category" type="text" name="category" required autocomplete="off" />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="small mb-1" for="StartDate">Start Date</label>
-                            <input class="form-control py-4" id="StartDate" type="text" name="start_date" required autocomplete="off" />
+                            <input class="form-control" id="StartDate" type="text" name="start_date" required autocomplete="off" />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="small mb-1" for="EndDate">Deadline Date</label>
-                            <input class="form-control py-4" id="EndDate" type="text" name="deadline" autocomplete="off" required/>
+                            <input class="form-control" id="EndDate" type="text" name="deadline" autocomplete="off" required/>
                         </div>
                     </div>
                     <!-- <div class="col-md-6">
@@ -346,13 +346,56 @@
                 </div>
 
                 <div class="form-row">
-                    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="small mb-1" for="project_priority">Priority</label>
+                            <select class="form-control select2" required id="project_priority" name="project_priority">
+                                <option value="Low" selected>Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Urgent">Urgent</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="small mb-1" for="billing_type_id">Billing type</label>
+                            <select class="form-control select2" required id="billing_type_id"  name="billing_type_id">
+                                <option value="" selected="selected">Please select</option>
+                                <option value="Task Hours">Task Hours</option>
+                                <option value="Project Hours">Project Hours</option>
+                                <option value="Fixed Price">Fixed Price</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="small mb-1" for="estimated_hours">Estimated hours</label>
+                            <input class="form-control" id="estimated_hours" type="text" name="estimated_hours" autocomplete="off" required/>
+                        </div>
+                    </div>
                 </div>
+
+                 <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="small mb-1" for="estimated_hours">Project Phase</label>
+                            <input class="form-control" id="project_phase" type="text" name="project_phase" autocomplete="off" required placeholder="1,2,3" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="small mb-1" for="estimated_hours">Project Demo url</label>
+                            <input class="form-control" id="project_demo_url" type="url" name="project_demo_url" autocomplete="off" required placeholder="http://google.com" />
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="small mb-1" for="inputEmailAddress">Project Description</label>
-                      <textarea class="form-control py-4" name="project_description" id="project_description" required></textarea>
+                      <textarea class="form-control" name="project_description" id="project_description" required></textarea>
                     </div>
                   </div>
                 </div>

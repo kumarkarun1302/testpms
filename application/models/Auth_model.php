@@ -8,6 +8,7 @@ class Auth_model extends CI_Model{
 		$username = $data['username'];
 		$this->db->from($this->table);
 		$this->db->where("(username = '$username' OR email = '$username' OR mobile_no = '$username')");
+		//$this->db->where('paymentyesnot','0');
 		$query = $this->db->get();
 		//echo $this->db->last_query();exit;
 		if ($query->num_rows() == 0){
@@ -36,7 +37,7 @@ class Auth_model extends CI_Model{
 	//--------------------------------------------------------------------
 	public function register($data){
 		$this->db->insert($this->table, $data);
-		return true;
+		return $this->db->insert_id();
 	}
 
 	//--------------------------------------------------------------------

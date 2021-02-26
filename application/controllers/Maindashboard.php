@@ -30,6 +30,8 @@ class Maindashboard extends MY_Controller {
 		$query_completed = $this->db->query("SELECT project_id FROM `tbl_task` WHERE user_id=$user_id and task_status=2");
 		$view_data['total_task_completed'] = $query_completed->num_rows();
 
+		$query_tbl_feedback = $this->db->query("SELECT feedback_id FROM `tbl_feedback`");
+		$view_data['total_tbl_feedback'] = $query_tbl_feedback->num_rows();
 
 		$query_chart =  $this->db->query("SELECT user_id,COUNT(1) AS total,COUNT(1) / (SELECT COUNT(1) FROM tbl_project) * 100 AS avg FROM tbl_project GROUP BY user_id"); 
 		$record_chart = $query_chart->result();

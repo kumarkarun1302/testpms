@@ -54,6 +54,9 @@
 
     <!-- Main Dashboard CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/'); ?>css/main-dashboard.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
 </head>
 
 <body class="common_dashboard_trello main-dashboard-bg">
@@ -293,7 +296,7 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                     <div class="stack-item-content">
                         <div class="blockHeader">
                             <a href="javascript:void(0);" class="blockHeaderTitle">
-                                <h5 class="blockTitle">Client in projects</h5>
+                                <h5 class="blockTitle">Projects</h5>
                             </a>
                         </div>
                         <div class="blockContent">
@@ -393,7 +396,7 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                     <div class="stack-item-content">
                         <div class="blockHeader">
                             <a href="javascript:voi(0)" class="blockHeaderTitle">
-                                <h5 class="blockTitle">Completed Tasks in projects</h5>
+                                <h5 class="blockTitle">FeedBack</h5>
                             </a>
                         </div>
                         <div class="blockContent">
@@ -401,7 +404,7 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                                 <a href="javascript:void(0)" class="overall-block">
                                     <div class="overall-block-title">Total</div>
                                     <div class="overall-block-data">
-                                        <span id="tasksTotalCount"><?php echo $total_task_completed; ?></span>
+                                        <span id="tasksTotalCount"><?php echo $total_tbl_feedback; ?></span>
                                         <span id="totalUnitName"></span>
                                     </div>
                                 </a>
@@ -650,6 +653,38 @@ $projectstatus = '<span class="badge badge-secondary ml-auto project_status_runn
         </div>
     </div>
 
+    <div class="modal fade" id="marketing_channelModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="marketing_channelModalLabel" aria-hidden="true">
+      <div class="modal-dialog-centered modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="marketing_channelModalLabel">Please tell me, how did you hear about <b>ANJPMS</b>.</h5>
+          </div>
+          <div class="modal-body">
+               <div class="form-row">
+                            
+            <select id="marketing_channel" class="form-control" name="marketing_channel">
+                <option class="dropdown-item" value="">Choose</option>
+                <option class="dropdown-item" value="search-engine-tc">Search engine - anjpms website</option>
+                <option class="dropdown-item" value="search-engine-other">Search engine - other website</option>
+                <option class="dropdown-item" value="google-ads">Google Ads</option>
+                <option class="dropdown-item" value="social-media">Social media</option>
+                <option class="dropdown-item" value="friend-recommendation">Friend's recommendation</option>
+                <option class="dropdown-item" value="free-version">Used the free version</option>
+            </select>
+               </div>
+               <div class="form-row">
+                    
+               </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="submitMarketing_channel" onclick="submitMarketing_channel()" style="color: rgb(255, 255, 255); background-color: rgb(85, 183, 97);">Let's go!</button>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
     <!-- END BOARDS MAIN CONTAINER -->
 
     <!-- Begin Chat Bubble -->
@@ -689,6 +724,35 @@ $projectstatus = '<span class="badge badge-secondary ml-auto project_status_runn
 <script src="https://www.thecodedeveloper.com/demo/add-datetimepicker-jquery-plugin/js/jquery.datetimepicker.js"></script>
 
 <script>
+
+    function submitMarketing_channel(){
+        if($("#marketing_channel").val()==''){
+            alert("Please select marketing channel");
+            return false;
+        }
+        $.ajax({
+            url: 'https://anjpms.com/otherPages/insert_marketing_channel', 
+            dataType: 'html',type: 'post',
+            data:{marketing_channel:$("#marketing_channel").val()},
+            success: function (response) {
+                window.location.href = "https://anjpms.com/dashboard";
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
+
+<?php 
+$qry=$this->db->query("SELECT `user_id` FROM `tbl_marketing_channel` where user_id = '".getProfilename('user_id')."'");
+$result = $qry->row_array(); 
+if($result['user_id']){
+?>
+    $('#marketing_channelModal').modal('hide');
+<?php } else { ?>
+    $('#marketing_channelModal').modal('show');
+<?php } ?>
+
 $(document).ready(function() {
 
 Highcharts.setOptions({
@@ -1103,9 +1167,10 @@ var BASE_URL = "<?php echo base_url(); ?>";
         }
     });
 
- /*document.addEventListener("keydown",function(){return 123==event.keyCode?(alert("This function has been disabled to prevent you from stealing my code!"),!1):event.ctrlKey&&event.shiftKey&&73==event.keyCode?(alert("This function has been disabled to prevent you from stealing my code!"),!1):event.ctrlKey&&85==event.keyCode?(alert("This function has been disabled to prevent you from stealing my code!"),!1):void 0},!1),document.addEventListener?document.addEventListener("contextmenu",function(e){alert("This function has been disabled to prevent you from stealing my code!"),e.preventDefault()},!1):document.attachEvent("oncontextmenu",function(){alert("This function has been disabled to prevent you from stealing my code!"),window.event.returnValue=!1});*/
-
-/*document.onkeydown = function(e) {
+/*document.addEventListener("keydown",function(){return 123==event.keyCode?(alert("This function has been disabled to prevent you from stealing my code!"),!1):event.ctrlKey&&event.shiftKey&&73==event.keyCode?(alert("This function has been disabled to prevent you from stealing my code!"),!1):event.ctrlKey&&85==event.keyCode?(alert("This function has been disabled to prevent you from stealing my code!"),!1):void 0},!1),document.addEventListener?document.addEventListener("contextmenu",function(e){alert("This function has been disabled to prevent you from stealing my code!"),e.preventDefault()},!1):document.attachEvent("oncontextmenu",function(){alert("This function has been disabled to prevent you from stealing my code!"),window.event.returnValue=!1});
+*/
+/*
+document.onkeydown = function(e) {
 if(event.keyCode == 123) {
 return false;
 }

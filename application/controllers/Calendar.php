@@ -19,12 +19,6 @@ class Calendar extends CI_Controller {
 		$this->load->view('fullcalendar');
 	}
 
-	function contacts()
-	{
-		insert_data_last_id('tbl_contacts',array('created_date'=>date_from_today(),'ip_address'=>$this->input->ip_address()));
-		$this->load->view('contacts');
-	}
-
 	function load()
 	{
 		$event_data = $this->fullcalendar_model->fetch_all_event();

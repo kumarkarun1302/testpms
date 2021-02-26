@@ -29,7 +29,7 @@ class Chat extends MY_Controller {
         $chat_id = $this->input->post('chat_id');
         $type = $this->input->post('type');
         if($type=='one'){
-            $sql = $this->db->query("SELECT username,user_id FROM `tbl_users` WHERE `user_id` = '$chat_id'");
+            $sql = $this->db->query("SELECT username,user_id FROM `tbl_users` WHERE `user_id` = '$chat_id' and user_id!=1");
         } else if($type=='group'){
             $sql = $this->db->query("SELECT chat_msg as username, sender_id as user_id FROM `tbl_chat` WHERE `conversation_id` = '$chat_id'");
         }
@@ -291,7 +291,7 @@ class Chat extends MY_Controller {
         $sql1=$this->db->query("SELECT sender_id,receiver_id,chat_msg FROM `tbl_chat` WHERE `conversation_id`='$receiver_id'");
         $result1=$sql1->row_array();
         $receiverId=$result1['receiver_id'];
-        $sql=$this->db->query("SELECT username,user_id,picture_url FROM `tbl_users` WHERE `user_id` IN ($receiverId)");
+        $sql=$this->db->query("SELECT username,user_id,picture_url FROM `tbl_users` WHERE `user_id` IN ($receiverId) and user_id!=1");
         $result = $sql->result_array();
 
         $html ='<div class="px-3 px-lg-4 pt-3 pt-lg-4">
@@ -362,7 +362,7 @@ class Chat extends MY_Controller {
         $sql1=$this->db->query("SELECT sender_id,receiver_id,chat_msg FROM `tbl_chat` WHERE `conversation_id`='$receiver_id'");
         $result1=$sql1->row_array();
         $receiverId=$result1['receiver_id'];
-        $sql=$this->db->query("SELECT username,user_id,picture_url FROM `tbl_users` WHERE `user_id` IN ($receiverId)");
+        $sql=$this->db->query("SELECT username,user_id,picture_url FROM `tbl_users` WHERE `user_id` IN ($receiverId) and user_id!=1");
         $result = $sql->result_array();
 
         $html = '<li class="header d-flex justify-content-between ps-3 pe-3 mb-1">
@@ -442,7 +442,7 @@ class Chat extends MY_Controller {
         if($chat_type=='group'){
             echo $this->currentProfileAboutGroup($receiver_id);
         } else {
-            $sql = $this->db->query("SELECT username,user_id,email,created_at,user_about FROM `tbl_users` WHERE `user_id` = '$receiver_id'");
+            $sql = $this->db->query("SELECT username,user_id,email,created_at,user_about FROM `tbl_users` WHERE `user_id` = '$receiver_id' and user_id!=1");
             $result = $sql->row_array();
            echo $this->currentProfileAbout($result);
         }
@@ -764,7 +764,7 @@ $result_one1 = $qry_one1->row_array();
         }
 
         if($multipleuserid){
-        $qry = $this->db->query("select username,user_id from tbl_users where user_id IN ($multipleuserid) and user_id!=$user_id");
+            $qry = $this->db->query("select username,user_id from tbl_users where user_id IN ($multipleuserid) and user_id!=$user_id and user_id!=1");
         } else {
             $qry=$this->db->query("SELECT GROUP_CONCAT(DISTINCT t1.contact_user_id) as userid FROM `tbl_main_chat` as t1 left join tbl_chat as t2 ON (t1.contact_user_id=t2.receiver_id) where t2.type_chat IN (1,3)");
         } 

@@ -129,7 +129,7 @@ class Labels extends \Restserver\Libraries\REST_Controller
                 $lastid = add_insert($this->tbl_status,$u_data);
                 $resultmanish = get_multi_value($this->tbl_task, 'status_id', $label_id,'result');
                 foreach ($resultmanish as $key => $result) {
-                $uu_data = array('user_id'=>$result['user_id'],'title'=>$result['title'],'description'=>$result['description'],'project_id'=>$result['project_id'],'status_id'=>$lastid,'position_id'=>$result['position_id'],'created_at'=>date_from_today(),'combo_id'=>$result['combo_id']);
+                $uu_data = array('user_id'=>$result['user_id'],'title'=>$result['title'],'description'=>$result['description'],'project_id'=>$result['project_id'],'due_date'=>$result['due_date'],'status_id'=>$lastid,'position_id'=>$result['position_id'],'created_at'=>date_from_today(),'combo_id'=>$result['combo_id'],'assigned_to'=>$result['assigned_to']);
                     add_insert($this->tbl_task,$uu_data);
                 }
                 $m_msg = 'copy';
@@ -203,7 +203,7 @@ class Labels extends \Restserver\Libraries\REST_Controller
                     $parts = explode('@',$txt_search1);
                     $username = $parts[0];
                     $picture_url='https://anjpms.com/uploads/notDelete.png';
-                    $user_id = add_insert($this->tbl_users,array('username'=>$username,'user_type'=>$user_type,'slug_username'=> slugify($username),'email'=>$txt_search1,'is_verify'=>1,'web_app'=>1,'created_at'=>date_from_today(),'picture_url'=>$picture_url));
+                    $user_id = add_insert($this->tbl_users,array('username'=>$username,'user_type'=>1,'slug_username'=> slugify($username),'email'=>$txt_search1,'is_verify'=>1,'web_app'=>1,'created_at'=>date_from_today(),'picture_url'=>$picture_url));
                 }
                 $subject = $sender_name.' invited you to join the board '.$username.' on ANJ PMS';
                 $body = $this->mailer->Anj_inviteTeam($sender_name, $username, $task_link);

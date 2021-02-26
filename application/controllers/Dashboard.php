@@ -8,26 +8,14 @@ class Dashboard extends MY_Controller {
 	}
 		
 	public function index(){
-		/*if(isset($_SESSION['lastactivetime']))
-		{
-			if((time() - $this->session->userdata('lastactivetime'))>100)
-			{
-                redirect('logout');
-        	}
-		} else{
-            $this->session->set_userdata('lastactivetime',time());
-        }*/
-		 
-
-    $user_id = getProfileName('user_id');
-    $queryqs = $this->db->query("SELECT user_id FROM `tbl_project` WHERE user_id=$user_id");
-    if($queryqs->num_rows()==''){
-    	newloginBydefultProject1();
-    	//newloginBydefultProject2();
-    	//newloginBydefultProject3();
-    	//newloginBydefultProject4();
-    }
-
+	    $user_id = getProfileName('user_id');
+	    $queryqs = $this->db->query("SELECT user_id FROM `tbl_project` WHERE user_id=$user_id");
+	    if($queryqs->num_rows()==''){
+	    	newloginBydefultProject1();
+	    	//newloginBydefultProject2();
+	    	//newloginBydefultProject3();
+	    	//newloginBydefultProject4();
+	    }
 		$user_data = $this->session->userdata('user_details');
 		update_duedate();
 		$this->load->helper('gdrive_helper');
@@ -124,6 +112,9 @@ class Dashboard extends MY_Controller {
 			$data_chart_cloumn[] = array('name'=>$row->role_name,'y'=>(int) $row->avg,'drilldown'=>$row->role_name);
 		}
       $view_data['chart_data_cloumn'] = json_encode($data_chart_cloumn);
+
+    $query_tbl_feedback = $this->db->query("SELECT feedback_id FROM `tbl_feedback`");
+	$view_data['total_tbl_feedback'] = $query_tbl_feedback->num_rows();
 
 	$query_packedbubble =  $this->db->query("SELECT project_id,project_name FROM `tbl_project` where user_id=$user_id ORDER BY `tbl_project`.`project_id`  DESC limit 5"); 
 	$record_packedbubble = $query_packedbubble->result_array();

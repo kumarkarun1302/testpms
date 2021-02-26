@@ -24,7 +24,8 @@
  <!-- Owl Carousel CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/css/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/css/owl.theme.default.min.css">
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=601ba3a85692e4001147c438&product=undefined' async='async'></script>
+    <!-- 
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=601ba3a85692e4001147c438&product=undefined' async='async'></script> -->
 </head>
 <style type="text/css">
 label {
@@ -148,7 +149,7 @@ if($this->uri->segment(1)=='trash'){
                             <a href="<?php echo base_url('anj_drive'); ?>"><i class="far fa-folder"></i> My Drive</a>
                         </li>
                     
-                        <li class="<?php echo $active2; ?>">
+                        <li class="<?php echo $active2; ?>" style="display: none;">
                             <a href="<?php echo base_url('shared_me'); ?>"><i class="far fa-share-square"></i> Shared With Me</a>
                         </li>
                         
@@ -232,7 +233,7 @@ $limit = round($limit). ' MB';*/
         </div>
         <div class="upgradeAccount_txtBtn">
             <h4>Get more storage & benefits</h4>
-            <a href="javascript:void(0)" class="upgradeNowBtn">Upgrade Now</a>
+            <a href="<?php echo base_url('#pricing-table'); ?>" class="upgradeNowBtn">Upgrade Now</a>
         </div>
     </div>
     <!-- End Upgrade Account -->
@@ -313,7 +314,7 @@ $limit = round($limit). ' MB';*/
                                 <i class="fas fa-chevron-left"></i> Back To PMS
                             </a>
                         </li>
-                        <li class="nav-item nav-icon dropdown">
+                        <li class="nav-item nav-icon dropdown" style="display: none;">
                             <a href="<?php echo base_url('assets'); ?>/#" class="search-toggle dropdown-toggle" id="dropdownMenuButton01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-question-circle"></i>
                             </a>
@@ -339,7 +340,8 @@ $limit = round($limit). ' MB';*/
                                 <div class="card shadow-none m-0">
                                     <div class="card-body p-0 ">
                                         <div class="p-3">
-                                            <a href="<?php echo base_url('updates'); ?>" class="dd-sub-card pt-0"><i class="fas fa-cog"></i> Settings</a>
+                                            <a href="<?php echo base_url('#pricing-table'); ?>" class="upgradeNowBtn">Upgrade Now</a>
+                                            <!-- <a href="<?php //echo base_url('updates'); ?>" class="dd-sub-card pt-0"><i class="fas fa-cog"></i> Settings</a> -->
                                             <!-- <a href="javascript:void(0)" class="dd-sub-card"><i class="far fa-hdd"></i> Get Drive for desktop</a>
                                             <a href="javascript:void(0)" class="dd-sub-card"><i class="far fa-keyboard"></i> Keyboard Shortcuts</a> -->
                                         </div>                                

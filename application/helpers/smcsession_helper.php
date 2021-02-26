@@ -34,7 +34,7 @@ function send_one_message_notification($text,$user_id){
     "url" => base_url()
   ));
     $fields = array(
-      'app_id' => "295a45d3-aff0-4e46-b87f-31f276611acd",
+      'app_id' => "37b918fe-7261-492d-847b-90c5d7d972fa",
       'include_external_user_ids'=>array($user_id),
       'data' => array("anj" => "web"),
       'contents' => $content
@@ -44,7 +44,7 @@ function send_one_message_notification($text,$user_id){
   curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
   curl_setopt($ch, CURLOPT_HTTPHEADER, array(
       'Content-Type: application/json; charset=utf-8',
-      'Authorization: Basic ZTgzYzYyMmMtYjExMC00ZTM1LThlZWMtZWQ3YzY4ZWZjYjQx'
+      'Authorization: Basic YmM5NjNjN2MtYTc0ZC00YTM2LTlkMDAtM2I2NGU2M2FmMDJj'
   ));
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
   curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -65,7 +65,7 @@ function send_message_notification($text){
     "url" => base_url()
   ));
     $fields = array(
-      'app_id' => "295a45d3-aff0-4e46-b87f-31f276611acd",
+      'app_id' => "37b918fe-7261-492d-847b-90c5d7d972fa",
       'included_segments' => array('All'),
       'data' => array("foo" => "bar"),
       'contents' => $content
@@ -76,7 +76,7 @@ function send_message_notification($text){
   curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
   curl_setopt($ch, CURLOPT_HTTPHEADER, array(
       'Content-Type: application/json; charset=utf-8',
-      'Authorization: Basic ZTgzYzYyMmMtYjExMC00ZTM1LThlZWMtZWQ3YzY4ZWZjYjQx'
+      'Authorization: Basic YmM5NjNjN2MtYTc0ZC00YTM2LTlkMDAtM2I2NGU2M2FmMDJj'
   ));
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
   curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -138,6 +138,18 @@ function getCity($stateid){
     return $query->result_array();
 }
 
+function getResponse($user_id)
+{
+    $ci = & get_instance();
+    $result = $ci->db->get_where('tbl_users',array('user_id'=>$user_id));
+    if($result->num_rows() > 0){
+        $result = $result->row_array();
+        return $result;
+    } else {
+        return false;
+    }
+}
+
 function getProfileName($key){
     $CI = & get_instance();
     
@@ -174,7 +186,7 @@ function getSession($key){
 
 function setmaniSession($result){
     $CI = & get_instance();
-    $user_data = array('user_id' => $result['user_id'],'username' => $result['username'],'email' => $result['email'],'user_type' => $result['user_type'],'slug_username' => $slug_username, 'merge_account'=>$result['merge_account'],'main_merge_account'=>$result['merge_account'],'merge_account_userID'=>$result['user_id'],'file_sharing_storage'=>$result['file_sharing_storage']);
+    $user_data = array('user_id' => $result['user_id'],'username' => $result['username'],'email' => $result['email'],'user_type' => $result['user_type'],'merge_account'=>$result['merge_account'],'main_merge_account'=>$result['merge_account'],'merge_account_userID'=>$result['user_id'],'file_sharing_storage'=>$result['file_sharing_storage']);
     return  $CI->session->set_userdata('user_details', $user_data);
 }
 
@@ -394,3 +406,42 @@ function anjDrive_disabled()
 }
 
 
+function upgrade_plan_mdr($payer_email,$payment_status,$price){
+    $ci = & get_instance();
+    $user_id = getProfileName('user_id');
+    $price_hide = $ci->session->userdata('price_hide');
+    $month_year = $ci->session->userdata('month_year');
+    $next_due_date = date('Y-m-d H:i:s', strtotime(date_from_today(). ' +30 days'));
+    if($month_year=='month'){
+      $plan_packages=2;
+    } else if($month_year=='year'){
+      $plan_packages=3; 
+    }
+    $txn_id = time();
+    $payment_gross = $price;
+    $total_user_support = $ci->session->userdata('total_user_support');
+    $max_file_size_upload = get_tbl_price($price_hide,'max_file_size_upload');
+    $file_sharing_storage = get_tbl_price($price_hide,'file_sharing_storage');
+    $file_sharing_storageOLD = getProfileName('file_sharing_storage');
+    $file_sharing_storage = $file_sharing_storage + $file_sharing_storageOLD;
+    $payemntdata = array('user_id'=>$user_id,
+                         'month_year'=>$month_year,'plan_packages'=>$plan_packages,
+                         'txn_id'=>$txn_id,'payment_gross'=>$payment_gross,
+                         'payer_email'=>$payer_email,'payment_status'=>$payment_status,
+                         'created_date'=>date_from_today());
+    insert_data_last_id('tbl_payments',$payemntdata);
+      if($month_year=='year'){
+          $updatedata = array('total_user_support'=>$total_user_support,'package_date'=>$next_due_date,'plan_packages'=>$plan_packages,'month_year'=>$month_year);
+      } else if($month_year=='month'){
+        if(getProfileName('month_year')=='month'){
+          $month_count = getProfileName('month_count') + 1;
+          $updatedata = array('total_user_support'=>$total_user_support,'package_date'=>$next_due_date,'month_count'=>$month_count);
+        } else {
+          $updatedata = array('total_user_support'=>$total_user_support,'package_date'=>$next_due_date,'plan_packages'=>$plan_packages,'month_year'=>$month_year,'file_sharing_storage'=>$file_sharing_storage,'max_file_size_upload'=>$max_file_size_upload);
+        }
+      }
+    $multi_where = array('user_id'=>$user_id);
+    edit_update_multi_where('tbl_users',$updatedata, $multi_where);
+    $ci->session->set_flashdata('success', 'Your Plan Successfully Update');
+
+  }

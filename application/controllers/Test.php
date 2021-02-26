@@ -2,32 +2,20 @@
 class Test extends CI_Controller
 {
 
-	public function send_mail()
-    {
-		$headers = "MIME-Version: 1.0" . "\r\n";
-		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-		$headers .= 'From: <pms.test@anjwebtech.com>' . "\r\n";
-		$headers .= 'Cc: manish@anjwebtech.com' . "\r\n";
-		mail('pms.test@anjwebtech.com','mf','abcd',$headers);
+	public function radio()
+	{
+		$this->load->view('paymentpage');
+	}
 
-		$config['protocol']    = 'smtp';
-        $config['smtp_host']    = 'mail.anjwebtech.com';
-        $config['smtp_port']    = '465';
-        $config['smtp_timeout'] = '7';
-        $config['smtp_user']    		= "pms.test@anjwebtech.com";
-		$config['smtp_pass']    		= 'dT*}E&awppG@';
-        $config['charset']    = 'utf-8';
-        $config['newline']    = "\r\n";
-        $config['mailtype'] = 'text';
-        $config['validation'] = TRUE;      
-        $this->email->initialize($config);
-        $this->email->from('feedback.anjwebtech@gmail.com', 'myname');
-        $this->email->to('pms.test@anjwebtech.com'); 
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');  
-        $this->email->send();
-        echo $this->email->print_debugger();
-    }
+	public function radiosubmit()
+	{
+		if($this->input->post('payment')=='paypal')
+		{
+			redirect('productstwo');
+		} else if($this->input->post('payment')=='stripe'){
+			redirect('products');
+		}
+	}
 
 	public function empty_table(){
 		$this->db->truncate('ci_sessions');
@@ -148,44 +136,145 @@ class Test extends CI_Controller
 	public function create_users_pdf(){
 			$this->load->helper('pdf_helper'); 
 			$html = '
-			<h3>Users List</h3>
-			<table border="1" style="width:100%">
+<html>
+	<body>
+		<header>
+			<h1 style="test-align:center;">Invoice</h1>
+			<address style="float: left;font-size: 75%;font-style: normal;line-height: 1.25;margin: 0 1em 1em 0;">
+				<p>Jonathan Neal
+				<br>
+				101 E. Chapman Ave<br>Orange, CA 92866
+				<br>
+				(800) 555-1234</p>
+			</address>
+			
+		</header>
+
+<table style="width:100%;border-collapse: collapse;margin-bottom:1em;" border="0" cellspacing="0" cellpadding="0" valign="top">
+    <tr valign="top">
+      <td valign="top">
+		<address style="float: left;font-size: 100%;font-style: normal;line-height: 1.25;margin: 0 1em 1em 0;">
+			<p>Some Company<br>c/o Some Guy</p>
+		</address>
+      </td>
+      <td>
+      	<table class="meta" border="1" cellspacing="0" cellpadding="2" style="float: left;margin-left:400px;width:100%;">
+			<tr>
+				<th style="text-align:left;float:left;"><span>Invoice #</span></th>
+				<td><span>101138</span></td>
+			</tr>
+			<tr>
+				<th style="text-align:left;float:left;"><span>Date</span></th>
+				<td><span>January 1, 2012</span></td>
+			</tr>
+		</table>
+      </td>
+    </tr>    
+  </table>
+<br>
+	<table border="1" cellspacing="0" cellpadding="4" style="width:100%;border-collapse: separate;">
 				<thead>
-					<tr class="headerrow">
-						<th>Username</th>
+					<tr>
+						<th><span contenteditable>Item</span></th>
+						<th><span contenteditable>Description</span></th>
+						<th><span contenteditable>Rate</span></th>
+						<th><span contenteditable>Quantity</span></th>
+						<th><span contenteditable>Price</span></th>
 					</tr>
 				</thead>
-				<tbody>					
-					<tr class="oddrow">
-						<td>123</td>
-					</tr>';
-				$html .=	'</tbody>
-				</table>			
-			 ';
+				<tbody>
+					<tr>
+						<td><a class="cut">-</a><span contenteditable>Front End Consultation</span></td>
+						<td><span contenteditable>Experience Review</span></td>
+						<td style="text-align:right;float:right;">$<span>150.00</span></td>
+						<td style="text-align:right;float:right;"><span>4</span></td>
+						<td style="text-align:right;float:right;">$<span>600.00</span></td>
+					</tr>
+					<tr>
+						<td><a class="cut">-</a><span contenteditable>Front End Consultation</span></td>
+						<td><span contenteditable>Experience Review</span></td>
+						<td style="text-align:right;float:right;">$<span>150.00</span></td>
+						<td style="text-align:right;float:right;"><span>4</span></td>
+						<td style="text-align:right;float:right;">$<span>600.00</span></td>
+					</tr>
+					<tr>
+						<td><a class="cut">-</a><span contenteditable>Front End Consultation</span></td>
+						<td><span contenteditable>Experience Review</span></td>
+						<td style="text-align:right;float:right;">$<span>150.00</span></td>
+						<td style="text-align:right;float:right;"><span>4</span></td>
+						<td style="text-align:right;float:right;">$<span>600.00</span></td>
+					</tr>
+					<tr>
+						<td><a class="cut">-</a><span contenteditable>Front End Consultation</span></td>
+						<td><span contenteditable>Experience Review</span></td>
+						<td style="text-align:right;float:right;">$<span>150.00</span></td>
+						<td style="text-align:right;float:right;"><span>4</span></td>
+						<td style="text-align:right;float:right;">$<span>600.00</span></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br>
+			<table border="1" cellspacing="0" cellpadding="2" style="float: right;margin-left:450px;width:100%;text-align:right;border-collapse: separate;">
+				<tr>
+
+					<th style="text-align:left;float:left;"><span>Total</span></th>
+					<td style="text-align:right;float:right;">$<span>2400.00</span></td>
+				</tr>
+				<tr>
+					<th style="text-align:left;float:left;"><span>Amount Paid</span></th>
+					<td style="text-align:right;float:right;">$<span>0.00</span></td>
+				</tr>
+				<tr>
+					<th style="text-align:left;float:left;"><span>Balance Due</span></th>
+					<td style="text-align:right;float:right;">$<span>2400.00</span></td>
+				</tr>
+			</table>
+		
+
+		<br>
+
+		<aside>
+			<hr>
+			<div style="text-align:center;">
+				<p>A finance charge of 1.5% will be made on unpaid balances after 30 days.</p>
+			</div>
+		</aside>
+<style>
+header h1 {
+    background: #000;
+    border-radius: 0.25em;
+    color: #FFF;
+    margin: 0 0 1em;
+    padding: 0.5em 0;
+}
+h1 {
+    font: bold 100% sans-serif;
+    letter-spacing: 0.5em;
+    text-align: center;
+    text-transform: uppercase;
+}
+</style>
+	</body>
+</html>';
 			//ob_clean();
 			//flush();
-			$mpdf = new mPDF();
+			
+			//$mpdf = new mPDF();
+			$mpdf=new mPDF('utf-8', 'A4', 0, '', 10, 10, 2, 0, 0, 'L'); 
 			$mpdf->SetProtection(array('print'));
-			$mpdf->SetTitle("Codeglamour - Users List");
-			$mpdf->SetAuthor("Codeglamour");
-			$mpdf->watermark_font = 'Codeglamour';
-			$mpdf->watermarkTextAlpha = 0.1;
+			$mpdf->SetTitle("Invoice New");
+			$mpdf->SetAuthor("Invoice");
+			//$mpdf->SetMargins(0);
+
+			$mpdf->shrink_tables_to_fit = 1;
+
 			$mpdf->SetDisplayMode('fullpage');		 
 			$mpdf->WriteHTML($html);
 			$filename = 'in';
-			$mpdf->Output($filename . '.pdf', 'D');			
+			$mpdf->Output($filename . '.pdf', 'I');			
 			//exit;
 		}
-
-	 public function index()
-	 {
-		$file = fopen("assets/logo.txt","r");
-		while(! feof($file))
-		  {
-		  echo fgets($file). "<br />";
-		  }
-		fclose($file);
-	 }
 	 
 	public function manish(){
 		error_reporting(0);
