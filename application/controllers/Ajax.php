@@ -10,7 +10,7 @@ class Ajax extends MY_Controller
     {
         if(isset($_SESSION['last_active_time']))
         {
-            if((time() - $this->session->userdata('last_active_time'))>1500)
+            if((time() - $this->session->userdata('last_active_time'))>10000)
             {
                     echo "logout";
             }
@@ -310,7 +310,9 @@ foreach ($taskResult as $taskRow) {
         }
     }
       
-        $html .='<div class="item item-body" id="sort'.$statusRow["id"].'" data-status-id="'.$taskRow["status_id"].'" data-task-id="'.$taskRow["id"].'" datastatusid="'.$statusRow["id"].'" data-taskNameid="'.$taskRow["id"].'" data-toggle="modal" data-target="#editTaskModal">
+      //data-toggle="modal" data-target="#editTaskModal"
+    
+        $html .='<div class="item item-body" id="sort'.$statusRow["id"].'" data-status-id="'.$taskRow["status_id"].'" data-task-id="'.$taskRow["id"].'" datastatusid="'.$statusRow["id"].'" data-taskNameid="'.$taskRow["id"].'" >
             <div class="itemHeading">
                 <h6 class="m-0 d-flex align-items-center"><span class="title">'.$taskRow["title"].'</span> <span class="'.$badgeclass.'">'.$priority.'</span></h6>
                 <div class="card-options">';

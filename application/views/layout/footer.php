@@ -255,19 +255,19 @@ var BASE_URL = "<?php echo base_url(); ?>";
  $(document).ready(function() {
   $('#start_date').datetimepicker({
     format:'Y-m-d H:i:s',
-    minDate: 0,
+    //minDate: 0,
     autoclose: true
   });
 
   $('#due_date').datetimepicker({
     format:'Y-m-d H:i:s',
-    minDate: 0,
+    //minDate: 0,
     autoclose: true
   });
   
   $('#StartDate').datetimepicker({
     format:'Y-m-d H:i:s',
-    minDate: 0,
+    //minDate: 0,
     autoclose: true,
     onSelect: function(date) {
       $("#EndDate").datetimepicker('option', 'minDate', date);
@@ -284,7 +284,7 @@ var BASE_URL = "<?php echo base_url(); ?>";
   $('#EndDate').datetimepicker({
     format:'Y-m-d H:i:s',
     autoclose: true,
-    minDate: 0,
+    //minDate: 0,
     onClose: function (selected) {
       if(selected.length <= 0) {
           $("#StartDate").datetimepicker('disable')

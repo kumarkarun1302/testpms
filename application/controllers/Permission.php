@@ -36,6 +36,31 @@ class Permission extends MY_Controller
 	 public function insert_Permission()
 	 {
 	 	$email = $this->input->post('account_email');
+	 	$query1 = $this->db->query("SELECT user_id FROM `tbl_users` where email='$email'");
+		if($query1->num_rows() > 0){
+    		$result = $query1->row_array();
+    		$permiuser_id=$result['user_id'];
+    		$designation= $this->input->post('role_name');
+    		$this->db->query("UPDATE `tbl_users` SET designation='$designation' where email='$email' and user_id=$permiuser_id");
+    	} else {
+    		$picture=base_url().'uploads/notDelete.png';
+		 	$parts = explode('@',$email);
+            $username = $parts[0];
+            $password=password_hash('123456aA@', PASSWORD_BCRYPT);
+		 	$tbl_usersData = array('is_verify'=>1,'user_type'=>getProfileName('user_type'),'designation'=>$this->input->post('role_name'),'username'=>$username,'slug_username'=>slugify($username),'first_name'=>$username,'last_name'=>$username, 'email' => $email,'first_login' => date_from_today(),'updated_at'=>date_from_today(),'picture_url'=>$picture,'password'=>$password);
+		 	$last_userid=insert_data_last_id('tbl_users', $tbl_usersData);
+			$coma_user_id = get_by_role_assion('tbl_roles',getProfileName('user_id'),anj_decode($this->input->post('project_id')), 'user_id');
+			$assigned_to = implode(',',array_unique(explode(',', $coma_user_id.','.$last_userid)));
+			$data_role = array('user_id' => $assigned_to);
+			$multi_where = array('main_user_id'=>getProfileName('user_id'),'project_id'=>anj_decode($this->input->post('project_id')));
+			edit_update_multi_where('tbl_roles',$data_role,$multi_where);
+		 	$this->load->library('mailer');
+		 	$body = $this->mailer->Anj_newmember($email,'123456');
+			$this->load->helper('email_helper');
+			$email = sendEmail($email, 'Your ANJ PMS account', $body, $file = '' , $cc = 'manish@anjwebtech.com');
+			$permiuser_id = $last_userid;
+    	}
+
 	 	/*$query = $this->db->query("SELECT user_id FROM `tbl_users` where email='$email'");
 		if($query->num_rows() > 0){
     		$result = $query->row_array();
@@ -53,12 +78,12 @@ class Permission extends MY_Controller
 		    redirect('permission');
 	    }
 
-		$this->form_validation->set_rules('account_email', 'Enter Email ID', 'trim|required|valid_email|callback_isEmailExist');
+		/*$this->form_validation->set_rules('account_email', 'Enter Email ID', 'trim|required|valid_email|callback_isEmailExist');
 		$this->form_validation->set_rules('role_name', 'Select Designation', 'trim|required');
 		if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('error', 'Email address is already exist.');
 		 	redirect('permission/'.$this->input->post('project_id'));
-		} else {
+		} else {*/
 			if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
 	 		$data_permission['email'] = $email;
 	 		$this->session->set_userdata('email_permission', $email);
@@ -100,26 +125,9 @@ class Permission extends MY_Controller
 		 		$dataPermission['task_crud'] = implode(',', $this->input->post('task_crud'));
 		 	}
 		 	$dataPermission['created_date'] = date_from_today();
+		 	
 
-		 	$picture=base_url().'uploads/notDelete.png';
-		 	$parts = explode('@',$email);
-            $username = $parts[0];
-            $password=password_hash('123456', PASSWORD_BCRYPT);
-		 	$tbl_usersData = array('is_verify'=>1,'user_type'=>getProfileName('user_type'),'designation'=>$this->input->post('role_name'),'username'=>$username,'slug_username'=>slugify($username),'first_name'=>$username,'last_name'=>$username, 'email' => $email,'first_login' => date_from_today(),'updated_at'=>date_from_today(),'picture_url'=>$picture,'password'=>$password);
-		 	$last_userid=insert_data_last_id('tbl_users', $tbl_usersData);
-
-			$coma_user_id = get_by_role_assion('tbl_roles',getProfileName('user_id'),anj_decode($this->input->post('project_id')), 'user_id');
-			$assigned_to = implode(',',array_unique(explode(',', $coma_user_id.','.$last_userid)));
-			$data_role = array('user_id' => $assigned_to);
-			$multi_where = array('main_user_id'=>getProfileName('user_id'),'project_id'=>anj_decode($this->input->post('project_id')));
-			edit_update_multi_where('tbl_roles',$data_role,$multi_where);
-
-		 	$this->load->library('mailer');
-		 	$body = $this->mailer->Anj_newmember($email,'123456');
-			$this->load->helper('email_helper');
-			$email = sendEmail($email, 'Your ANJ PMS account', $body, $file = '' , $cc = 'manish@anjwebtech.com');
-
-		 	$dataPermission['user_to_permission']=$last_userid;
+		 	$dataPermission['user_to_permission']=$permiuser_id;
 		 	$dataPermission['time'] = time();
 		 	//anj_crypt($created_time,'e');
 		 		insert_data_last_id('tbl_permission', $dataPermission);
@@ -129,8 +137,7 @@ class Permission extends MY_Controller
 				$this->session->set_flashdata('error', 'Invalid Email Address!');
 				redirect('permission/'.$this->input->post('project_id'));
 			}
-		}
-	 	
+		//}
 	 }
 
 }

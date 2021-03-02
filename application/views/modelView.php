@@ -327,13 +327,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="small mb-1" for="StartDate">Start Date</label>
-                            <input class="form-control" id="StartDate" type="text" name="start_date" required autocomplete="off" />
+                            <input class="form-control" id="StartDate" type="text" name="start_date"  autocomplete="off" />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="small mb-1" for="EndDate">Deadline Date</label>
-                            <input class="form-control" id="EndDate" type="text" name="deadline" autocomplete="off" required/>
+                            <input class="form-control" id="EndDate" type="text" name="deadline" autocomplete="off" />
                         </div>
                     </div>
                     <!-- <div class="col-md-6">
@@ -349,7 +349,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="small mb-1" for="project_priority">Priority</label>
-                            <select class="form-control select2" required id="project_priority" name="project_priority">
+                            <select class="form-control select2" id="project_priority" name="project_priority">
                                 <option value="Low" selected>Low</option>
                                 <option value="Medium">Medium</option>
                                 <option value="High">High</option>
@@ -360,7 +360,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="small mb-1" for="billing_type_id">Billing type</label>
-                            <select class="form-control select2" required id="billing_type_id"  name="billing_type_id">
+                            <select class="form-control select2" id="billing_type_id"  name="billing_type_id">
                                 <option value="" selected="selected">Please select</option>
                                 <option value="Task Hours">Task Hours</option>
                                 <option value="Project Hours">Project Hours</option>
@@ -371,7 +371,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="small mb-1" for="estimated_hours">Estimated hours</label>
-                            <input class="form-control" id="estimated_hours" type="text" name="estimated_hours" autocomplete="off" required/>
+                            <input class="form-control" id="estimated_hours" type="text" name="estimated_hours" autocomplete="off"/>
                         </div>
                     </div>
                 </div>
@@ -380,13 +380,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="small mb-1" for="estimated_hours">Project Phase</label>
-                            <input class="form-control" id="project_phase" type="text" name="project_phase" autocomplete="off" required placeholder="1,2,3" />
+                            <input class="form-control" id="project_phase" type="text" name="project_phase" autocomplete="off" placeholder="1,2,3" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="small mb-1" for="estimated_hours">Project Demo url</label>
-                            <input class="form-control" id="project_demo_url" type="url" name="project_demo_url" autocomplete="off" required placeholder="http://google.com" />
+                            <input class="form-control" id="project_demo_url" type="url" name="project_demo_url" autocomplete="off" placeholder="http://google.com" />
                         </div>
                     </div>
                 </div>

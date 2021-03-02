@@ -335,15 +335,15 @@ set_cookie($cookie_mergeaccount);
 					      redirect('#pricing-table');
 					    } 
 
-					$qrypedding=$this->db->query("SELECT due_date FROM `tbl_task` WHERE `due_date` < CURDATE() and task_status=0 and user_id='$user_id'");
+					/*$qrypedding=$this->db->query("SELECT due_date FROM `tbl_task` WHERE `due_date` < CURDATE() and task_status=0 and user_id='$user_id'");
 					$result_qrypedding = $qrypedding->row_array(); 	    
 					if($result_qrypedding['due_date']){
 						$body = $this->mailer->Anj_pending_tasks();
 						$this->load->helper('email_helper');
 						$email = sendEmail($result['email'], 'pending tasks', $body, $file = '' , $cc = 'manish@anjwebtech.com');
-					}
+					}*/
 			
-					    redirect('dashboard');
+					redirect('dashboard');
 					    
 						 /*if($status['success']){     
 						    if($this->session->userdata('projectID')){
@@ -547,7 +547,7 @@ set_cookie($cookie_mergeaccount);
 				$reset_link = base_url('login/reset_password/'.$pwd_reset_code);
 				$body = $this->mailer->Tpl_PwdResetLink($name,$reset_link);
 				$this->load->helper('email_helper');
-				$subject = 'Reset your password';
+				$subject = 'Reset Your  Password';
 				$email = sendEmail($email, $subject, $body, $file = '' , $cc = 'pms.test@anjwebtech.com');
 				if($email){
 					$this->session->set_flashdata('success', 'We have sent instructions for resetting your password to your email');
@@ -634,7 +634,7 @@ $name = getProfileName('username');
 $email = getProfileName('email');
 $body = $this->mailer->changepassword_Email_Template($name,$email,$new_password);
 $this->load->helper('email_helper');
-$subject = 'your change password';
+$subject = 'Your Account Password Changed Successfully';
 $emailsend = sendEmail($email, $subject, $body, $file = '' , $cc = 'pms.test@anjwebtech.com');
 
         				$data = array('code' => 0,'msg' => 'New password has been Updated successfully.');

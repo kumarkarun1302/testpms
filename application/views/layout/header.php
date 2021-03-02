@@ -44,8 +44,10 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<link href="https://www.thecodedeveloper.com/demo/add-datetimepicker-jquery-plugin/css/jquery.datetimepicker.min.css" rel="stylesheet"/>
-<script src="https://www.thecodedeveloper.com/demo/add-datetimepicker-jquery-plugin/js/jquery.datetimepicker.js"></script>
+
+<link href="<?php echo base_url('assets/'); ?>jquery.datetimepicker.min.css" rel="stylesheet"/>
+<script src="<?php echo base_url('assets/'); ?>jquery.datetimepicker.js"></script>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href='<?= base_url('assets/') ?>dropzone.css' type='text/css' rel='stylesheet'>
 <script src='<?= base_url('assets/') ?>dropzone.js' type='text/javascript'></script>

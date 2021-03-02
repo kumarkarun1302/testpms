@@ -78,13 +78,16 @@ class Dashboard extends MY_Controller {
 			$this->load->view('layout/footer', $view_data);
 		} else {
 
-		$query = $this->db->query("SELECT client_id FROM `tbl_project` WHERE user_id=$user_id");
-		$view_data['total_client'] = getProjectTotal('client_id');
+		//$query = $this->db->query("SELECT client_id FROM `tbl_project` WHERE user_id=$user_id");
+		$query123 = $this->db->query("SELECT DISTINCT t2.client_id FROM `tbl_roles` as t1 join tbl_project as t2 ON (t1.project_id=t2.project_id) WHERE CONCAT(',', t1.user_id, ',') like '%,$user_id,%'");
+		$view_data['total_client'] = $query123->num_rows();
 
-		$query = $this->db->query("SELECT project_id FROM `tbl_project` WHERE user_id=$user_id and status=2");
+		$query = $this->db->query("SELECT t1.project_id FROM `tbl_roles` as t1 join tbl_project as t2 ON (t1.project_id=t2.project_id) WHERE CONCAT(',', t1.user_id, ',') like '%,$user_id,%' and t2.status=2");
+
+		//echo $this->db->last_query();exit;
 		$view_data['total_completed'] = $query->num_rows();
 
-		$query_running = $this->db->query("SELECT project_id FROM `tbl_project` WHERE user_id=$user_id and status=0");
+		$query_running = $this->db->query("SELECT t1.project_id FROM `tbl_roles` as t1 join tbl_project as t2 ON (t1.project_id=t2.project_id) WHERE CONCAT(',', t1.user_id, ',') like '%,$user_id,%' and t2.status=0");
 		$view_data['total_running'] = $query_running->num_rows();
 
 		$query_running = $this->db->query("SELECT project_id FROM `tbl_status` WHERE user_id=$user_id");

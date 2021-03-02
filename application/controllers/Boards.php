@@ -24,6 +24,10 @@ class Boards extends MY_Controller
 
 		insert_data_last_id('tbl_my_activity',array('user_id'=>getProfileName('user_id'),'activity'=>$status_id,'activity_2'=>'copy label','created_date'=>date_from_today()));
 		//echo $this->db->last_query();
+
+		$msgg = getProfileName('username').' copy label';
+        $manishno = send_message_notification($msgg);
+
 		echo '1';
 	}
 
@@ -33,6 +37,9 @@ class Boards extends MY_Controller
 		$user_id = getProfileName('user_id');
 		$data = array('user_id'=>$user_id,'title'=>$result['title'],'description'=>$result['description'],'project_id'=>$result['project_id'],'status_id'=>$result['status_id'],'position_id'=>$result['position_id'],'created_at'=>date_from_today(),'combo_id'=>$result['combo_id'],'assigned_to'=>$result['assigned_to'],'due_date'=>$result['due_date'],'task_file'=>$result['task_file'],'priority'=>$result['priority']);
 		insert_data($this->tbl_task,$data);
+
+		$msgg = getProfileName('username').' copy task';
+        $manishno = send_message_notification($msgg);
 
 		insert_data_last_id('tbl_my_activity',array('user_id'=>getProfileName('user_id'),'activity'=>$task_id,'activity_2'=>'copy task','created_date'=>date_from_today()));
 	}
@@ -56,6 +63,10 @@ class Boards extends MY_Controller
 	public function addTask(){
 		$data = array('assigned_to'=>getProfileName('user_id'),'user_id'=>getProfileName('user_id'),'title'=>$this->input->post('title'),'status_id'=>$this->input->post('status_id'),'project_id'=>$this->input->post('project_id'),'combo_id'=>$this->input->post('projectCombo_id'),'due_date'=>date_from_today(),'created_at'=>date_from_today(),'start_date'=>date_from_today());
 		$task_id = insert_data_last_id($this->tbl_task, $data);
+
+		$msgg = getProfileName('username').' create new task';
+        $manishno = send_message_notification($msgg);
+
 		insert_data_last_id('tbl_my_activity',array('user_id'=>getProfileName('user_id'),'activity'=>$this->input->post('title'),'activity_2'=>'Add task','created_date'=>date_from_today()));
 	}
 
@@ -74,6 +85,9 @@ class Boards extends MY_Controller
 		$data1 = array('status_id' => $use.','.$last_status_id);
 		edit_update_multi_where('tbl_roles',$data1,$multi_where);
 		
+		$msgg = getProfileName('username').' create new label';
+        $manishno = send_message_notification($msgg);
+
 		insert_data_last_id('tbl_my_activity',array('user_id'=>getProfileName('user_id'),'activity'=>$last_status_id,'activity_2'=>'Add label','created_date'=>date_from_today()));
 
 		//echo $this->db->last_query();exit;
@@ -85,6 +99,10 @@ class Boards extends MY_Controller
 		$status_name = $this->input->post('status_name');
 		$data = array('status_name'=>$status_name);
 		edit_update($this->tbl_status, $data, 'id', $status_id);
+
+		$msgg = getProfileName('username').' rename label '.$status_name;
+        $manishno = send_message_notification($msgg);
+
 		insert_data_last_id('tbl_my_activity',array('user_id'=>getProfileName('user_id'),'activity'=>$status_name,'activity_2'=>'rename label','created_date'=>date_from_today()));
 	}
 
@@ -93,6 +111,10 @@ class Boards extends MY_Controller
 		$task_id = $this->input->post('status_id');
 		$data = array('title'=>$title);
 		edit_update($this->tbl_task, $data, 'id', $task_id);
+
+		$msgg = getProfileName('username').' rename task '.$title;
+        $manishno = send_message_notification($msgg);
+
 		insert_data_last_id('tbl_my_activity',array('user_id'=>getProfileName('user_id'),'activity'=>$title,'activity_2'=>'rename task','created_date'=>date_from_today()));
 		echo 1;
 	}
@@ -103,6 +125,8 @@ class Boards extends MY_Controller
 		$data = array('eDelete'=>1);
 		edit_update($this->tbl_status, $data, 'id', $status_id);
 		edit_update($this->tbl_task, $data, 'status_id', $status_id);
+		$msgg = getProfileName('username').' delete label';
+        $manishno = send_message_notification($msgg);
 		insert_data_last_id('tbl_my_activity',array('user_id'=>getProfileName('user_id'),'activity'=>$status_id,'activity_2'=>'delete label','created_date'=>date_from_today()));
 		echo 1;
 	}
@@ -111,6 +135,8 @@ class Boards extends MY_Controller
 		$task_id = $this->input->post('status_id');
 		$data = array('eDelete'=>1);
 		edit_update($this->tbl_task, $data, 'id', $task_id);
+		$msgg = getProfileName('username').' delete task';
+        $manishno = send_message_notification($msgg);
 		insert_data_last_id('tbl_my_activity',array('user_id'=>getProfileName('user_id'),'activity'=>$task_id,'activity_2'=>'delete task','created_date'=>date_from_today()));
 		echo 1;
 	}

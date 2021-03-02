@@ -302,7 +302,7 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                         <div class="blockContent">
                             <div class="overAllBlock">
                                 <a href="javascript:void(0)" class="overall-block">
-                                    <div class="overall-block-title">Total</div>
+                                    <div class="overall-block-title"></div>
                                     <div class="overall-block-data">
                                         <span id="tasksTotalCount"><?php echo $total_client; ?></span>
                                         <span id="totalUnitName"></span>
@@ -322,7 +322,7 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                         <div class="blockContent">
                             <div class="overAllBlock">
                                 <a href="javascript:void(0)" class="overall-block">
-                                    <div class="overall-block-title">Total</div>
+                                    <div class="overall-block-title"></div>
                                     <div class="overall-block-data">
                                         <span id="tasksTotalCount"><?php echo $total_completed; ?></span>
                                         <span id="totalUnitName"></span>
@@ -342,7 +342,7 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                         <div class="blockContent">
                             <div class="overAllBlock">
                                 <a href="javascript:void(0)" class="overall-block">
-                                    <div class="overall-block-title">Total</div>
+                                    <div class="overall-block-title"></div>
                                     <div class="overall-block-data">
                                         <span id="tasksTotalCount"><?php echo $total_running; ?></span>
                                         <span id="totalUnitName"></span>
@@ -362,7 +362,7 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                         <div class="blockContent">
                             <div class="overAllBlock">
                                 <a href="javascript:void(0)" class="overall-block">
-                                    <div class="overall-block-title">Total</div>
+                                    <div class="overall-block-title"></div>
                                     <div class="overall-block-data">
                                         <span id="tasksTotalCount"><?php echo $total_section; ?></span>
                                         <span id="totalUnitName"></span>
@@ -382,7 +382,7 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                         <div class="blockContent">
                             <div class="overAllBlock">
                                 <a href="javascript:void(0)" class="overall-block">
-                                    <div class="overall-block-title">Total</div>
+                                    <div class="overall-block-title"></div>
                                     <div class="overall-block-data">
                                         <span id="tasksTotalCount"><?php echo $total_task; ?></span>
                                         <span id="totalUnitName"></span>
@@ -402,7 +402,7 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                         <div class="blockContent">
                             <div class="overAllBlock">
                                 <a href="javascript:void(0)" class="overall-block">
-                                    <div class="overall-block-title">Total</div>
+                                    <div class="overall-block-title"></div>
                                     <div class="overall-block-data">
                                         <span id="tasksTotalCount"><?php echo $total_tbl_feedback; ?></span>
                                         <span id="totalUnitName"></span>
@@ -416,44 +416,42 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
             <div class="row no-gape mb-4">
                 
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="stack-item-content">
-                        <div class="blockHeader">
-                            <a href="javascript:void(0)" class="blockHeaderTitle">
-                                <h5 class="blockTitle">Technology use in projects</h5>
-                            </a>
-                        </div>
-                        <div class="blockContent">
-                            <div class="revenueClient_table" data-simplebar>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th class="revenueClient_no">#</th>
-                                                <th class="revenueClient_client">Client</th>
-                                                <th class="revenueClient_sumWithoutTax">Technology</th>
-                                                <th class="revenueClient_percentage">Total Projects</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                                $query2 = $this->db->query("SELECT client_id,category,COUNT(project_id) as total FROM `tbl_project` WHERE user_id=$maindashboard_user_id GROUP by category");
-                                                $result_maindashboard2 = $query2->result_array();
-                                                $i=1;
-                                                //echo print_r($result_maindashboard2);exit;
-                                                foreach ($result_maindashboard2 as $key => $value) {
-                                                    
-                                                ?>                                           
-                                            <tr>
-                                                <td class="revenueClient_no"><?php echo $i; ?></td>
-                                                <td class="revenueClient_client">
-                                                    <a href="javascript:void(0)"><h4 class="projectName"><?php echo ucfirst($value['client_id']); ?></h4></a>
-                                                </td>
-                                                <td class="revenueClient_sumWithoutTax"><?php echo ucfirst($value['category']); ?></td>
-                                                <td class="revenueClient_percentage"><?php echo $value['total']; ?></td>
-                                            </tr>
-                                            <?php $i++; } ?>                                          
-                                        </tbody>
-                                    </table>
+<div class="stack-item-content">
+<div class="blockHeader">
+    <a href="javascript:void(0)" class="blockHeaderTitle">
+        <h5 class="blockTitle">Technology use in projects</h5>
+    </a>
+</div>
+<div class="blockContent">
+    <div class="revenueClient_table" data-simplebar>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="revenueClient_no">#</th>
+                        <th class="revenueClient_client">Client</th>
+                        <th class="revenueClient_sumWithoutTax">Technology</th>
+                        <th class="revenueClient_percentage">Total Projects</th>
+                    </tr>
+</thead>
+    <tbody>
+        <?php
+            $query2 = $this->db->query("SELECT t2.*,count(t2.client_id) as total FROM `tbl_roles` as t1 join tbl_project as t2 ON (t1.project_id=t2.project_id) WHERE CONCAT(',', t1.user_id, ',') like '%,$maindashboard_user_id,%' group by t2.client_id");
+            $result_maindashboard2 = $query2->result_array();
+            $i=1;
+            foreach ($result_maindashboard2 as $key => $value) {
+            ?>                                           
+        <tr>
+            <td class="revenueClient_no"><?php echo $i; ?></td>
+            <td class="revenueClient_client">
+                <a href="javascript:void(0)"><h4 class="projectName"><?php echo ucfirst($value['client_id']); ?></h4></a>
+            </td>
+            <td class="revenueClient_sumWithoutTax"><?php echo ucfirst($value['category']); ?></td>
+            <td class="revenueClient_percentage" style="text-align: left;"><?php echo $value['total']; ?></td>
+        </tr>
+        <?php $i++; } ?>                                          
+    </tbody>
+</table>
                                 </div>
                             </div>
                         </div>
@@ -622,7 +620,7 @@ $projectstatus = '<span class="badge badge-secondary ml-auto project_status_runn
                     </div>
                 </div>
             </div>
-            <div class="row no-gape mb-4 dashboard_footer">
+            <!-- <div class="row no-gape mb-4 dashboard_footer">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="dashboard_footer-item">
                         <a href="javascript:void(0)">
@@ -630,7 +628,7 @@ $projectstatus = '<span class="badge badge-secondary ml-auto project_status_runn
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="footer_bar container-fluid">
             <div class="row no-gape">
@@ -1099,13 +1097,13 @@ var BASE_URL = "<?php echo base_url(); ?>";
  $(document).ready(function() {
   $('#due_date').datetimepicker({
     format:'Y-m-d H:i:s',
-    minDate: 0,
+    //minDate: 0,
     autoclose: true
   });
 
   $('#StartDate').datetimepicker({
     format:'Y-m-d H:i:s',
-    minDate: 0,
+    //minDate: 0,
     autoclose: true,
     onSelect: function(date) {
       $("#EndDate").datetimepicker('option', 'minDate', date);
@@ -1122,7 +1120,7 @@ var BASE_URL = "<?php echo base_url(); ?>";
   $('#EndDate').datetimepicker({
     format:'Y-m-d H:i:s',
     autoclose: true,
-    minDate: 0,
+    //minDate: 0,
     onClose: function (selected) {
       if(selected.length <= 0) {
           $("#StartDate").datetimepicker('disable')

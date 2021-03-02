@@ -36,7 +36,8 @@
 
     <!-- Role Permission CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/'); ?>css/rolePermission.css">
-    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=601ba3a85692e4001147c438&product=undefined' async='async'></script>
+
+    <!-- <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=601ba3a85692e4001147c438&product=undefined' async='async'></script> -->
 
 </head>
 
@@ -286,8 +287,9 @@ $result = $query->row_array();
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div class="form-group">
                                             <label for="addaccount">Email:</label>
-                                            <input type="text" class="form-control" name="account_email" id="account_email" placeholder="Enter Email ID" onblur="validateEmail1(this);">
-                                            <span id="errormsgaccount_email"></span>
+                                            <!-- <input type="text" class="form-control" name="account_email" id="account_email" placeholder="Enter Email ID" onblur="validateEmail1(this);"> -->
+                                            <input type="text" class="form-control" name="account_email" id="account_email" placeholder="Enter Email ID">
+                                            <span id="errormsgaccount_email" style="display: none;"></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
