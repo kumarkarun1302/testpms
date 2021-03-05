@@ -15,14 +15,14 @@ function newloginBydefultProject1(){
         'start_date'=>date_from_today(),
         'deadline'=>date('Y-m-d H:i:s', strtotime(date_from_today(). ' +30 days')),
         'category'=>'php,ajax',
-        'client_id'=>'Petey Cruiser',
+        'client_id'=>'ANJ Webtech',
         'created_date'=>date_from_today(),
         'user_id'=>getProfileName('user_id'),
         'combo_id'=>$combo_id,
         'status'=>0,
         'project_priority'=>'Urgent',
         'billing_type_id'=>'Project Hours',
-        'estimated_hours'=>'200',
+        'estimated_hours'=>'40',
         'project_phase'=>'3',
         'project_demo_url'=>'http://google.com'
         );
@@ -60,7 +60,7 @@ function newloginBydefultProject2(){
     'status'=>2,
     'project_priority'=>'Urgent',
     'billing_type_id'=>'Project Hours',
-    'estimated_hours'=>'200',
+    'estimated_hours'=>'80',
     'project_phase'=>'3',
     'project_demo_url'=>'http://google.com'
     );
@@ -98,7 +98,7 @@ function newloginBydefultProject3(){
         'status'=>3,
         'project_priority'=>'Urgent',
         'billing_type_id'=>'Project Hours',
-        'estimated_hours'=>'200',
+        'estimated_hours'=>'120',
         'project_phase'=>'3',
         'project_demo_url'=>'http://google.com'
         );
@@ -136,7 +136,7 @@ function newloginBydefultProject4(){
         'status'=>4,
         'project_priority'=>'Urgent',
         'billing_type_id'=>'Project Hours',
-        'estimated_hours'=>'200',
+        'estimated_hours'=>'220',
         'project_phase'=>'3',
         'project_demo_url'=>'http://google.com'
         );

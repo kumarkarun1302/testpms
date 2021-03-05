@@ -299,6 +299,7 @@ if(preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2
             if($response){
                 $rand_no = rand(0,1000);
                 $pwd_reset_code = md5($rand_no.$response['user_id']);
+                $this->UserModel->update_reset_code($pwd_reset_code, $response['user_id']);
                 $query = $this->db->query("select `email` from `tbl_users` where user_id='".$response['user_id']."'");
                 $result = $query->row_array();
                 //echo $this->db->last_qury();exit;
