@@ -313,7 +313,7 @@ set_cookie($cookie_mergeaccount);
 					first_login_f();
 					$projectNAME = $this->session->userdata('projectNAME');
 					$projectASSIGN = $this->session->userdata('projectASSIGN');
-					
+					$this->db->query("UPDATE tbl_users SET last_ip='".$ip."' WHERE user_id='".$user_id."'");
 					if($this->session->userdata('projectID')){
 						$main_user_id = anj_decode($this->input->post('projectMain_user_id'));
 						$projectID = anj_decode($this->input->post('projectID'));
@@ -372,9 +372,9 @@ set_cookie($cookie_mergeaccount);
 	{
 		$get_group_concat_project_id = get_group_concat_project_id('project_id');
 		if($get_group_concat_project_id){
-			$last_project1 = $this->db->query("SELECT * FROM `tbl_project` WHERE project_id IN ($get_group_concat_project_id) and eDelete=0 and status=0 limit 0,1");
+			$last_project1 = $this->db->query("SELECT combo_id,project_id,project_name,user_id FROM `tbl_project` WHERE project_id IN ($get_group_concat_project_id) and eDelete=0 and status=0 limit 0,1");
 		} else {
-			$last_project1 = $this->db->query("SELECT * FROM `tbl_project` WHERE eDelete=0 and status=0 limit 0,1");	
+			$last_project1 = $this->db->query("SELECT combo_id,project_id,project_name,user_id FROM `tbl_project` WHERE eDelete=0 and status=0 limit 0,1");	
 		}
 		$last_project = $last_project1->row_array();
 		$projectCombo_id = $last_project['combo_id'];
@@ -600,7 +600,8 @@ set_cookie($cookie_mergeaccount);
 		echo "<script>localStorage.clear();</script>";
 		$last_login = date_from_today();
 		$user_id = getProfileName('user_id');
-		$data = array('last_login' => $last_login,'online'=>'1');
+		$logout_ip = $this->input->ip_address();
+		$data = array('last_login' => $last_login,'online'=>'1','logout_ip'=>$logout_ip);
 		$this->db->where('user_id', $user_id);
 		$this->db->update('tbl_users', $data);
 		$this->session->sess_destroy();

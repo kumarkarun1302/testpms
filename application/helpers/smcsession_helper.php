@@ -1,19 +1,22 @@
 <?php
 
-function anj_crypt($string,$action='e') {
-  $secret_key = '!@#$%^&*()+qwertyazxcvbnm*?=;[{ZXCVBNMLKJHGFDSAQWERTYUIOP}]';
-  $secret_iv=hash('sha512',$secret_key);
-  $output = false;
-  $encrypt_method = "AES-256-CBC";
-  $key = hash( 'sha512', $secret_key );
-  $iv = substr( hash( 'sha512', $secret_iv ), 0, 256);
-  if( $action == 'e' ) {
-      $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
+// any id to convert encrypted //
+if (!function_exists('anj_crypt')) {
+  function anj_crypt($string,$action='e') {
+    $secret_key = '!@#$%^&*()+qwertyazxcvbnm*?=;[{ZXCVBNMLKJHGFDSAQWERTYUIOP}]';
+    $secret_iv=hash('sha512',$secret_key);
+    $output = false;
+    $encrypt_method = "AES-256-CBC";
+    $key = hash( 'sha512', $secret_key );
+    $iv = substr( hash( 'sha512', $secret_iv ), 0, 256);
+    if( $action == 'e' ) {
+        $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
+    }
+    else if( $action == 'd' ){
+        $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
+    }
+    return $output;
   }
-  else if( $action == 'd' ){
-      $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
-  }
-  return $output;
 }
 
 function anj_encode($text){
@@ -24,36 +27,38 @@ function anj_decode($text){
   return str_replace('=', '', strtr(base64_decode($text), '+/', '-_'));
 }
 
-
-function send_one_message_notification($text,$user_id){
-  $content      = array("en" => $text);
-  $hashes_array = array();
-  array_push($hashes_array, array(
-    "text" => $text,
-    "icon" => base_url()."assets/images/notifi.png",
-    "url" => base_url()
-  ));
-    $fields = array(
-      'app_id' => "37b918fe-7261-492d-847b-90c5d7d972fa",
-      'include_external_user_ids'=>array($user_id),
-      'data' => array("anj" => "web"),
-      'contents' => $content
-    );
-  $fields = json_encode($fields);
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-      'Content-Type: application/json; charset=utf-8',
-      'Authorization: Basic YmM5NjNjN2MtYTc0ZC00YTM2LTlkMDAtM2I2NGU2M2FmMDJj'
-  ));
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-  curl_setopt($ch, CURLOPT_HEADER, FALSE);
-  curl_setopt($ch, CURLOPT_POST, TRUE);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-  $response = curl_exec($ch);
-  curl_close($ch);
-  return $response;
+// send notification by new project add/edit/delete  //
+if (!function_exists('send_one_message_notification')) {
+  function send_one_message_notification($text,$user_id){
+    $content      = array("en" => $text);
+    $hashes_array = array();
+    array_push($hashes_array, array(
+      "text" => $text,
+      "icon" => base_url()."assets/images/notifi.png",
+      "url" => base_url()
+    ));
+      $fields = array(
+        'app_id' => "37b918fe-7261-492d-847b-90c5d7d972fa",
+        'include_external_user_ids'=>array($user_id),
+        'data' => array("anj" => "web"),
+        'contents' => $content
+      );
+    $fields = json_encode($fields);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json; charset=utf-8',
+        'Authorization: Basic YmM5NjNjN2MtYTc0ZC00YTM2LTlkMDAtM2I2NGU2M2FmMDJj'
+    ));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_POST, TRUE);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+  }
 }
 
 function send_message_notification($text){
@@ -88,20 +93,24 @@ function send_message_notification($text){
   return $response;
 }
 
-function insert_my_activity($insertmyactivity){
-   $ci = & get_instance();
-   $insert_my_activity_data = array('user_id'=>getProfileName('user_id'),'created_date'=>date_from_today());
-   $data = array();
-   array_push($data, $insertmyactivity);
-   array_push($data, $insert_my_activity_data);
-   insert_data_last_id('tbl_my_activity',$data);
-   return true;
+if (!function_exists('insert_my_activity')) {
+  function insert_my_activity($insertmyactivity){
+     $ci = & get_instance();
+     $insert_my_activity_data = array('user_id'=>getProfileName('user_id'),'created_date'=>date_from_today());
+     $data = array();
+     array_push($data, $insertmyactivity);
+     array_push($data, $insert_my_activity_data);
+     insert_data_last_id('tbl_my_activity',$data);
+     return true;
+  }
 }
 
-function notification_insertDB($tbl_notifications_data){
-   $ci = & get_instance();
-   $notifications_id = insert_data_last_id('tbl_notifications',$tbl_notifications_data);
-   return true;
+if (!function_exists('notification_insertDB')) {
+  function notification_insertDB($tbl_notifications_data){
+     $ci = & get_instance();
+     $notifications_id = insert_data_last_id('tbl_notifications',$tbl_notifications_data);
+     return true;
+  }
 }
 
 function getCountry(){
@@ -138,30 +147,31 @@ function getCity($stateid){
     return $query->result_array();
 }
 
-function getResponse($user_id)
-{
-    $ci = & get_instance();
-    $result = $ci->db->get_where('tbl_users',array('user_id'=>$user_id));
-    if($result->num_rows() > 0){
-        $result = $result->row_array();
-        return $result;
-    } else {
-        return false;
-    }
+// get respone by user session //
+if (!function_exists('getResponse')) {
+  function getResponse($user_id)
+  {
+      $ci = & get_instance();
+      $result = $ci->db->get_where('tbl_users',array('user_id'=>$user_id));
+      if($result->num_rows() > 0){
+          $result = $result->row_array();
+          return $result;
+      } else {
+          return false;
+      }
+  }
 }
 
-function getProfileName($key){
-    $CI = & get_instance();
-    
-    /*if($CI->session->userdata('joinaccount')){
-      $slug_username = $CI->session->userdata('joinaccount');
-      $id = getsession_mergeAccount($slug_username);
-    } else {*/
+
+// user_id session get user details one by one //
+if (!function_exists('getProfileName')) {
+  function getProfileName($key){
+      $CI = & get_instance();
       $id = getSession('user_id');
-    //}
-    $query = $CI->db->get_where('tbl_users', array('user_id' => $id));
-    $result = $query->row_array();
-    return  $result[$key];
+      $query = $CI->db->get_where('tbl_users', array('user_id' => $id));
+      $result = $query->row_array();
+      return  $result[$key];
+  }
 }
 
 function getsession_mergeAccount($slug_username){
@@ -196,10 +206,13 @@ function getSessionadmin($key){
     return  $admin_details[$key];
 }
 
-function date_from_today()
-{
-    $CI = & get_instance();
-    return date('Y-m-d H:i:s');
+// today date //
+if (!function_exists('date_from_today')) {
+  function date_from_today()
+  {
+      $CI = & get_instance();
+      return date('Y-m-d H:i:s');
+  }
 }
 
 function is_login_admin(){ 

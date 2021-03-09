@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Calendar Display</title>
-        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-        
+<head>
+<title>Calendar Display</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+<link href="https://www.thecodedeveloper.com/demo/add-datetimepicker-jquery-plugin/css/jquery.datetimepicker.min.css" rel="stylesheet"/>
+<script src="https://www.thecodedeveloper.com/demo/add-datetimepicker-jquery-plugin/js/jquery.datetimepicker.js"></script>
+
+
     </head>
     <body>
 
@@ -28,7 +34,7 @@
     </div>
     </div>
 
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -36,7 +42,9 @@
         <h4 class="modal-title" id="myModalLabel">Add Calendar Event</h4>
       </div>
       <div class="modal-body">
-      <?php echo form_open(site_url("calendar/add_event"), array("class" => "form-horizontal")) ?>
+
+      <form class="needs-validation" novalidate action="<?php echo base_url('calendar/add_event'); ?>" method="post" autocomplete="off" class="form-horizontal">
+      
       <div class="form-group">
                 <label for="p-in" class="col-md-4 label-heading">Event Name</label>
                 <div class="col-md-8 ui-front">
@@ -52,13 +60,13 @@
         <div class="form-group">
                 <label for="p-in" class="col-md-4 label-heading">Start Date</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="start_date">
+                    <input type="text" class="form-control" name="start_date" id="start_date">
                 </div>
         </div>
         <div class="form-group">
                 <label for="p-in" class="col-md-4 label-heading">End Date</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="end_date">
+                    <input type="text" class="form-control" name="end_date" id="end_date">
                 </div>
         </div>
       </div>
@@ -95,13 +103,13 @@
         <div class="form-group">
                 <label for="p-in" class="col-md-4 label-heading">Start Date</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="start_date" id="start_date">
+                    <input type="text" class="form-control" name="start_date1" id="start_date1">
                 </div>
         </div>
         <div class="form-group">
                 <label for="p-in" class="col-md-4 label-heading">End Date</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="end_date" id="end_date">
+                    <input type="text" class="form-control" name="end_date1" id="end_date1">
                 </div>
         </div>
         <div class="form-group">
@@ -122,6 +130,36 @@
 </div>
     
 <script type="text/javascript">
+
+$(document).ready(function() {
+  $(function () {
+      $("#start_date").datepicker({
+          minDate: new Date(),
+          dateFormat:"yy-mm-dd",
+          onSelect: function (selected) {
+              var dt = new Date(selected);
+              dt.setDate(dt.getDate() + 1);
+              $("#end_date").datepicker("option", "minDate", dt);
+          }
+      });
+      $("#end_date").datepicker({
+          dateFormat:"yy-mm-dd",
+          onSelect: function (selected) {
+              var dt = new Date(selected);
+              dt.setDate(dt.getDate() - 1);
+              $("#start_date").datepicker("option", "maxDate", dt);
+              var startDate = new Date($('#start_date').val());
+              var endDate = new Date($('#end_date').val());
+              if (startDate > endDate) {
+                alert("EndDate must be greater than start date");
+                $('#end_date').val('');
+              }
+
+          }
+      });
+  });
+});
+
 $(document).ready(function() {
 
     var date_last_clicked = null;

@@ -95,7 +95,7 @@ class Ajax_task extends MY_Controller
         $project_id = $this->input->post('project_id');
         $combo_id = $this->input->post('projectCombo_id');
         $project_type_status = $this->input->post('project_type_status');
-        $query = $this->db->query("select * from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query = $this->db->query("select project_name,project_description,client_id,start_date,deadline from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0");
         $project_list = $query->row_array();
         $query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0");
         $status_total = $query_status->row_array();
@@ -154,7 +154,7 @@ class Ajax_task extends MY_Controller
         $user_id = getProfileName('user_id');
         $project_id = $this->input->post('project_id');
         $combo_id = $this->input->post('projectCombo_id');
-        $query = $this->db->query("select * from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query = $this->db->query("select project_name,project_description,client_id,start_date,deadline from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0");
         $project_list = $query->row_array();
         $query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0");
         $status_total = $query_status->row_array();
@@ -212,7 +212,7 @@ class Ajax_task extends MY_Controller
         $user_id = getProfileName('user_id');
         $project_id = $this->input->post('project_id');
         $combo_id = $this->input->post('projectCombo_id');
-        $query = $this->db->query("select * from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query = $this->db->query("select project_name,project_description,client_id,start_date,deadline from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0");
         $project_list = $query->row_array();
         $query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0");
         $status_total = $query_status->row_array();

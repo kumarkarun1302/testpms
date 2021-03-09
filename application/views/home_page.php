@@ -681,7 +681,7 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
 
             <ul class="footer-bottom-social" style="text-align: center;">
               <li><u><a href="<?php echo base_url('feedback'); ?>" target="_blank">FeedBack</a></u></li>
-              <li><u><a href="<?php echo base_url('#iq-feature'); ?>">Product</a></u></li>
+              <li><u><a href="<?php echo base_url('blog'); ?>">Blog</a></u></li>
               <li><u><a href="<?php echo base_url('developer_api'); ?>" target="_blank">Developers & API</a></u></li>
               <li><u><a href="<?php echo base_url('#pricing-table'); ?>">Pricing</a></u></li>
               <li><u><a href="<?php echo base_url('contact'); ?>" target="_blank">Contact</a></u></li>
@@ -784,9 +784,9 @@ $max_file_size_upload_limit = round($max_file_size_upload_limit,2). ' GB';
           }, 2000);
         });
 
-/*document.addEventListener("keydown",function(){return 123==event.keyCode?(alert("Nice trick! but not permitted!"),!1):event.ctrlKey&&event.shiftKey&&73==event.keyCode?(alert("Nice trick! but not permitted!"),!1):event.ctrlKey&&85==event.keyCode?(alert("Nice trick! but not permitted!"),!1):void 0},!1),document.addEventListener?document.addEventListener("contextmenu",function(e){alert("Nice trick! but not permitted!"),e.preventDefault()},!1):document.attachEvent("oncontextmenu",function(){alert("Nice trick! but not permitted!"),window.event.returnValue=!1});
-*/
-/*document.onkeydown = function(e) {
+document.addEventListener("keydown",function(){return 123==event.keyCode?(alert("Nice trick! but not permitted!"),!1):event.ctrlKey&&event.shiftKey&&73==event.keyCode?(alert("Nice trick! but not permitted!"),!1):event.ctrlKey&&85==event.keyCode?(alert("Nice trick! but not permitted!"),!1):void 0},!1),document.addEventListener?document.addEventListener("contextmenu",function(e){alert("Nice trick! but not permitted!"),e.preventDefault()},!1):document.attachEvent("oncontextmenu",function(){alert("Nice trick! but not permitted!"),window.event.returnValue=!1});
+
+document.onkeydown = function(e) {
 if(event.keyCode == 123) {
 return false;
 }
@@ -815,8 +815,8 @@ if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
 return false;
 }
 }
-*/
-      </script>
+
+</script>
 
 <script>
 setInterval(function(){

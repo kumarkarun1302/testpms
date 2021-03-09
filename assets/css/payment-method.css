@@ -1,0 +1,48 @@
+
+#paypal{
+
+}
+#paypal input[type=radio]{
+	width: 25px;
+	height: 25px;
+	margin-bottom: 0;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+#stripe{
+
+}
+#stripe input{
+	margin-bottom: 0;
+}
+.pricingCost {
+    padding: .75em 1.25em;
+    display: flex;
+    justify-content: space-between;
+}
+.pricingCost h5{
+	font-size: 18px;
+}
+.pricingCost h6{
+	font-size: 16px;
+    margin-bottom: 0;
+    font-weight: 700;
+    line-height: 20px;
+}
+.pricingCost:first-child {
+    padding: .75em 1.25em 0;
+}
+
+.pricingCost:last-child {
+    padding: 0 1.25em .75em;
+}
+h6 {
+    font-size: 18px;
+    line-height: 1.3em;
+}
+
+input:hover, input.form-control:hover, input:focus, input.form-control:focus, textarea.form-control:hover, textarea.form-control:focus {
+    border-color: #218dcb;
+    outline: 0;
+    box-shadow: none;
+}

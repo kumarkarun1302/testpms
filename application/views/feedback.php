@@ -1,46 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>FeedBack From</title>
-<meta name="description" content="feedback anjpms project management system pms tools"/>
-<meta name="keywords" content="feedback anjpms project management system pms tools pms, task, team, projects, images, role permission, Account Merge" />
-<meta name="robots" content="noindex, nofollow, index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-<meta name="language" content="en"/>
-<meta name="audience" content="ALL"/>
-<meta name="copyright" content="anjpmswebtech Pvt Ltd"/>
-<meta name="googlebot" content="index,follow" />
-<meta name="SLURP" content="INDEX,FOLLOW" />
-<meta name="author" content="feedback anjpms">
-<meta name="p:domain_verify" content="074142b0b1f71cd9c90164be2a88e4a3"/>
-<link rel="dns-prefetch" href="<?php echo base_url('feedback'); ?>"/>
-<meta property="og:title" content="feedback anjpms"/>
-<meta property="twitter:title" content="feedback anjpms" />
-<meta property="og:image" content="<?php echo base_url('assets/images/ogBanner.png'); ?>"/>
-<meta property="twitter:image" content="<?php echo base_url('assets/images/ogBanner.png'); ?>" />
-<meta property="og:description" content="feedback anjpms project management system pms tools"/>
-<meta property="twitter:description" content="feedback anjpms project management system pms tools"/>
-<meta property="og:type" content="website" />
-<meta property="og:url" content="<?php echo base_url('feedback'); ?>"/>
-<meta property="og:site_name" content="feedback anjpms"/>
-<link rel="canonical" href="<?php echo base_url('feedback'); ?>" />
-<link rel="canonical" href="<?php echo base_url('assets/images/ogBanner.png'); ?>" />
-<link rel="alternate" href="<?php echo base_url('assets/images/ogBanner.png'); ?>" hreflang="en" />
 
-<link rel="shortcut icon" href="<?php echo base_url('assets/home/'); ?>images/favicon.ico" />
-<link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/bootstrap.min.css">
-<link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/style.css">
-<link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/responsive.css">
-<link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/all.min.css">
-<link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/owl.carousel.min.css">
-<link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/ionicons.min.css">
-<link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/wow.css">
-<link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/slick-theme.css">
-<link rel="stylesheet" href="<?php echo base_url('assets/home/'); ?>css/flaticon.css">
-</head>
-  <body class="index">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Feedback | ANJ PMS</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?php echo base_url('assets/payment/'); ?>images/favicon.ico" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/payment/'); ?>css/bootstrap.min.css">
     
+    <!-- Style -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/payment/'); ?>css/style.css">
+    <!-- Responsive -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/payment/'); ?>css/responsive.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/payment/'); ?>css/all.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url('assets/payment/'); ?>css/owl.carousel.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url('assets/payment/'); ?>css/ionicons.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url('assets/payment/'); ?>css/wow.css">
+
+    <link rel="stylesheet" href="<?php echo base_url('assets/payment/'); ?>css/slick-theme.css">
+    
+    <link rel="stylesheet" href="<?php echo base_url('assets/payment/'); ?>css/flaticon.css">
+  </head>
+  <body class="index">
+    <!-- loading -->
+    <div id="loading">
+      <div id="loading-center">
+        <div class="loader">
+          <div class="cube">
+            <div class="sides">
+              <div class="top"></div>
+              <div class="right"></div>
+              <div class="bottom"></div>
+              <div class="left"></div>
+              <div class="front"></div>
+              <div class="back"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- loading End -->
+
     <!-- Start Header -->
     <header id="header" class="home">
       <div class="container">
@@ -48,24 +55,18 @@
           <div class="col-lg-8">
             <nav class="navbar navbar-expand-lg navbar-light">
               <a class="navbar-brand" href="<?php echo base_url(''); ?>">
-                <img class="logo" src="<?php echo base_url('assets/home/'); ?>images/index-logo.png" alt="image">
+                <img class="logo" src="<?php echo base_url('assets/payment/images/index-logo.png'); ?>" alt="image">
               </a>
             </nav>
           </div>
           <div class="col-lg-4 text-right">
             <ul class="login">
-              <?php if(isset($_SESSION['user_details'])){ ?>
-                
-                <li class="d-inline "><a href="<?php echo base_url('dashboard'); ?>" class="login-btn">Dashboard</a></li>
-
-                <li class="d-inline"><a href="<?php echo base_url('login/logout'); ?>" class="btn">Logout</a></li>
-              <?php } else { ?>
-
-                <li class="d-inline text-dark"><a href="<?php echo base_url('login'); ?>" class="login-btn">Login</a></li>
-                <li class="d-inline "><a href="<?php echo base_url('register'); ?>" class="login-btn">Signup</a></li>
-
-              <?php } ?>
-              
+                <?php if(isset($_SESSION['user_details'])){ ?>
+                  <li class="d-inline "><a href="<?php echo base_url('dashboard'); ?>" class="login-btn">Dashboard</a></li>
+                <?php } else { ?>
+                  <li class="d-inline text-dark"><a href="<?php echo base_url('login'); ?>" class="login-btn">Login</a></li>
+                  <li class="d-inline "><a href="<?php echo base_url('register'); ?>" class="login-btn">Signup</a></li>
+                <?php } ?>
             </ul>
           </div>
         </div>
@@ -73,133 +74,105 @@
     </header>
     <!-- End Header -->
 
-      <!-- Main Content -->
-      <div class="main-content">
-        <!-- Roadmap-->
-
-        <section class="iq-roadmap">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-sm-12">
-                <div class="title-box">
-                  <h1 class="title">Feedback ANJPMS</h1>
+    <!-- Start Page Title Area -->
+    <div class="page-title-area feedback">
+       <div class="d-table">
+          <div class="d-table-cell">
+             <div class="container">
+                <div class="page-title-content">
+                   <h2>Feedback</h2>
+                   <ul>
+                      <li><a href="<?php echo base_url(''); ?>">Home</a></li>
+                      <li>Feedback</li>
+                   </ul>
                 </div>
-              </div>
-            </div>
-            
-
-<?php if($this->session->flashdata('success')): ?>
-<div class="alert alert-success">
-<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-<?=$this->session->flashdata('success')?>
-</div>
-<?php endif; ?>
-
-<form action="<?php echo base_url('feedback/insert_feedback'); ?>" method="post" onsubmit="return validateForm()">
-  <div class="row">
-              <div class="col-sm-6">
-                <label for="quality">Type of Quality:</label>
-                <select name="quality" id="quality" class="form-control">
-                  <option value=""></option>
-                  <option value="Excellent">Excellent</option>
-                  <option value="Very Good">Very Good</option>
-                  <option value="Good">Good</option>
-                  <option value="Average">Average</option>
-                  <option value="Poor">Poor</option>
-                </select>
-
-              </div>
-
-              <div class="col-sm-6">
-                <label for="phone">Your Phone:</label>
-                <input type="number" id="phone" name="phone" class="form-control">
-              </div>
-
-              <div class="col-sm-6">
-                <label for="first_name">Your Name:</label>
-                <input type="text" id="first_name" name="first_name" class="form-control">
-              </div>
-
-              <div class="col-sm-6">
-                <label for="email">Your Email:</label>
-                <input type="text" id="email" name="email" class="form-control">
-              </div>
-
-              <div class="col-sm-12">
-                <label for="email">Your Comment:</label>
-                <textarea name="message" id="message" class="form-control" rows="3"></textarea>
-              </div>
-
-              <div class="col-sm-12">
-                <input type="submit" name="submit" class="btn login-btn btn-primary" value="Send FeedBack">
-              </div>
-
-            </div>
-            </form>
-
+             </div>
           </div>
+       </div>
+       <div class="default-shape">
+          <div class="shape-1">
+             <img src="<?php echo base_url('assets/payment/'); ?>images/shape/1.png" alt="image">
+          </div>
+          <div class="shape-2 rotateme">
+             <img src="<?php echo base_url('assets/payment/'); ?>images/shape/2.png" alt="image">
+          </div>
+          <div class="shape-3">
+             <img src="<?php echo base_url('assets/payment/'); ?>images/shape/3.svg" alt="image">
+          </div>
+          <div class="shape-4">
+             <img src="<?php echo base_url('assets/payment/'); ?>images/shape/4.svg" alt="image">
+          </div>
+          <div class="shape-5">
+             <img src="<?php echo base_url('assets/payment/'); ?>images/shape/5.png" alt="image">
+          </div>
+       </div>
+    </div>
+    <!-- End Page Title Area -->
 
-        </section>
-        <!-- Roadmap End-->
+    <!-- Start Contact Section -->
+    <section class="pms-contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="contact-widget">
+               <div class="sec-title2">
+                   <span class="sub-text contact mb-15">Send Us Your Feedback!</span>
+                   <h2 class="title testi-title">Do you have a suggestion or found some bug? let us know in the field below.</h2>
 
-      </div>
-      <!-- Main Content END -->
-
-      <!-- Start Call To Action Section -->
-      <section class="call-to-act-wrap">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="call-to-act">
-                <div class="call-to-act-head">
-                  <h3>Want to Become a ANJ PMS?</h3>
-                  <span>We'll help you to grow your career and growth.</span>
-                </div>
-                <a href="<?php echo base_url('register'); ?>" class="btn btn-call-to-act">SignUp Today</a>
-              </div>
-              
+               </div>
+                <div id="form-messages"></div>
+                <form id="contact-form" method="post" action="<?php echo base_url('feedback/insert_feedback'); ?>" onsubmit="return validateForm()"> 
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
+                                <input class="form-control" type="text" id="name" name="name" placeholder="Name" >
+                            </div> 
+                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
+                                <input class="form-control" type="text" id="email" name="email" placeholder="E-Mail" >
+                            </div>   
+                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
+                                <input class="form-control" type="text" id="phone" name="phone" placeholder="Phone Number" >
+                            </div>   
+                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
+                                <select name="type_of_enquiry" id="type_of_enquiry" class="form-control" >
+                                  <option value="Select Feedback Type">Select Feedback Type</option>
+                                  <option value="Excellent">Excellent</option>
+                                  <option value="Very Good">Very Good</option>
+                                  <option value="Good">Good</option>
+                                  <option value="Average">Average</option>
+                                  <option value="Poor">Poor</option>
+                                </select>
+                            </div>
+                      
+                            <div class="col-lg-12 mb-30">
+                                <textarea class="form-control" id="message" name="message" placeholder="Your message Here" ></textarea>
+                            </div>
+                        </div>
+                        <div class="btn-part">                                            
+                            <div class="form-group mb-0">
+                                <input class="readon learn-more submit" type="submit" value="Send Feedback">
+                            </div>
+                        </div> 
+                    </fieldset>
+                </form> 
             </div>
           </div>
         </div>
-      </section>
-      <!-- End Call To Action Section -->
-
-      
-      <div class="modal fade" id="custompackageModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="custompackageModalLabel" aria-hidden="true">
-        <div class="modal-dialog-centered modal-dialog modal-md" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="custompackageModalLabel">Custom Package</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-            </div>
-            <div class="modal-body">
-                 <div class="form-row">
-                    <p>If you have any questions,<br/>please contact our <a class="customer-support-link" href="https://anjwebtech.com/contact-us/" target="_blank"> Customer Support</a>.</p>
-                 </div>
-                 <div class="form-row">
-                    <div class="gyan-infobox-content gyan-ease-transition">F-504, Titanium City Center, Prahaladnagar, A'bad – 380015 <br>
-                    <div class="office-phone"><a href="tel:+919824168721"><span><i class="fas fa-phone"></i><span>+91-982-416-8721</span></span></a></div>
-                    <div class="office-email"><a href="mailto:info@anjwebtech.com"><span><i class="fas fa-envelope"></i><span> info@anjwebtech.com</span></span></a></div>
-                    </div>
-                 </div>
-              </div>
-              <div class="modal-footer"> 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
-              </div>
-          </div>
-        </div>
       </div>
+    </section>
+    <!-- End Contact Section -->
 
       <!-- Footer Start -->
       <footer class="dark-footer skin-dark-footer">
         <div class="footer-bottom">
           <div class="container">
-            
             <div class="row align-items-center">
+              
               <div class="col-lg-6 col-md-6">
-                <p class="mb-0">© <?php echo date("Y"); ?> ANJ PMS. Designd By <a href="https://anjwebtech.com">ANJ Webtech Pvt Ltd</a> All Rights Reserved</p>
+                <p class="mb-0">© 2021 ANJ PMS. Designd By <a href="https://anjwebtech.com/">ANJ Webtech Pvt Ltd</a> All Rights Reserved</p>
               </div>
-              <div class="col-lg-6 col-md-6">
+              
+              <div class="col-lg-6 col-md-6 text-right">
                 <ul class="footer-bottom-social">
                   <li><a href="https://www.facebook.com/anjpms/"><i class="fab fa-facebook-f"></i></a></li>
                   <li><a href="https://twitter.com/anjpms"><i class="fab fa-twitter"></i></a></li>
@@ -209,11 +182,12 @@
                   <li><a href="https://www.youtube.com/user/anjpms"><i class="fab fa-youtube"></i></a></li>
                 </ul>
               </div>
+              
             </div>
 
             <ul class="footer-bottom-social" style="text-align: center;">
               <li><u><a href="<?php echo base_url('feedback'); ?>" target="_blank">FeedBack</a></u></li>
-              <li><u><a href="<?php echo base_url('#iq-feature'); ?>">Product</a></u></li>
+              <li><u><a href="<?php echo base_url('blog'); ?>">Blog</a></u></li>
               <li><u><a href="<?php echo base_url('developer_api'); ?>" target="_blank">Developers & API</a></u></li>
               <li><u><a href="<?php echo base_url('#pricing-table'); ?>">Pricing</a></u></li>
               <li><u><a href="<?php echo base_url('contact'); ?>" target="_blank">Contact</a></u></li>
@@ -239,17 +213,31 @@
 
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="<?php echo base_url('assets/home/'); ?>js/jquery-3.5.1.min.js" ></script>
-      <script src="<?php echo base_url('assets/home/'); ?>js/popper.min.js"></script>
-      <script src="<?php echo base_url('assets/home/'); ?>js/bootstrap.min.js" ></script>
-      <script src="<?php echo base_url('assets/home/'); ?>js/modernizr.js"></script>
-      <script src="<?php echo base_url('assets/home/'); ?>js/wow.min.js"></script>
-      <script src="<?php echo base_url('assets/home/'); ?>js/jquery.count.min.js"></script>
-      <script src="<?php echo base_url('assets/home/'); ?>js/owl.carousel.min.js"></script>
-      <script src="<?php echo base_url('assets/home/'); ?>js/parallax.min.js"></script>
-      <script src="<?php echo base_url('assets/home/'); ?>js/slick.min.js"></script>
-      <script src="<?php echo base_url('assets/home/'); ?>js/custom.js"></script>
+      <script src="<?php echo base_url('assets/payment/'); ?>js/jquery-3.5.1.min.js" ></script>
+      <!-- popper  -->
+      <script src="<?php echo base_url('assets/payment/'); ?>js/popper.min.js"></script>
+      <!--  bootstrap -->
+      <script src="<?php echo base_url('assets/payment/'); ?>js/bootstrap.min.js" ></script>
+      <!-- Modernizr JavaScript -->
+      <script src="<?php echo base_url('assets/payment/'); ?>js/modernizr.js"></script>
       
+      <!-- Wow -->
+      <script src="<?php echo base_url('assets/payment/'); ?>js/wow.min.js"></script>
+
+      <!-- countTo JavaScript -->
+      <script src="<?php echo base_url('assets/payment/'); ?>js/jquery.count.min.js"></script>
+
+      <!-- Owl Carousel JavaScript -->
+      <script src="<?php echo base_url('assets/payment/'); ?>js/owl.carousel.min.js"></script>
+
+      <!-- Parallax JavaScript -->
+      <script src="<?php echo base_url('assets/payment/'); ?>js/parallax.min.js"></script>
+
+      <!-- slick  -->
+      <script src="<?php echo base_url('assets/payment/'); ?>js/slick.min.js"></script>
+      <!-- Custom JavaScript -->
+      <script src="<?php echo base_url('assets/payment/'); ?>js/custom.js"></script>
+
       <script type="text/javascript">
       function validateForm() {
           if($("#quality").val()==''){
@@ -269,6 +257,7 @@
           }
       }
       </script>
+
       
   </body>
 </html>

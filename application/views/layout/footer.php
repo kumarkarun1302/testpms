@@ -253,21 +253,19 @@ function all_function_call(){
 var BASE_URL = "<?php echo base_url(); ?>";
 
  $(document).ready(function() {
+
   $('#start_date').datetimepicker({
     format:'Y-m-d H:i:s',
-    //minDate: 0,
     autoclose: true
   });
 
   $('#due_date').datetimepicker({
     format:'Y-m-d H:i:s',
-    //minDate: 0,
     autoclose: true
   });
   
   $('#StartDate').datetimepicker({
     format:'Y-m-d H:i:s',
-    //minDate: 0,
     autoclose: true,
     onSelect: function(date) {
       $("#EndDate").datetimepicker('option', 'minDate', date);
@@ -281,10 +279,11 @@ var BASE_URL = "<?php echo base_url(); ?>";
       $("#EndDate").datetimepicker("option", "minDate", selected);
     }
   });
+
   $('#EndDate').datetimepicker({
     format:'Y-m-d H:i:s',
     autoclose: true,
-    //minDate: 0,
+    orientation: "top",
     onClose: function (selected) {
       if(selected.length <= 0) {
           $("#StartDate").datetimepicker('disable')
@@ -294,7 +293,8 @@ var BASE_URL = "<?php echo base_url(); ?>";
       $("#StartDate").datetimepicker("option", "maxDate", selected);
     }
   });
-    $( "#search" ).autocomplete({
+  
+  $( "#search" ).autocomplete({
         source: function(request, response) {
             $.ajax({
             url: BASE_URL + "ajax_comman/search",
@@ -315,6 +315,7 @@ var BASE_URL = "<?php echo base_url(); ?>";
     },
     minLength: 1
  });
+
 });
  
  // File type validation

@@ -1,71 +1,82 @@
 <?php
+
 /* record insert */
-function insert_data($tablename, $arg1)
-{
-    $ci = & get_instance();
-    $ci->db->insert($tablename, $arg1);
-    if ($ci->db->affected_rows() > 0) {
-        return TRUE;
-    } else {
-        return FALSE;
+if (!function_exists('insert_data')) {
+    function insert_data($tablename, $arg1)
+    {
+        $ci = & get_instance();
+        $ci->db->insert($tablename, $arg1);
+        if ($ci->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 }
-function insert_data_last_id($tablename, $arg1)
-{
-    $ci = & get_instance();
-    $ci->db->insert($tablename, $arg1);
-    if ($ci->db->affected_rows() > 0) {
-        return $last_insert_id = $ci->db->insert_id();
-    } else {
-        return NULL;
+
+if (!function_exists('insert_data_last_id')) {
+    function insert_data_last_id($tablename, $arg1)
+    {
+        $ci = & get_instance();
+        $ci->db->insert($tablename, $arg1);
+        if ($ci->db->affected_rows() > 0) {
+            return $last_insert_id = $ci->db->insert_id();
+        } else {
+            return NULL;
+        }
     }
 }
 /*  END record insert */ 
 
 /* record upadte */
-function edit_update($table, $data, $column_id, $id){
-    $ci = & get_instance();
-    //$table = substr($table, 4);
-    $ci->db->where($column_id, $id);
-    $ci->db->update($table, $data);
-    return true;
+if (!function_exists('edit_update')) {
+    function edit_update($table, $data, $column_id, $id){
+        $ci = & get_instance();
+        //$table = substr($table, 4);
+        $ci->db->where($column_id, $id);
+        $ci->db->update($table, $data);
+        return true;
+    }
 }
 
-function edit_update_multi_where($table, $data, $multi_where){
-    $ci = & get_instance();
-    $ci->db->where($multi_where);
-    $ci->db->update($table, $data);
-    return true;
+if (!function_exists('edit_update_multi_where')) {
+    function edit_update_multi_where($table, $data, $multi_where){
+        $ci = & get_instance();
+        $ci->db->where($multi_where);
+        $ci->db->update($table, $data);
+        return true;
+    }
 }
-
 /*  END record upadte */ 
 
 
 /* record select */
-
-function get_by_id($table, $selected_column, $column_id, $id)
-{
-    $ci = & get_instance();
-    $ci->db->select($selected_column);
-    $ci->db->from($table);
-    $ci->db->where($column_id, $id);
-    $ci->db->order_by($column_id, 'DESC');
-    $ci->db->limit(1);
-    $query = $ci->db->get();
-    return $query->row_array();
+if (!function_exists('get_by_id')) {
+    function get_by_id($table, $selected_column, $column_id, $id)
+    {
+        $ci = & get_instance();
+        $ci->db->select($selected_column);
+        $ci->db->from($table);
+        $ci->db->where($column_id, $id);
+        $ci->db->order_by($column_id, 'DESC');
+        $ci->db->limit(1);
+        $query = $ci->db->get();
+        return $query->row_array();
+    }
 }
 
-function get_by_all($table, $selected_column, $column_id, $id)
-{
-    $ci = & get_instance();
-    $ci->db->select($selected_column);
-    $ci->db->from($table);
-    $ci->db->where('eDelete', 0);
-    $ci->db->where($column_id, $id);
-    $query = $ci->db->get();
-    return $query->result_array();
+if (!function_exists('get_by_all')) {
+    function get_by_all($table, $selected_column, $column_id, $id)
+    {
+        $ci = & get_instance();
+        $ci->db->select($selected_column);
+        $ci->db->from($table);
+        $ci->db->where('eDelete', 0);
+        $ci->db->where($column_id, $id);
+        $query = $ci->db->get();
+        return $query->result_array();
+    }
 }
-
 /// admin data fetch ///
 
 function get_dataBY_admin($table)

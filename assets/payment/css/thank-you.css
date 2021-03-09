@@ -1,0 +1,53 @@
+.thank_you_section .thankyouContent {
+	background-color: #fff;
+    box-shadow: 0px 0px 15px 0px rgb(0, 0, 0, 11%);
+    border-radius: 10px;
+    transform: rotate(0deg);
+    padding: 54px 40px 50px;
+    text-align: center;
+}
+.thankyouContent .heading h2 {
+    line-height: normal;
+    font-size: 40px;
+    color: #1d3d71;
+}
+.thankyouContent .heading h2 strong	{
+	display: block;
+	font-size: 20px;
+	font-weight: 700;
+}
+.thankyouContent .imgIcon {
+    margin-bottom: 15px;
+}
+
+.thankyouContent .desc {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.thankyouContent .desc p {
+    margin-bottom: 0;
+    font-size: 18px;
+    line-height: normal;
+    font-weight: bold;
+    color: #000;
+}
+
+.thankyouContent .desc p span {
+	font-weight: 400;
+}
+.backToDashboard {
+    padding-top: 20px;
+    display: block;
+}
+.backToDashboard .dashboardBtn {
+    background: #218dcb;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.backToDashboard .dashboardBtn:hover{
+	background: #1d3d71;
+}
+

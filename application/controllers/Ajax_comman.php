@@ -56,8 +56,6 @@ class Ajax_comman extends MY_Controller
         $email = $this->input->post('addaccountemail');
         $result = get_by_id('tbl_users', 'user_id', 'email', $email);
         $user_id = $result['user_id'];
-        $qry = $this->db->query("SELECT * FROM `tbl_merge_users` where CONCAT(',', user_id, ',') like '%,$user_id,%'");
-        $qry_result = $qry->row_array();
         $qry1 = $this->db->query("SELECT main_account,user_id FROM `tbl_merge_users` where main_account='".getProfileName('user_id')."'");
         $qry_result1 = $qry1->row_array();
         $main_account = $qry_result1['main_account'];
@@ -278,7 +276,7 @@ class Ajax_comman extends MY_Controller
     	$project_id = $this->input->post('project_id');
     	$combo_id = $this->input->post('combo_id');
         if($combo_id){
-        $qrytbl_status = $this->db->query("select * from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $qrytbl_status = $this->db->query("select status_name,id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0");
         $resulttbl_status = $qrytbl_status->result_array(); 
 	        foreach ($resulttbl_status as $key => $val) {
 	        	$html .='<option value="'.$val['id'].'">'.$val['status_name'].'</option>';

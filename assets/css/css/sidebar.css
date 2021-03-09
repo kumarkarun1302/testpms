@@ -1,0 +1,95 @@
+/*------------------------------------
+  Sidebar Navigation
+------------------------------------*/
+/* Disable content revealing on page load */
+.u-sidebar[aria-labelledby] {
+  opacity: 0;
+}
+
+.u-sidebar[aria-labelledby][role="tabpanel"] {
+  opacity: 1;
+}
+
+.u-sidebar[aria-labelledby].u-unfold--css-animation, .u-sidebar[aria-labelledby].u-unfold--jquery-slide {
+  opacity: 1;
+}
+
+.u-sidebar.u-unfold--css-animation.u-unfold--hidden {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.u-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 102;
+  width: 18.75rem;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -0.5rem 0 1.125rem rgba(21, 27, 38, 0.07);
+}
+
+.u-sidebar__body, .u-sidebar__content {
+  height: 100%;
+}
+
+.u-sidebar--left {
+  right: auto;
+  left: 0;
+  box-shadow: 0.5rem 0 1.125rem rgba(21, 27, 38, 0.07);
+}
+
+.u-sidebar__close {
+  color: #646f79;
+}
+
+.u-sidebar__close:hover {
+  color: #151b26;
+  opacity: 1;
+}
+
+.u-sidebar__scroller {
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.u-sidebar__container {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+}
+
+.u-sidebar__footer {
+  width: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/*------------------------------------
+  Sidebar Panel
+------------------------------------*/
+/* Link */
+.u-sidebar--panel__link {
+  color: #646f79;
+}
+
+.u-sidebar--panel__link:hover {
+  color: #21c87a;
+}
+
+/* Footer */
+.u-sidebar--panel__footer-offset {
+  height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 9.5rem;
+}
+
+.u-sidebar__footer--panel {
+  background: #fff;
+  border-top: 1px solid #e3e6f0;
+}

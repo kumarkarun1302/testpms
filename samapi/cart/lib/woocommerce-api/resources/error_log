@@ -1,0 +1,1 @@
+[14-Jul-2020 00:50:50 America/Chicago] PHP Fatal error:  Class 'WC_API_Client_Resource' not found in /home1/careandcure/public_html/cc_files/api/cart/lib/woocommerce-api/resources/class-wc-api-client-resource-coupons.php on line 7

@@ -1,0 +1,69 @@
+
+
+#paypal{
+
+}
+#paypal input[type=radio], #stripe input[type=radio]{
+	width: 25px;
+	height: 25px;
+	margin-bottom: 0;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+#stripe{
+
+}
+#stripe input{
+	margin-bottom: 0;
+}
+.pricingCost {
+    padding: .75em 1.25em;
+    display: flex;
+    justify-content: space-between;
+}
+.pricingCost h5{
+	font-size: 18px;
+}
+.pricingCost h6{
+	font-size: 16px;
+}
+.pricingCost:first-child {
+    padding: .75em 1.25em 0;
+}
+
+.pricingCost:last-child {
+    padding: 0 1.25em .75em;
+}
+.choosePlanPaymentMethod {
+    position: relative;
+    background-image: url(../images/pms-pattern-bg.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.choosePlanPaymentMethod:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.60);
+}
+.choosePlanPaymentMethod .container {
+    border-radius: 10px;
+}
+.choosePlanPaymentMethod .payment-method-bg {
+    background: #fff;
+    border-radius: 10px;
+}
+.choosePlanPaymentMethod .payment-method-bg .card .card-header {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+#stripe form .card-footer{
+	padding-left: 0;
+	padding-right: 0;
+}

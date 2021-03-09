@@ -2004,6 +2004,7 @@ figure.effect-chico h2 {
   text-align: left;
   padding: 18% 0 20px 0;
   font-size: 24px;
+  line-height: 30px;
   -webkit-transition: all 0.5s ease-out 0s;
   -moz-transition: all 0.5s ease-out 0s;
   -ms-transition: all 0.5s ease-out 0s;
@@ -2079,7 +2080,7 @@ figure.effect-chico:hover p {
   font-family: "Ionicons";
 }
 .slider {
-  width: 108%;
+  width: 100%;
   float: left;
   overflow: hidden;
 }

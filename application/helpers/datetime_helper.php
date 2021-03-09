@@ -1,6 +1,6 @@
 <?php
 //this curl is for linkedin
-public function curl($url,$parameters)
+function curl($url,$parameters)
 {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -19,6 +19,29 @@ public function curl($url,$parameters)
 
     return $result;
 }
+    if ( !function_exists('today_date')){
+        function today_date(){
+            $tz ='Asia/Kolkata';
+            $timestamp = time();
+            $dt = new DateTime("now", new DateTimeZone($tz));
+            $dt->setTimestamp($timestamp);
+            $this->cureantdate = $dt->format('Y-m-d H:i:s');
+            return $this->cureantdate;
+        }
+    }
+
+    if ( !function_exists('today_date_time')){
+        function today_date_time(){
+            $tz ='Asia/Kolkata';
+            $timestamp = time();
+            $dt = new DateTime("now", new DateTimeZone($tz));
+            $dt->setTimestamp($timestamp);
+            $this->cureantdate = $dt->format('Y-m-d H:i:s');
+            $date_time_arr = explode(' ', $this->cureantdate);
+            return array('date'=> $date_time_arr[0], 'time' => $date_time_arr[1]);
+        }
+    }    
+
 
 if ( !function_exists('export_csv'))
 {

@@ -65,10 +65,57 @@ class OtherPages extends CI_Controller
         $this->load->view("blog", $view_data);
 	}
 
+	public function blog_details()
+	{
+		$view_data["heading"] = "Blog page";
+		$blog_id = $this->uri->segment(2);
+		$query = $this->db->query("SELECT * FROM `tbl_blog` WHERE `blog_id`='$blog_id'");
+		$view_data['result_blog'] = $query->row_array();
+        $this->load->view("blog_details", $view_data);
+	}
+	
 	public function contact()
 	{
 		$view_data["heading"] = "Contact ANJPMS Support";
         $this->load->view("contact", $view_data);
+	}
+
+	public function insert_comment()
+	{
+		$data_tbl_comment_blog = array(
+			'comment' => $this->input->post('comment'),
+			'blog_id' => $this->input->post('blog_id'),
+			'comment' =>  $this->input->post('comment'),
+			'author' =>  $this->input->post('author'),
+			'email' =>  $this->input->post('email'),
+			'created_date' => date_from_today()
+		);
+		insert_data_last_id('tbl_comment_blog',$data_tbl_comment_blog);
+		$query = $this->db->query("SELECT * FROM `tbl_comment_blog` WHERE `blog_id`='$blog_id'");
+		$result_blog = $query->result_array();
+		$html = '';
+		foreach ($result_blog as $key => $value) {
+			$html .='<li class="comment">
+					  <article class="comment-body">
+					     <footer class="comment-meta">
+					        <div class="comment-author vcard">
+					           <img src="'.$url.'" class="avatar img-fluid" alt="image">
+					           <b class="fn">James Anderson</b>
+					           <span class="says">says:</span>
+					        </div>
+					        <div class="comment-metadata">
+					           <a href="#">
+					           <time>'.$date.'</time>
+					           </a>
+					        </div>
+					     </footer>
+					     <div class="comment-content">
+					        '.$comment.'
+					     </div>
+					  </article>
+					</li>';
+		}
+		echo $html;
 	}
 
 	public function insertContact()

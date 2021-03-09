@@ -256,14 +256,14 @@ $("#edit_task_assigned_to").val('0');
           },
           success: function (response) {
               
-              /*setTimeout(function() {
+              setTimeout(function() {
               swal({
               title: '',
               text: "task has been update successfully"
               }, function() {
               jQuery("#editTaskModal").modal('hide');
               });
-              }, 1000);*/
+              }, 1000);
 
               $("#teamProfile").html(response);
               project_status_check();

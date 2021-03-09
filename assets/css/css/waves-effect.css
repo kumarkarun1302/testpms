@@ -1,0 +1,281 @@
+.waves-effect {
+	position: relative;
+	cursor: pointer;
+	display: inline-block;
+	overflow: hidden;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent
+}
+
+.waves-effect .waves-ripple {
+	position: absolute;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	margin-top: -50px;
+	margin-left: -50px;
+	opacity: 0;
+	background: rgba(0, 0, 0, .2);
+	background: radial-gradient(rgba(0, 0, 0, .2) 0, rgba(0, 0, 0, .3) 40%, rgba(0, 0, 0, .4) 50%, rgba(0, 0, 0, .5) 60%, rgba(255, 255, 255, 0) 70%);
+	-webkit-transition: all .5s ease-out;
+	transition: all .5s ease-out;
+	-webkit-transition-property: -webkit-transform, opacity;
+	-webkit-transition-property: opacity, -webkit-transform;
+	transition-property: opacity, -webkit-transform;
+	transition-property: transform, opacity;
+	transition-property: transform, opacity, -webkit-transform;
+	-webkit-transform: scale(0) translate(0, 0);
+	transform: scale(0) translate(0, 0);
+	pointer-events: none
+}
+
+.waves-effect.waves-light .waves-ripple {
+	background: rgba(255, 255, 255, .4);
+	background: radial-gradient(rgba(255, 255, 255, .2) 0, rgba(255, 255, 255, .3) 40%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .5) 60%, rgba(255, 255, 255, 0) 70%)
+}
+
+.waves-effect.waves-classic .waves-ripple {
+	background: rgba(0, 0, 0, .2)
+}
+
+.waves-effect.waves-classic.waves-light .waves-ripple {
+	background: rgba(255, 255, 255, .4)
+}
+
+.waves-notransition {
+	-webkit-transition: none!important;
+	transition: none!important
+}
+
+.waves-button,
+.waves-circle {
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-mask-image: -webkit-radial-gradient(circle, #fff 100%, #000 100%)
+}
+
+.waves-button,
+.waves-button-input,
+.waves-button:hover,
+.waves-button:visited {
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: none;
+	outline: 0;
+	color: inherit;
+	background-color: rgba(0, 0, 0, 0);
+	font-size: 1em;
+	line-height: 1em;
+	text-align: center;
+	text-decoration: none;
+	z-index: 1
+}
+
+.waves-button {
+	padding: .85em 1.1em;
+	border-radius: .2em
+}
+
+.waves-button-input {
+	margin: 0;
+	padding: .85em 1.1em
+}
+
+.waves-input-wrapper {
+	border-radius: .2em;
+	vertical-align: bottom
+}
+
+.waves-input-wrapper.waves-button {
+	padding: 0
+}
+
+.waves-input-wrapper .waves-button-input {
+	position: relative;
+	top: 0;
+	left: 0;
+	z-index: 1
+}
+
+.waves-circle {
+	text-align: center;
+	width: 2.5em;
+	height: 2.5em;
+	line-height: 2.5em;
+	border-radius: 50%
+}
+
+.waves-float {
+	-webkit-mask-image: none;
+	-webkit-box-shadow: 0 1px 1.5px 1px rgba(0, 0, 0, .12);
+	box-shadow: 0 1px 1.5px 1px rgba(0, 0, 0, .12);
+	-webkit-transition: all .3s;
+	transition: all .3s
+}
+
+.waves-float:active {
+	-webkit-box-shadow: 0 8px 20px 1px rgba(0, 0, 0, .3);
+	box-shadow: 0 8px 20px 1px rgba(0, 0, 0, .3)
+}
+
+.waves-block {
+	display: block
+}
+
+.waves-effect.waves-light .waves-ripple {
+	background-color: rgba(255, 255, 255, .4)
+}
+
+.waves-effect.waves-primary .waves-ripple {
+	background-color: rgba(91, 115, 232, .4)
+}
+
+.waves-effect.waves-success .waves-ripple {
+	background-color: rgba(52, 195, 143, .4)
+}
+
+.waves-effect.waves-info .waves-ripple {
+	background-color: rgba(80, 165, 241, .4)
+}
+
+.waves-effect.waves-warning .waves-ripple {
+	background-color: rgba(241, 180, 76, .4)
+}
+
+.waves-effect.waves-danger .waves-ripple {
+	background-color: rgba(244, 106, 106, .4)
+}
+
+body[data-topbar=dark] .navbar-header .waves-effect .waves-ripple {
+	background: rgba(255, 255, 255, .4)
+}
+
+body[data-sidebar=colored] #sidebar-menu ul li a.waves-effect .waves-ripple {
+	background: rgba(255, 255, 255, .1)
+}
+
+body[data-layout=horizontal][data-topbar=colored] .navbar-header .waves-effect .waves-ripple {
+	background: rgba(255, 255, 255, .4)
+}
+
+
+
+
+/*Font Size and Alert CSS*/
+.alert-border {
+	background-color: #fff;
+	border-color: #f5f6f8;
+	border-top: 2px solid #f5f6f8
+}
+
+.alert-border-primary {
+	border-top-color: #5b73e8
+}
+
+.alert-border-secondary {
+	border-top-color: #74788d
+}
+
+.alert-border-success {
+	border-top-color: #34c38f
+}
+
+.alert-border-info {
+	border-top-color: #50a5f1
+}
+
+.alert-border-warning {
+	border-top-color: #f1b44c
+}
+
+.alert-border-danger {
+	border-top-color: #f46a6a
+}
+
+.alert-border-pink {
+	border-top-color: #e83e8c
+}
+
+.alert-border-light {
+	border-top-color: #f5f6f8
+}
+
+.alert-border-dark {
+	border-top-color: #343a40
+}
+
+.alert-border-purple {
+	border-top-color: #6f42c1
+}
+
+.custom-accordion .card+.card {
+	margin-top: .5rem
+}
+
+.custom-accordion a.collapsed i.accor-down-icon:before {
+	content: "\F0140"
+}
+
+.custom-accordion .card-body {
+	color: #74788d
+}
+
+.font-size-10 {
+	font-size: 10px!important
+}
+
+.font-size-11 {
+	font-size: 11px!important
+}
+
+.font-size-12 {
+	font-size: 12px!important
+}
+
+.font-size-13 {
+	font-size: 13px!important
+}
+
+.font-size-14 {
+	font-size: 14px!important
+}
+
+.font-size-15 {
+	font-size: 15px!important
+}
+
+.font-size-16 {
+	font-size: 16px!important
+}
+
+.font-size-17 {
+	font-size: 17px!important
+}
+
+.font-size-18 {
+	font-size: 18px!important
+}
+
+.font-size-20 {
+	font-size: 20px!important
+}
+
+.font-size-22 {
+	font-size: 22px!important
+}
+
+.font-size-24 {
+	font-size: 24px!important
+}
+
+.font-weight-medium {
+	font-weight: 500
+}
+
+.font-weight-semibold {
+	font-weight: 600
+}

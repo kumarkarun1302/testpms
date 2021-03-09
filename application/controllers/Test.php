@@ -2,6 +2,32 @@
 class Test extends CI_Controller
 {
 
+	public function mgetlocation()
+	{
+		$this->load->library("geolocationm");
+		$data['geo'] = $this->geolocationm->getlocation($this);		
+		echo "<pre>";
+		print_r($data['geo']);die;
+	}
+
+	public function aes_encrypt()
+	{
+		echo '<form action="'.base_url('test/aes_encrypt1').'" method="post">
+                <div class="form-row">
+                   <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                      <input type="text" id="title" name="title"/>
+                      <input type="submit" id="submit" name="submit" value="submit"/>
+                   </div>
+                </div>
+             </form>';
+	}
+
+	public function aes_encrypt1()
+	{
+		$title = AES_ENCRYPT($this->input->post('title'),'efbfbdefbfbdefbfbd2b6a313a7225efbfbdefbfbd4d57efbfbdefbfbd4861efbfbd5befbfbd');
+		insert_data_last_id('calendar_events', array('title'=>$title));
+	}
+
 	public function radio()
 	{
 		$this->load->view('paymentpage');

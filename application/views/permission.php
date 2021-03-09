@@ -376,7 +376,7 @@ $result = $query->row_array();
                                         <input class="form-check-input" name="label_crud[]" type="checkbox" id="label_crud2" value="edit">
                                         <label class="form-check-label" for="label_crud2">Edit</label>
                                     </div>
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline" style="display: none;">
                                         <input class="form-check-input" name="label_crud[]" type="checkbox" id="label_crud3" value="view">
                                         <label class="form-check-label" for="label_crud3">View</label>
                                     </div>
@@ -395,7 +395,7 @@ $result = $query->row_array();
                                         <input class="form-check-input" name="task_crud[]" type="checkbox" id="task_crud2" value="edit">
                                         <label class="form-check-label" for="task_crud2">Edit</label>
                                     </div>
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline" style="display: none;">
                                         <input class="form-check-input" name="task_crud[]" type="checkbox" id="task_crud3" value="view">
                                         <label class="form-check-label" for="task_crud3">View</label>
                                     </div>

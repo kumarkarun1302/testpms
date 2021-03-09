@@ -1,0 +1,102 @@
+
+@media only screen and (max-width: 1199px) {
+  /** 1. Typography **/	
+  h1 {
+    font-size: 34px;
+  }
+  h2 {
+    font-size: 26px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  /** 1. Typography **/
+  h1 {
+    font-size: 32px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  h5 {
+    font-size: 16px;
+  }
+
+  /** LRF(Login Register Forgot) Layout CSS **/
+  .lrf-common-layout .lrf-logo {
+    margin-bottom: 80px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  /** 1. Typography **/
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+  
+  /** LRF(Login Register Forgot) Layout CSS **/
+  .lrf-common-layout .lrf-content {
+    padding: 70px 50px 60px;
+  }
+  .lrf-common-layout .lrf-logo {
+    margin-bottom: 60px;
+  }
+  .lrf-common-layout .lrf-form p {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  /** LRF(Login Register Forgot) Layout CSS **/
+  .lrf-common-layout .lrf-content {
+    padding: 60px 35px 50px;
+    border-radius: 15px;
+  }
+  .lrf-common-layout .lrf-logo {
+    margin-bottom: 40px;
+  }
+  .lrf-common-layout .lrf-switcher-wrap {
+    /*-webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;*/
+  }
+  .lrf-common-layout .lrf-switcher-wrap li {
+    /*margin: 0 0 2px;
+    width: 100%;*/
+  }
+  .lrf-common-layout .lrf-switcher-wrap li:last-child {
+    margin: 0;
+  }
+  .lrf-common-layout .lrf-switcher-wrap li a.switcher-text {
+    border-radius: 5px;
+  }
+  .lrf-common-layout .lrf-switcher-wrap li:first-child a.switcher-text {
+    /*border-radius: 5px;*/
+  }
+  .lrf-common-layout .lrf-switcher-wrap li:last-child a.switcher-text {
+    /*border-radius: 5px;*/
+  }
+  .lrf-common-layout ul.lrf-socials li {
+    margin-right: 2px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  /** LRF(Login Register Forgot) Layout CSS **/
+  .lrf-common-layout .lrf-content {
+    padding: 50px 20px 40px;
+  }
+}

@@ -4,43 +4,45 @@ function dayscounts($date2){
     return abs(round($diff / 86400));
 }
 
-function newloginBydefultProject1(){
-    $combo_id = time() + 1;
-    $ci = & get_instance();
-    $project_slug = slugify('Communication Software');
-    $data1 = array(
-        'project_name'=>'Communication Software',
-        'project_slug'=>$project_slug,
-        'project_description'=>'You can communicate through your ecommerce project management software but it’s always good to have an alternative communication channel. One that isn’t email, in any case.',
-        'start_date'=>date_from_today(),
-        'deadline'=>date('Y-m-d H:i:s', strtotime(date_from_today(). ' +30 days')),
-        'category'=>'php,ajax',
-        'client_id'=>'ANJ Webtech',
-        'created_date'=>date_from_today(),
-        'user_id'=>getProfileName('user_id'),
-        'combo_id'=>$combo_id,
-        'status'=>0,
-        'project_priority'=>'Urgent',
-        'billing_type_id'=>'Project Hours',
-        'estimated_hours'=>'40',
-        'project_phase'=>'3',
-        'project_demo_url'=>'http://google.com'
-        );
-    $project_id = insert_data_last_id('tbl_project',$data1);
-    $projectID = anj_encode($project_id);
-    $projectASSIGN = slugify(getProfileName('username'));
-    $projectMain_user_id = anj_encode(getProfileName('user_id'));
-    $projectCombo_id = $combo_id;
-    $project_link = base_url().'Invite/anj/'.$projectID.'/'.$project_slug.'/'.$projectASSIGN.'/'.$projectMain_user_id.'/'.$projectCombo_id;
-    $ci->db->query("UPDATE tbl_project SET project_link='".$project_link."' WHERE project_id='".$project_id."'");
-    for($i=1;$i<=3;$i++){
-      $last_id = defult_label_add($combo_id,$project_id,$i);
-      if($i==1){
-        defult_task_add($combo_id,$project_id,$last_id);
-      }
+// by defult add project in new user time //
+if (!function_exists('newloginBydefultProject1')) {
+    function newloginBydefultProject1(){
+        $combo_id = time() + 1;
+        $ci = & get_instance();
+        $project_slug = slugify('Communication Software');
+        $data1 = array(
+            'project_name'=>'Communication Software',
+            'project_slug'=>$project_slug,
+            'project_description'=>'You can communicate through your ecommerce project management software but it’s always good to have an alternative communication channel. One that isn’t email, in any case.',
+            'start_date'=>date_from_today(),
+            'deadline'=>date('Y-m-d H:i:s', strtotime(date_from_today(). ' +30 days')),
+            'category'=>'php,ajax',
+            'client_id'=>'ANJ Webtech',
+            'created_date'=>date_from_today(),
+            'user_id'=>getProfileName('user_id'),
+            'combo_id'=>$combo_id,
+            'status'=>0,
+            'project_priority'=>'Urgent',
+            'billing_type_id'=>'Project Hours',
+            'estimated_hours'=>'40',
+            'project_phase'=>'3',
+            'project_demo_url'=>'http://google.com'
+            );
+        $project_id = insert_data_last_id('tbl_project',$data1);
+        $projectID = anj_encode($project_id);
+        $projectASSIGN = slugify(getProfileName('username'));
+        $projectMain_user_id = anj_encode(getProfileName('user_id'));
+        $projectCombo_id = $combo_id;
+        $project_link = base_url().'Invite/anj/'.$projectID.'/'.$project_slug.'/'.$projectASSIGN.'/'.$projectMain_user_id.'/'.$projectCombo_id;
+        $ci->db->query("UPDATE tbl_project SET project_link='".$project_link."' WHERE project_id='".$project_id."'");
+        for($i=1;$i<=3;$i++){
+          $last_id = defult_label_add($combo_id,$project_id,$i);
+          if($i==1){
+            defult_task_add($combo_id,$project_id,$last_id);
+          }
+        }
     }
 }
-
 
 function newloginBydefultProject2(){
     $combo_id = time() + 2;
@@ -154,76 +156,83 @@ function newloginBydefultProject4(){
       }
     }
 }
-function defult_label_add($combo_id,$project_id,$i)
-{
-    $ci = & get_instance();
-    if($i==1){ 
-        $i=0;
-        $status_name = 'TO DO';
-    } else if($i==2){
-        $i=0;
-        $status_name = 'IN PROGRESS';
-    } else if($i==3){
-        $i=1;
-        $status_name = 'DONE';
+
+// by defult add lable in new project add time //
+if (!function_exists('defult_label_add')) {
+    function defult_label_add($combo_id,$project_id,$i)
+    {
+        $ci = & get_instance();
+        if($i==1){ 
+            $i=0;
+            $status_name = 'TO DO';
+        } else if($i==2){
+            $i=0;
+            $status_name = 'IN PROGRESS';
+        } else if($i==3){
+            $i=1;
+            $status_name = 'DONE';
+        }
+        $status_data = array(
+                      'status_name' => $status_name,
+                      'combo_id' => $combo_id,
+                      'project_id' => $project_id,
+                      'user_id' => getProfileName('user_id'),
+                      'orderBY' => $i
+                );
+        return insert_data_last_id('tbl_status',$status_data);
     }
-    $status_data = array(
-                  'status_name' => $status_name,
-                  'combo_id' => $combo_id,
-                  'project_id' => $project_id,
-                  'user_id' => getProfileName('user_id'),
-                  'orderBY' => $i
-            );
-    return insert_data_last_id('tbl_status',$status_data);
 }
 
-function defult_task_add($combo_id,$project_id,$status_id)
-{
-    $ci = & get_instance();
-    $task_data1 = array(
-                  'title' => 'title...',
-                  'description' => 'description...',
-                  'due_date' => date_from_today(),
-                  'user_id' => getProfileName('user_id'),
-                  'assigned_to' => getProfileName('user_id'),
-                  'combo_id' => $combo_id,
-                  'project_id'=>$project_id,
-                  'created_at'=>date_from_today(),
-                  'status_id'=>$status_id,
-                  'priority'=>3
-                );
-    insert_data_last_id('tbl_task',$task_data1);
-    $task_data2 = array(
-                  'title' => 'Front End Implementation...',
-                  'description' => 'description...',
-                  'due_date' => date_from_today(),
-                  'user_id' => getProfileName('user_id'),
-                  'assigned_to' => getProfileName('user_id'),
-                  'combo_id' => $combo_id,
-                  'project_id'=>$project_id,
-                  'created_at'=>date_from_today(),
-                  'status_id'=>$status_id,
-                  'priority'=>1
-                );
-    insert_data_last_id('tbl_task',$task_data2);
-    $task_data3 = array(
-                  'title' => 'Data imports end implementation...',
-                  'description' => 'description...',
-                  'due_date' => date_from_today(),
-                  'user_id' => getProfileName('user_id'),
-                  'assigned_to' => getProfileName('user_id'),
-                  'combo_id' => $combo_id,
-                  'project_id'=>$project_id,
-                  'created_at'=>date_from_today(),
-                  'status_id'=>$status_id,
-                  'priority'=>2
-                );
-    insert_data_last_id('tbl_task',$task_data3);
+// by defult add task in new project add time //
+if (!function_exists('defult_task_add')) {
+    function defult_task_add($combo_id,$project_id,$status_id)
+    {
+        $ci = & get_instance();
+        $task_data1 = array(
+                      'title' => 'title...',
+                      'description' => 'description...',
+                      'due_date' => date_from_today(),
+                      'user_id' => getProfileName('user_id'),
+                      'assigned_to' => getProfileName('user_id'),
+                      'combo_id' => $combo_id,
+                      'project_id'=>$project_id,
+                      'created_at'=>date_from_today(),
+                      'status_id'=>$status_id,
+                      'priority'=>3
+                    );
+        insert_data_last_id('tbl_task',$task_data1);
+        $task_data2 = array(
+                      'title' => 'Front End Implementation...',
+                      'description' => 'description...',
+                      'due_date' => date_from_today(),
+                      'user_id' => getProfileName('user_id'),
+                      'assigned_to' => getProfileName('user_id'),
+                      'combo_id' => $combo_id,
+                      'project_id'=>$project_id,
+                      'created_at'=>date_from_today(),
+                      'status_id'=>$status_id,
+                      'priority'=>1
+                    );
+        insert_data_last_id('tbl_task',$task_data2);
+        $task_data3 = array(
+                      'title' => 'Data imports end implementation...',
+                      'description' => 'description...',
+                      'due_date' => date_from_today(),
+                      'user_id' => getProfileName('user_id'),
+                      'assigned_to' => getProfileName('user_id'),
+                      'combo_id' => $combo_id,
+                      'project_id'=>$project_id,
+                      'created_at'=>date_from_today(),
+                      'status_id'=>$status_id,
+                      'priority'=>2
+                    );
+        insert_data_last_id('tbl_task',$task_data3);
 
-    $query = $ci->db->query("SELECT GROUP_CONCAT(id) as id FROM `tbl_status` WHERE combo_id='$combo_id' and project_id='$project_id'");
-    $result_array = $query->row_array();
-    $last_statusID = $result_array['id'];
-    return insert_data_last_id('tbl_roles',array('status_id'=>$last_statusID,'combo_id'=>$combo_id,'main_user_id'=>getProfileName('user_id'),'user_id'=>getProfileName('user_id'),'project_id'=>$project_id,'created_date'=>date_from_today()));
+        $query = $ci->db->query("SELECT GROUP_CONCAT(id) as id FROM `tbl_status` WHERE combo_id='$combo_id' and project_id='$project_id'");
+        $result_array = $query->row_array();
+        $last_statusID = $result_array['id'];
+        return insert_data_last_id('tbl_roles',array('status_id'=>$last_statusID,'combo_id'=>$combo_id,'main_user_id'=>getProfileName('user_id'),'user_id'=>getProfileName('user_id'),'project_id'=>$project_id,'created_date'=>date_from_today()));
+    }
 }
 
 function total_project()
