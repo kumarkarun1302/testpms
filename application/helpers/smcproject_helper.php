@@ -228,7 +228,7 @@ if (!function_exists('defult_task_add')) {
                     );
         insert_data_last_id('tbl_task',$task_data3);
 
-        $query = $ci->db->query("SELECT GROUP_CONCAT(id) as id FROM `tbl_status` WHERE combo_id='$combo_id' and project_id='$project_id'");
+        $query = $ci->db->query("SELECT GROUP_CONCAT(id) as id FROM `tbl_status` WHERE combo_id='$combo_id' and project_id='$project_id' limit 1");
         $result_array = $query->row_array();
         $last_statusID = $result_array['id'];
         return insert_data_last_id('tbl_roles',array('status_id'=>$last_statusID,'combo_id'=>$combo_id,'main_user_id'=>getProfileName('user_id'),'user_id'=>getProfileName('user_id'),'project_id'=>$project_id,'created_date'=>date_from_today()));
@@ -366,6 +366,7 @@ function get_by_id_Order($table, $column_id)
     $ci->db->from($table);
     $ci->db->where('eDelete', 0);
     $ci->db->order_by($column_id, 'DESC');
+    $ci->db->limit(1);
     $query = $ci->db->get();
     $result = $query->row_array();
     return $result[$column_id];
@@ -384,7 +385,7 @@ function project_assgin_tbl_role($main_user_id,$projectID,$user_id){
 function get_by_role_assion($table, $main_user_id, $project_id, $column_id)
 {
     $ci = & get_instance();
-    $ci->db->select($column_id)->from($table)->where(array('eDelete'=>0,'main_user_id'=>$main_user_id, 'project_id'=>$project_id));
+    $ci->db->select($column_id)->from($table)->where(array('eDelete'=>0,'main_user_id'=>$main_user_id, 'project_id'=>$project_id))->limit(1);
     $query = $ci->db->get();
     $result = $query->row_array();
     return $result[$column_id];
@@ -393,14 +394,14 @@ function get_by_role_assion($table, $main_user_id, $project_id, $column_id)
 function getProjectName($key,$project_id){
     $CI = & get_instance();
     $id = getProfileName('user_id');
-    $query = $CI->db->get_where('tbl_project', array('project_id' => $project_id));
+    $query = $CI->db->limit(1)->get_where('tbl_project', array('project_id' => $project_id));
     $result = $query->row_array();
     return  $result[$key];
 }
 
 function getuser_type($user_type_id){
     $CI = & get_instance();
-    $query = $CI->db->get_where('tbl_user_type', array('user_type_id' => $user_type_id));
+    $query = $CI->db->limit(1)->get_where('tbl_user_type', array('user_type_id' => $user_type_id));
     $result = $query->row_array();
     return  $result['user_type'];
 }

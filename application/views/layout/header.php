@@ -225,7 +225,7 @@ foreach ($tbl_project as $key => $value) {
     <?php 
     $main_merge_account = get_cookie('manish_mergeaccount_set');
     $merge_account_userID = get_cookie('manish_userid_set');
-    $query_joinaccount = $this->db->query("select user_id,main_account from tbl_merge_users where main_account='".$merge_account_userID."'");
+    $query_joinaccount = $this->db->query("select user_id,main_account from tbl_merge_users where main_account='".$merge_account_userID."' limit 1");
     $queryjoinaccount = $query_joinaccount->row_array();
     if($queryjoinaccount['main_account']){
         $user_id_multi = $queryjoinaccount['user_id'];

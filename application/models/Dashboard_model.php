@@ -65,7 +65,7 @@ class Dashboard_model extends CI_Model{
     }
 
     public function getProject_userImage_count_4($user_id){
-    	$query = $this->db->query("SELECT (count(picture) - 4) as fourcount FROM `tbl_users` WHERE `user_id` IN ($user_id)");
+    	$query = $this->db->query("SELECT (count(picture) - 4) as fourcount FROM `tbl_users` WHERE `user_id` IN ($user_id) limit 1");
     	//echo $this->db->last_query();exit;
     	return $query->row_array();
     }

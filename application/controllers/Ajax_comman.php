@@ -56,7 +56,7 @@ class Ajax_comman extends MY_Controller
         $email = $this->input->post('addaccountemail');
         $result = get_by_id('tbl_users', 'user_id', 'email', $email);
         $user_id = $result['user_id'];
-        $qry1 = $this->db->query("SELECT main_account,user_id FROM `tbl_merge_users` where main_account='".getProfileName('user_id')."'");
+        $qry1 = $this->db->query("SELECT main_account,user_id FROM `tbl_merge_users` where main_account='".getProfileName('user_id')."' limit 1");
         $qry_result1 = $qry1->row_array();
         $main_account = $qry_result1['main_account'];
         if($main_account){

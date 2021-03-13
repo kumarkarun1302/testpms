@@ -16,7 +16,7 @@ class Calendar extends CI_Controller {
 
 	function index()
 	{
-		$this->load->view('fullcalendar');
+		$this->load->view('calendar');
 	}
 
 	function load()
@@ -108,7 +108,7 @@ class Calendar extends CI_Controller {
 	       "end" => $end_date
 	       )
 	    );
-	    redirect(site_url("calendar/demo"));
+	    redirect(site_url("calendar"));
 	}
 
 	public function edit_event()
@@ -152,7 +152,7 @@ class Calendar extends CI_Controller {
           } else {
                $this->fullcalendar_model->delete_event($eventid);
           }
-          redirect(site_url("calendar/demo"));
+          redirect(site_url("calendar"));
      }
 
 

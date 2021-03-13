@@ -8,7 +8,7 @@ class Auth_model extends CI_Model{
 		$username = $data['username'];
 		$this->db->from($this->table);
 		$this->db->where("(username = '$username' OR email = '$username' OR mobile_no = '$username')");
-		//$this->db->where('paymentyesnot','0');
+		$this->db->limit(1);
 		$query = $this->db->get();
 		//echo $this->db->last_query();exit;
 		if ($query->num_rows() == 0){
@@ -60,7 +60,7 @@ class Auth_model extends CI_Model{
 	//============ Check User Email ============
     function check_user_mail($email)
     {
-    	$result = $this->db->get_where($this->table, array('email' => $email));
+    	$result = $this->db->limit(1)->get_where($this->table, array('email' => $email));
     	if($result->num_rows() > 0){
     		$result = $result->row_array();
     		return $result;
@@ -71,7 +71,7 @@ class Auth_model extends CI_Model{
 
     function check_user_mobile_no($mobile_no)
     {
-    	$result = $this->db->get_where($this->table, array('mobile_no' => $mobile_no));
+    	$result = $this->db->limit(1)->get_where($this->table, array('mobile_no' => $mobile_no));
     	if($result->num_rows() > 0){
     		$result = $result->row_array();
     		return $result;
@@ -124,7 +124,7 @@ class Auth_model extends CI_Model{
 	public function get_user_detail(){
 		//$id = $this->session->userdata('user_id');
 		$id = getSession('user_id');
-		$query = $this->db->get_where($this->table, array('user_id' => $id));
+		$query = $this->db->limit(1)->get_where($this->table, array('user_id' => $id));
 		//echo $this->db->last_query();
 		return $result = $query->row_array();
 	}
@@ -161,6 +161,7 @@ class Auth_model extends CI_Model{
 		$this->db->select($cloumn);
 		$this->db->from($this->table);
 		$this->db->where('user_id', $user_id);
+		$this->db->limit(1);
 		$query=$this->db->get();
 		//echo $this->db->last_query();
 		if($query->num_rows() > 0){

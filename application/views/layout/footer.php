@@ -54,7 +54,7 @@ var main_url_dashboard = main_url+'dashboard/';
 var timeoutHandle;
 
 <?php 
-$qry=$this->db->query("SELECT `user_id` FROM `tbl_page_refresh` where user_id = '".getProfilename('user_id')."'");
+$qry=$this->db->query("SELECT `user_id` FROM `tbl_page_refresh` where user_id = '".getProfilename('user_id')."' limit 1");
 $result = $qry->row_array(); 
 if($result['user_id']){
 ?>
@@ -82,7 +82,7 @@ $(document).ready(function(){
 
 <?php 
 $uid = getProfileName('user_id');
-$queryrunning = $this->db->query("SELECT package_date FROM `tbl_users` WHERE package_date!='0000-00-00 00:00:00' and user_id=$uid");
+$queryrunning = $this->db->query("SELECT package_date FROM `tbl_users` WHERE package_date!='0000-00-00 00:00:00' and user_id=$uid limit 1");
 $runningpackage_date = $queryrunning->row_array();
 
 $check_package = dayscounts($runningpackage_date['package_date']); 

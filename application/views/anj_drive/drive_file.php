@@ -1,6 +1,6 @@
 <?php 
 $user_id = getProfileName('user_id');
-$q=$this->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id and eDelete IN (0,2)");
+$q=$this->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id and eDelete IN (0,2) limit 1");
 $r = $q->row_array();
 //echo round($r['file_size']);exit;
 if($r['file_size']){

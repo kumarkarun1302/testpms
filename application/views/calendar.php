@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Calendar Display</title>
+<title>Calendar</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -43,7 +43,7 @@
       </div>
       <div class="modal-body">
 
-      <form class="needs-validation" novalidate action="<?php echo base_url('calendar/add_event'); ?>" method="post" autocomplete="off" class="form-horizontal">
+      <form action="<?php echo base_url('calendar/add_event'); ?>" method="post" autocomplete="off" class="form-horizontal">
       
       <div class="form-group">
                 <label for="p-in" class="col-md-4 label-heading">Event Name</label>
@@ -138,7 +138,7 @@ $(document).ready(function() {
           dateFormat:"yy-mm-dd",
           onSelect: function (selected) {
               var dt = new Date(selected);
-              dt.setDate(dt.getDate() + 1);
+              dt.setDate(dt.getDate());
               $("#end_date").datepicker("option", "minDate", dt);
           }
       });
@@ -146,7 +146,7 @@ $(document).ready(function() {
           dateFormat:"yy-mm-dd",
           onSelect: function (selected) {
               var dt = new Date(selected);
-              dt.setDate(dt.getDate() - 1);
+              dt.setDate(dt.getDate());
               $("#start_date").datepicker("option", "maxDate", dt);
               var startDate = new Date($('#start_date').val());
               var endDate = new Date($('#end_date').val());
@@ -171,11 +171,7 @@ $(document).ready(function() {
                 $.ajax({
                     url: '<?php echo base_url() ?>calendar/get_events',
                     dataType: 'json',
-                    data: {
-                        // our hypothetical feed requires UNIX timestamps
-                        start: start.unix(),
-                        end: end.unix()
-                    },
+                    data: { start: start.unix(),end: end.unix() },
                     success: function(msg) {
                         var events = msg.events;
                         callback(events);

@@ -11,7 +11,7 @@ class Ajax_task extends MY_Controller
     {
        $project_id = $this->input->post('project_id');
        $combo_id = $this->input->post('projectCombo_id');  
-       $query_status = $this->db->query("select * from tbl_project where project_id=$project_id and combo_id=$combo_id");
+       $query_status = $this->db->query("select * from tbl_project where project_id=$project_id and combo_id=$combo_id limit 1");
        echo json_encode($query_status->row_array()); 
     }
 
@@ -95,13 +95,13 @@ class Ajax_task extends MY_Controller
         $project_id = $this->input->post('project_id');
         $combo_id = $this->input->post('projectCombo_id');
         $project_type_status = $this->input->post('project_type_status');
-        $query = $this->db->query("select project_name,project_description,client_id,start_date,deadline from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query = $this->db->query("select project_name,project_description,client_id,start_date,deadline from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
         $project_list = $query->row_array();
-        $query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
         $status_total = $query_status->row_array();
-        $query_task = $this->db->query("select count(id) as task_id from tbl_task where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query_task = $this->db->query("select count(id) as task_id from tbl_task where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
         $task_total = $query_task->row_array();
-        $query_task = $this->db->query("select count(task_id) as comments from tbl_comment where project_id=$project_id");
+        $query_task = $this->db->query("select count(task_id) as comments from tbl_comment where project_id=$project_id limit 1");
         $task_total_comments = $query_task->row_array();
 
         $html = '<div class="col-lg-12 col-md-12 col-sm-12 col-12 p-0">
@@ -154,13 +154,13 @@ class Ajax_task extends MY_Controller
         $user_id = getProfileName('user_id');
         $project_id = $this->input->post('project_id');
         $combo_id = $this->input->post('projectCombo_id');
-        $query = $this->db->query("select project_name,project_description,client_id,start_date,deadline from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query = $this->db->query("select project_name,project_description,client_id,start_date,deadline from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
         $project_list = $query->row_array();
-        $query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
         $status_total = $query_status->row_array();
-        $query_task = $this->db->query("select count(id) as task_id from tbl_task where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query_task = $this->db->query("select count(id) as task_id from tbl_task where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
         $task_total = $query_task->row_array();
-        $query_task = $this->db->query("select count(task_id) as comments from tbl_comment where project_id=$project_id");
+        $query_task = $this->db->query("select count(task_id) as comments from tbl_comment where project_id=$project_id limit 1");
         $task_total_comments = $query_task->row_array();
 
         $html = '<div class="col-lg-12 col-md-12 col-sm-12 col-12 p-0">
@@ -212,13 +212,13 @@ class Ajax_task extends MY_Controller
         $user_id = getProfileName('user_id');
         $project_id = $this->input->post('project_id');
         $combo_id = $this->input->post('projectCombo_id');
-        $query = $this->db->query("select project_name,project_description,client_id,start_date,deadline from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query = $this->db->query("select project_name,project_description,client_id,start_date,deadline from tbl_project where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
         $project_list = $query->row_array();
-        $query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
         $status_total = $query_status->row_array();
-        $query_task = $this->db->query("select count(id) as task_id from tbl_task where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+        $query_task = $this->db->query("select count(id) as task_id from tbl_task where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
         $task_total = $query_task->row_array();
-        $query_task = $this->db->query("select count(task_id) as comments from tbl_comment where project_id=$project_id");
+        $query_task = $this->db->query("select count(task_id) as comments from tbl_comment where project_id=$project_id limit 1");
         $task_total_comments = $query_task->row_array();
         $html = '<div class="col-lg-12 col-md-12 col-sm-12 col-12 p-0">
                     <div class="company">
@@ -278,7 +278,7 @@ class Ajax_task extends MY_Controller
         $main_user_id = anj_decode($this->input->post('projectMain_user_id'));
         $projectID = anj_decode($this->input->post('projectID'));
         $project_id = $projectID;
-        $query_status = $this->db->query("select user_id from tbl_roles where main_user_id=$main_user_id and project_id=$project_id");
+        $query_status = $this->db->query("select user_id from tbl_roles where main_user_id=$main_user_id and project_id=$project_id limit 1");
         $resultrole = $query_status->row_array();
         $count = count(explode(',',$resultrole['user_id'])) - 1;
         $total_user_support = getProfileName('total_user_support');
@@ -348,7 +348,7 @@ class Ajax_task extends MY_Controller
         $projectID = anj_decode($this->input->post('projectID'));
         $main_user_id = anj_decode($this->input->post('projectMain_user_id')); 
         $projectCombo_id = $this->input->post('projectCombo_id');
-        $query = $this->db->query("select user_id from tbl_roles where main_user_id='$main_user_id' and project_id='$projectID' and combo_id='$projectCombo_id'");
+        $query = $this->db->query("select user_id from tbl_roles where main_user_id='$main_user_id' and project_id='$projectID' and combo_id='$projectCombo_id' limit 1");
         $get_comma_value_by_user = $query->row_array();
         $user_id = $this->input->post('user_id');
         $new_value_userID = removeFromString($get_comma_value_by_user['user_id'],$user_id);
@@ -394,7 +394,7 @@ class Ajax_task extends MY_Controller
     public function get_assingName_task()
     {
         $user_id = $this->input->post('user_id');
-        $qry = $this->db->query("select email,username from tbl_users where user_id=$user_id");
+        $qry = $this->db->query("select email,username from tbl_users where user_id=$user_id limit 1");
         $result = $qry->row_array();
         echo $result['username'];  
     }

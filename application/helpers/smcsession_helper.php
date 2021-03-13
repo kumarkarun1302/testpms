@@ -152,7 +152,7 @@ if (!function_exists('getResponse')) {
   function getResponse($user_id)
   {
       $ci = & get_instance();
-      $result = $ci->db->get_where('tbl_users',array('user_id'=>$user_id));
+      $result = $ci->db->limit(1)->get_where('tbl_users',array('user_id'=>$user_id));
       if($result->num_rows() > 0){
           $result = $result->row_array();
           return $result;
@@ -168,7 +168,7 @@ if (!function_exists('getProfileName')) {
   function getProfileName($key){
       $CI = & get_instance();
       $id = getSession('user_id');
-      $query = $CI->db->get_where('tbl_users', array('user_id' => $id));
+      $query = $CI->db->limit(1)->get_where('tbl_users', array('user_id' => $id));
       $result = $query->row_array();
       return  $result[$key];
   }
@@ -176,14 +176,14 @@ if (!function_exists('getProfileName')) {
 
 function getsession_mergeAccount($slug_username){
   $ci = & get_instance();
-  $query = $ci->db->query("SELECT user_id FROM `tbl_users` WHERE `slug_username`='$slug_username'");
+  $query = $ci->db->query("SELECT user_id FROM `tbl_users` WHERE `slug_username`='$slug_username' limit 1");
   $result = $query->row_array();
   return $result['user_id'];
 }
 
 function getsession_manish($user_id){
   $ci = & get_instance();
-  $query = $ci->db->query("SELECT * FROM `tbl_users` WHERE `user_id`='$user_id'");
+  $query = $ci->db->query("SELECT * FROM `tbl_users` WHERE `user_id`='$user_id' limit 1");
   $result = $query->row_array();
   return $result;
 }
@@ -240,7 +240,7 @@ function update_duedate(){
 
 function get_user_img($user_id){ 
   $CI = & get_instance();
-  $query = $CI->db->query("SELECT `picture`,`oauth_provider`,`picture_url` FROM `tbl_users` WHERE `user_id`=$user_id");
+  $query = $CI->db->query("SELECT `picture`,`oauth_provider`,`picture_url` FROM `tbl_users` WHERE `user_id`=$user_id limit 1");
   $result = $query->row_array();
   if($result['picture'] == ''){
       $imaname = base_url('uploads/').'notDelete.jpg';
@@ -256,7 +256,7 @@ function get_user_img($user_id){
 
 function get_one_value($table,$column_id,$table_id,$table_id_value){ 
   $CI = & get_instance();
-  $CI->db->select($column_id)->from($table)->where(array('eDelete'=>0, $table_id=>$table_id_value));
+  $CI->db->select($column_id)->from($table)->where(array('eDelete'=>0, $table_id=>$table_id_value))->limit(1);
   $query = $CI->db->get();
   $result = $query->row_array();
   return $result[$column_id];
@@ -269,6 +269,7 @@ function get_anjdrive_data($dummy_cryptcode){
   $CI->db->where_in('eDelete', array(0,2));
   $CI->db->where('dummy_cryptcode',$dummy_cryptcode);
   $CI->db->where('user_id',$user_id);
+  $CI->db->limit(1);
   $query = $CI->db->get();
   if($query->num_rows() > 0){
     return $query->row_array();
@@ -368,7 +369,7 @@ function anjdrive_imageget($username,$file,$file_folder,$folder = ''){
 function anjdrive_getsize(){ 
   $ci = & get_instance();
   $user_id=getProfileName('user_id');
-  $q=$ci->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id and eDelete IN (0,2)");
+  $q=$ci->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id and eDelete IN (0,2) limit 1");
   $r = $q->row_array();
   if($r['file_size']){
     return $r['file_size'];
@@ -388,7 +389,7 @@ function anj_progressBar($type)
 {
   $ci = & get_instance();
   $user_id = getProfileName('user_id');
-  $q=$ci->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id and eDelete IN (0,2)");
+  $q=$ci->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id and eDelete IN (0,2) limit 1");
   $r = $q->row_array();
   $sizee = '1024';
   $hundr = '100';
@@ -408,7 +409,7 @@ function anjDrive_disabled()
 {
   $ci = & get_instance();
   $user_id = getProfileName('user_id');
-  $q=$ci->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id");
+  $q=$ci->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id limit 1");
   $r = $q->row_array();
   if(round($r['file_size']) > '99900'){
     return 'disabled';

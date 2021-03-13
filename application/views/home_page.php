@@ -380,9 +380,11 @@ if (isPushSupported)
                   ?>
                   <div class="grid d-inline-block position-relative  bg-over-black-70">
                     <figure class="effect-chico">
-                      <img src="<?php echo base_url('uploads/'); ?><?php echo $value['blog_image']; ?>" class="img-fluid" alt="img"/>
+                      <a href="<?php echo base_url('blog_details/'); ?><?php echo $value['blog_id']; ?>"><img src="<?php echo base_url('uploads/'); ?><?php echo $value['blog_image']; ?>" class="img-fluid" alt="img"/>
+                      </a>
                       <figcaption>
-                        <h2 class="font-weight-bold"><?php echo $value['title']; ?></h2>
+                        <a href="<?php echo base_url('blog_details/'); ?><?php echo $value['blog_id']; ?>"><h2 class="font-weight-bold"><?php echo $value['title']; ?></h2>
+                        </a>
                       </figcaption>
                       <div class="blog-comment">
                         <ul class="list-inline">
@@ -433,10 +435,10 @@ if (isPushSupported)
 
           <div class="row">
 <?php
-$query1 = $this->db->query("SELECT `total_user_support`, `file_sharing_storage`, `max_file_size_upload` FROM `tbl_price` where month_year='free'");
+$query1 = $this->db->query("SELECT `total_user_support`, `file_sharing_storage`, `max_file_size_upload` FROM `tbl_price` where month_year='free' limit 1");
 $result1 = $query1->row_array();
 
-$query3 = $this->db->query("SELECT `total_user_support` FROM `tbl_price` where month_year='custom'");
+$query3 = $this->db->query("SELECT `total_user_support` FROM `tbl_price` where month_year='custom' limit 1");
 $result3 = $query3->row_array();
 ?>
             <!-- Single Package -->
@@ -477,9 +479,9 @@ $result3 = $query3->row_array();
             <div class="col-lg-4 col-md-4">
               <div class="pricing-wrap platinum-pr recommended">
 <?php 
-$query_tbl_pricemonth = $this->db->query("SELECT * FROM `tbl_price` where month_year='month'");
+$query_tbl_pricemonth = $this->db->query("SELECT * FROM `tbl_price` where month_year='month' limit 1");
 $result_tbl_pricemonth = $query_tbl_pricemonth->row_array();
-$query_tbl_priceyear = $this->db->query("SELECT * FROM `tbl_price` where month_year='year'");
+$query_tbl_priceyear = $this->db->query("SELECT * FROM `tbl_price` where month_year='year' limit 1");
 $result_tbl_priceyear = $query_tbl_priceyear->row_array();
 
 $sizee='1000';

@@ -197,7 +197,7 @@
     <?php 
     $main_merge_account = get_cookie('manish_mergeaccount_set');
     $merge_account_userID = get_cookie('manish_userid_set');
-    $query_joinaccount = $this->db->query("select user_id,main_account from tbl_merge_users where main_account='".$merge_account_userID."'");
+    $query_joinaccount = $this->db->query("select user_id,main_account from tbl_merge_users where main_account='".$merge_account_userID."' limit 0,1");
     $queryjoinaccount = $query_joinaccount->row_array();
     if($queryjoinaccount['main_account']){
         $user_id_multi = $queryjoinaccount['user_id'];
@@ -475,11 +475,13 @@ Your ANJ PMS month expires. Please <a href="<?php echo base_url('#pricing-table'
                                                 <th class="project_DueDate">End Date</th>
                                                 <th class="project_income">Category</th>
                                                 <th class="project_status">Status</th>
+                                                <th class="project_status">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 <?php
 $get_group_concat_project_id = get_group_concat_project_id('project_id');
+
 if($get_group_concat_project_id){
     $query = $this->db->query("SELECT * FROM `tbl_project` WHERE eDelete=0 and project_id IN ($get_group_concat_project_id) ORDER BY `tbl_project`.`project_id` DESC");
 } else {
@@ -496,10 +498,11 @@ $projectstatus = '<span class="badge badge-success ml-auto project_status_comple
 $projectstatus = '<span class="badge badge-warning text-white ml-auto project_status_cancel">Canceled</span>';
 } else if($value['status']=='0'){
 $projectstatus = '<span class="badge badge-secondary ml-auto project_status_running">On Running</span>';
+} else if($value['status']=='5'){
+$projectstatus = '<span class="badge badge-secondary ml-auto project_status_complete">Project Maintenance</span>';
 }
 ?>
 <tr>
-    <?php //echo substr(getProfileName('username'),0,1); ?>
     <td class="project_nameClient">
         <div class="icon"><i class="fas fa-briefcase"></i></div>
         <div class="projectNameClient">
@@ -509,11 +512,15 @@ $projectstatus = '<span class="badge badge-secondary ml-auto project_status_runn
     </td>
     <td class="project_startDate"><?php echo date_fjy($value['start_date']); ?></td>
     <td class="project_DueDate"><?php echo date_fjy($value['deadline']); ?></td>
-    <td class="project_income">
-        <div class="income_1"><?php echo $value['category']; ?></div>
-    </td>
-    <td class="project_status">
-        <?php echo $projectstatus; ?>
+    <td class="project_income"><div class="income_1"><?php echo $value['category']; ?></div></td>
+    <td class="project_status"><?php echo $projectstatus; ?></td>
+     <td class="project_status">
+        <?php if($value['status']=='2'){ ?>
+            <select name="project_action" id="project_action" class="form-control select2">
+                <option value="">select</option>
+                <option value="<?php echo $value['project_id']; ?>">Maintenance</option>
+            </select>
+        <?php } ?>
     </td>
 </tr>
 <?php } ?>
@@ -556,7 +563,7 @@ $projectstatus = '<span class="badge badge-secondary ml-auto project_status_runn
                                             $i=1;
                                             foreach ($result_task_recent as $key => $value) {
                                                 $project_id=$value['project_id'];
-                                                $query=$this->db->query("SELECT project_name FROM `tbl_project` WHERE `project_id`='$project_id'");
+                                                $query=$this->db->query("SELECT project_name FROM `tbl_project` WHERE `project_id`='$project_id' limit 0,1");
                                                 $resultma=$query->row_array();
                                                 ?>                                           
                                             <tr>
@@ -742,7 +749,7 @@ $projectstatus = '<span class="badge badge-secondary ml-auto project_status_runn
     }
 
 <?php 
-$qry=$this->db->query("SELECT `user_id` FROM `tbl_marketing_channel` where user_id = '".getProfilename('user_id')."'");
+$qry=$this->db->query("SELECT `user_id` FROM `tbl_marketing_channel` where user_id = '".getProfilename('user_id')."' limit 0,1");
 $result = $qry->row_array(); 
 if($result['user_id']){
 ?>
@@ -931,7 +938,7 @@ var main_url_dashboard = main_url+'dashboard/';
 var timeoutHandle;
 
 <?php 
-$qry=$this->db->query("SELECT `user_id` FROM `tbl_page_refresh` where user_id = '".getProfilename('user_id')."'");
+$qry=$this->db->query("SELECT `user_id` FROM `tbl_page_refresh` where user_id = '".getProfilename('user_id')."' limit 0,1");
 $result = $qry->row_array(); 
 if($result['user_id']){
 ?>
@@ -1223,6 +1230,19 @@ return false;
             x.type = "password";
           }
         }
+
+$('#project_action').change(function() {
+    var project_id= $(this).val(); 
+    $.ajax({
+      url: '<?php echo base_url('projects/projectsUp'); ?>',
+      type: 'POST',
+      dataType: 'html',
+      data: { project_id:project_id},
+      success: function(response){
+        window.location.href = 'https://anjpms.com/dashboard';
+      }
+    });
+});
 </script>
 
 <script src="<?php echo base_url('assets/'); ?>js/anj/bigbull.js"></script>

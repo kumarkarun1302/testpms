@@ -5,6 +5,75 @@ class Projects extends MY_Controller
         parent::__construct();
     }
 
+    public function projectsUp()
+    {
+      $combo_id = time();
+      $project_id = $this->input->post('project_id');
+      $this->db->select('*');
+      $this->db->from('tbl_project');
+      $this->db->where('project_id', $project_id);
+      $this->db->limit(1);
+      $query = $this->db->get();
+      $result = $query->row_array();
+      $data = array(
+                'user_id'=>$result['user_id'],
+                'parent_project_id'=>$result['project_id'],
+                'project_name'=>$result['project_name'],
+                'project_slug'=>$result['project_slug'],
+                'category' => $result['category'],
+                'project_description'=>$result['project_description'],
+                'start_date'=>$result['start_date'],
+                'deadline'=>$result['deadline'],
+                'client_id'=>$result['client_id'],
+                'status'=>5,
+                'project_priority'=>$result['project_priority'],
+                'billing_type_id'=>$result['billing_type_id'],
+                'estimated_hours'=>$result['estimated_hours'],
+                'project_phase'=>$result['project_phase'],
+                'project_demo_url'=>$result['project_demo_url'],
+                'created_date'=>date_from_today(),
+                'combo_id'=>$combo_id
+                );
+      $pid = insert_data_last_id('tbl_project',$data);
+
+
+    $projectID = anj_encode($pid);
+    $projectNAME = slugify($result['project_name']);
+    $projectASSIGN = slugify(getProfileName('username'));
+    $projectMain_user_id = anj_encode($result['user_id']);
+    $url = $projectID.'/'.$projectNAME.'/'.$projectASSIGN.'/'.$projectMain_user_id.'/'.$combo_id;
+    $project_link = base_url().'Invite/anj/'.$url;
+    $this->db->query("UPDATE tbl_project SET project_link='".$project_link."' WHERE project_id='".$pid."'");
+    $tbl_notifications_data = array('main_user_id'=>getProfileName('user_id'),'user_id'=>getProfileName('user_id'),'title'=>$result['project_name'],'url'=>$project_link,'notifications_name'=>$result['project_name'],'created_date'=>date_from_today());
+    notification_insertDB($tbl_notifications_data);
+    $this->db->query("UPDATE tbl_project SET project_link='".$project_link."' WHERE project_id='".$result."'");
+    $msgg = getProfileName('username').' ('.$result['project_name'].' ) project is maintenance ';
+    $manishno = send_message_notification($msgg);
+
+      $this->db->select('*');
+      $this->db->from('tbl_roles');
+      $this->db->where('project_id', $project_id);
+      $this->db->limit(1);
+      $query1 = $this->db->get();
+      $resultrole = $query1->row_array();
+      $data_role = array(
+                'main_user_id'=>$resultrole['main_user_id'],
+                'user_id'=>$resultrole['user_id'],
+                'project_id'=>$pid,
+                'status_id'=>$resultrole['status_id'],
+                'task_id' => $resultrole['task_id'],
+                'combo_id'=>$combo_id,'created_date'=>date_from_today()
+                );
+      insert_data_last_id('tbl_roles',$data_role);
+
+      $datatbl_maintenance = array(
+                'project_id'=>$project_id,
+                'user_id'=>$resultrole['main_user_id'],
+                'created_date'=>date_from_today());
+      insert_data_last_id('tbl_maintenance',$datatbl_maintenance);
+      //echo $this->db->last_query();
+    }
+
     public function editProjects($data){
 
       $project_id = $data['edit_project_id'];

@@ -1,7 +1,7 @@
 
 <?php
 $dummy_cryptcode=$this->uri->segment(3);
-$query = $this->db->query("SELECT folder  FROM `tbl_anjdrive` WHERE user_id='$user_id' and dummy_cryptcode='$dummy_cryptcode'");
+$query = $this->db->query("SELECT folder  FROM `tbl_anjdrive` WHERE user_id='$user_id' and dummy_cryptcode='$dummy_cryptcode' limit 1");
 $result_array = $query->row_array();
 ?>
 <!-- Start Content Page -->

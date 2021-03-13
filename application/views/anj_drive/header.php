@@ -169,7 +169,7 @@ if($this->uri->segment(1)=='trash'){
 
 <?php 
 $user_id = getProfileName('user_id');
-$q=$this->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id");
+$q=$this->db->query("SELECT sum(file_size) as file_size FROM `tbl_anjdrive` where user_id=$user_id limit 1");
 $r = $q->row_array();
 
 if($r['file_size']){

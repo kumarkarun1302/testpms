@@ -65,11 +65,11 @@ $combo_id = $value['combo_id'];
 $project_name = $value['project_name'];
 $user_id = $value['user_id'];
 
-$query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+$query_status = $this->db->query("select count(id) as status_id from tbl_status where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
 $status_total = $query_status->row_array();
-$query_task = $this->db->query("select count(id) as task_id from tbl_task where project_id=$project_id and combo_id=$combo_id and eDelete=0");
+$query_task = $this->db->query("select count(id) as task_id from tbl_task where project_id=$project_id and combo_id=$combo_id and eDelete=0 limit 1");
 $task_total = $query_task->row_array();
-$query_task = $this->db->query("select count(task_id) as comments from tbl_comment where project_id=$project_id");
+$query_task = $this->db->query("select count(task_id) as comments from tbl_comment where project_id=$project_id limit 1");
 $task_total_comments = $query_task->row_array();
 
 $username1 = get_by_id('tbl_users','username','user_id',$user_id);
@@ -441,7 +441,7 @@ if(in_array('add', $label_crudparts) == '1' || getProfileName('designation')=='M
         $projectNAME = $this->input->post('projectNAME');
         $projectASSIGN = $this->input->post('projectASSIGN');
         $projectCombo_id = $this->input->post('projectCombo_id');
-        $query = $this->db->query("SELECT GROUP_CONCAT(id) as id FROM `tbl_status` WHERE project_id='".$projectID."' and user_id='".$main_user_id."'");
+        $query = $this->db->query("SELECT GROUP_CONCAT(id) as id FROM `tbl_status` WHERE project_id='".$projectID."' and user_id='".$main_user_id."' limit 1");
         $result = $query->row_array();
         $status_id = $result['id'];
     }
